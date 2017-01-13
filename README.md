@@ -1,2 +1,2 @@
 # koolProject
-display car mp dashboard
+display car mpg dashboard
