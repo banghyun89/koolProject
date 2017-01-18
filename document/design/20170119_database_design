@@ -1,0 +1,19 @@
+Reference : https://www.tutorialspoint.com/sqlite/sqlite_views.htm
+
+
+sqlite3 obd.db
+create table TB_OBD (
+RPM                    varchar(10),
+SPEED                  varchar(10),
+TIMING_ADVANCE         varchar(10),
+MAF                    varchar(10),
+RUN_TIME_MIL           varchar(10),
+MAX_MAF             varchar(10),
+FUEL_TYPE           varchar(10),
+FUEL_RATE           varchar(10),
+CREATE_USER_ID  varchar(20),
+CREATE_DATE DATETIME,
+MODIFY_USER_ID varchar(20),
+MODIFY_DATE DATETIME
+);
+.save obd.db
