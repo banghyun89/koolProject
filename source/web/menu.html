@@ -1,54 +1,51 @@
-import obd
-import sqlite3
+<!DOCTYPE html>
+<html>
+<title>Menu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="resource/css/w3.css">
+<style>
+  .container-custom {
+    width:100%;
+    font-size:1.2em;
+  }
+  .w3-card-12-custom {
+    width:40%;
+    margin:10px;
+    text-align:center;
+    float:left;
+    cursor:pointer;
+  }
+  .w3-card-12-custom:hover {
+    background-color: #ffffff;
+    font-weight:bold;
+    opacity: 0.5;
+   }
+  .card-img {
+    width:90%;
+    margin-top:10px;
+  }
+</style>
+<body>
 
-conn = sqlite3.connect('test.db')
-c = conn.cursor()
-# t = ('RHAT',)
-c.execute('SELECT * FROM tb1')
-print(c.fetchone())
-# Save (commit) the changes
-# conn.commit()
-conn.close()
+<div class="w3-container container-custom">
 
-connection = obd.OBD() # auto-connects to USB or RF port
-cmd = obd.commands.SPEED # select an OBD command (sensor)
+  <div class="w3-card-12 w3-card-12-custom">
+    <img src="resource/images/live.JPG" class="card-img" alt="live">
+    <div class="w3-container w3-center">
+      <p>Live</p>
+    </div>
+  </div>
+  <div class="w3-card-12 w3-card-12-custom">
+    <img src="resource/images/history.JPG" alt="history" class="card-img" >
+    <div class="w3-container w3-center">
+      <p>History</p>
+    </div>
+  </div>
 
-
-response = connection.query(cmd) # send the command, and parse the response
-print(response.value) # returns unit-bearing values thanks to Pint
-print(response.value.to("mph")) # user-friendly unit conversions
-
-
-
-#sqlite> .save FILE
-
-#
-# obd.OBD            # main OBD connection class
-# obd.Async          # asynchronous OBD connection class
-# obd.commands       # command tables
-# obd.Unit           # unit tables (a Pint UnitRegistry)
-# obd.OBDStatus      # enum for connection status
-# obd.scan_serial    # util function for manually scanning for OBD adapters
-# obd.OBDCommand     # class for making your own OBD Commands
-# obd.ECU            # enum for marking which ECU a command should listen to
-# obd.logger         # the OBD module's root logger (for debug)
+</div>
 
 
-# from obd import OBDCommand, Unit
-# from obd.protocols import ECU
-# from obd.utils import bytes_to_int
-#
-# def rpm(messages):
-#     """ decoder for RPM messages """
-#     d = messages[0].data
-#     v = bytes_to_int(d) / 4.0  # helper function for converting byte arrays to ints
-#     return v * Unit.RPM # construct a Pint Quantity
-#
-# c = OBDCommand("RPM", \          # name
-#                "Engine RPM", \   # description
-#                b"010C", \        # command
-#                2, \              # number of return bytes to expect
-#                rpm, \            # decoding function
-#                ECU.ENGINE, \     # (optional) ECU filter
-#                True)             # (optional) allow a "01" to be added for speed
+
+</body>
+</html>
 
