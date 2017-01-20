@@ -1,0 +1,6 @@
+<application>
+  <component name="GithubSettings">
+    <option name="HOST" value="jamse88@nate.com" />
+    <option name="AUTH_TYPE" value="TOKEN" />
+  </component>
+</application>
