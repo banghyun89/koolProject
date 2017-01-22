@@ -1,47 +1,70 @@
 <!DOCTYPE html>
 <html>
-<title>Menu</title>
+<title>Live</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="resource/css/w3.css">
 <style>
-  .container-custom {
-    width:100%;
-    font-size:1.2em;
-  }
-  .w3-card-12-custom {
-    width:40%;
-    margin:10px;
-    text-align:center;
-    float:left;
-    cursor:pointer;
-  }
-  .w3-card-12-custom:hover {
-    background-color: #ffffff;
-    font-weight:bold;
-    opacity: 0.5;
-   }
-  .card-img {
-    width:90%;
-    margin-top:10px;
-  }
+    body {background-color:#000000;
+           margin:0px;
+           }
+    .small-box {
+                float:left;
+                width:350px;
+                height:40%;
+                text-align:center;
+                padding:20px;
+                margin:20px;
+                -webkit-border-radius: 800px;
+                -moz-border-radius: 800px;
+                border-radius: 800px;
+                border: 2px solid #00ebb3  /*rgb(125, 222, 213)*/;
+                color:#00ebb3/*rgb(125, 222, 213)*/;
+                }
+
+    .small-box:hover {
+         background-color: #00ebb3;
+         color: #000000;
+         font-weight:bold;
+         border: 5px solid #111111;
+         opacity: 0.9;
+     }
+
+    .title {font-size:4em;}
+    .container-custom {padding:50px 0px 50px 0px;width:100%;}
+
+    a:link {
+       text-decoration: none;
+    }
+
+    /* visited link */
+    a:visited {
+        text-decoration: none;
+    }
+
+    /* mouse over link */
+    a:hover {
+        text-decoration: none;
+    }
+
+    /* selected link */
+    a:active {
+       text-decoration: none;
+    }
+
 </style>
 <body>
 
 <div class="w3-container container-custom">
-
-  <div class="w3-card-12 w3-card-12-custom">
-    <img src="resource/images/live.JPG" class="card-img" alt="live">
-    <div class="w3-container w3-center">
-      <p>Live</p>
-    </div>
+  <div class="outer">
+      <div class="small-box real-fuel-efficiency">
+          <div class="title"><a href="live.html">LIVE</a></div>
+      </div>
   </div>
-  <div class="w3-card-12 w3-card-12-custom">
-    <img src="resource/images/history.JPG" alt="history" class="card-img" >
-    <div class="w3-container w3-center">
-      <p>History</p>
-    </div>
+  <div class="outer">
+      <div class="small-box avg-fuel-efficiency">
+          <div class="title"><a href="history.html">HISTORY</a></div>
+      </div>
   </div>
-
 </div>
 
 
