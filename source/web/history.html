@@ -1,54 +1,153 @@
-import obd
-import sqlite3
+<!DOCTYPE html>
+<html>
+<title>History</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="resource/css/w3.css">
+<style>
+    body {background-color:#000000;
+           margin:0px;
+          }
+    .row-border {
+        margin:0px;
+        padding:0px;
+    }
+    .grid-wrap {
+        margin-top:20px;
+        margin-left:100px;
+    }
+    .td-title {
+        font-size:1.5em;
+        font-weight:bold;
+    }
+    .td-common {
+                    width:150px;
+                    text-align:center;
+                    padding:10px;
+                    border: 1px solid #00ebb3  /*rgb(125, 222, 213)*/;
+                    color:#00ebb3/*rgb(125, 222, 213)*/;
+                    font-size:1.2em;
+                }
+     .td-common p { margin:2px;}
+     .neon-color { color:#00ebb3;}
 
-conn = sqlite3.connect('test.db')
-c = conn.cursor()
-# t = ('RHAT',)
-c.execute('SELECT * FROM tb1')
-print(c.fetchone())
-# Save (commit) the changes
-# conn.commit()
-conn.close()
+    /* div.gridcontainer
+    {
+        width: 76px;
+        line-height: 0;
+        border-right:1px solid black;
+        border-bottom:1px solid black;
+    }
 
-connection = obd.OBD() # auto-connects to USB or RF port
-cmd = obd.commands.SPEED # select an OBD command (sensor)
+    div.griditem
+    {
+        display:inline-block;
+        border-left:1px solid black;
+        border-top:1px solid black;
+        width: 18px;
+        height: 18px;
+    }   */
+
+    a {font-size:1.2em;}
+
+    a:link {
+       text-decoration: none;
+    }
+
+    /* visited link */
+    a:visited {
+        text-decoration: none;
+    }
+
+    /* mouse over link */
+    a:hover {
+        text-decoration: none;
+        font-size:1.5em;
+        text-weight:bold;
+    }
+
+    /* selected link */
+    a:active {
+       text-decoration: none;
+    }
+</style>
+<body>
+    <div class="grid-wrap">
+        <div class="w3-row w3-container row-border">
+          <div class="w3-col s2 td-common td-title w3-center">
+            <p>Time</p>
+          </div>
+          <div class="w3-col s2 td-common td-title w3-center">
+            <p>kpl</p>
+          </div>
+        </div>
+        <div class="w3-row w3-container row-border">
+          <div class="w3-col s2 td-common w3-center">
+            <p>2017/01/22 16:10</p>
+          </div>
+          <div class="w3-col s2 td-common w3-center">
+            <p>10.01 kpl</p>
+          </div>
+        </div>
+        <div class="w3-row w3-container row-border">
+          <div class="w3-col s2 td-common w3-center">
+            <p>2017/01/22 16:00</p>
+          </div>
+          <div class="w3-col s2 td-common w3-center">
+            <p>10.02 kpl</p>
+          </div>
+        </div>
+        <div class="w3-row w3-container row-border">
+          <div class="w3-col s2 td-common w3-center">
+            <p>2017/01/22 15:50</p>
+          </div>
+          <div class="w3-col s2 td-common w3-center">
+            <p>10.02 kpl</p>
+          </div>
+        </div>
+        <div class="w3-row w3-container row-border">
+          <div class="w3-col s2 td-common w3-center">
+            <p>2017/01/22 15:40</p>
+          </div>
+          <div class="w3-col s2 td-common w3-center">
+            <p>10.02 kpl</p>
+          </div>
+        </div>
+        <div class="w3-row w3-container row-border">
+          <div class="w3-col s2 td-common w3-center">
+            <p>2017/01/22 15:30</p>
+          </div>
+          <div class="w3-col s2 td-common w3-center">
+            <p>10.02 kpl</p>
+          </div>
+        </div>
+        <div class="w3-row w3-container row-border">
+          <div class="w3-col s2 td-common w3-center">
+            <p>2017/01/22 15:20</p>
+          </div>
+          <div class="w3-col s2 td-common w3-center">
+            <p>10.02 kpl</p>
+          </div>
+        </div>
+        <div class="w3-row w3-container row-border">
+          <div class="w3-col s4 w3-center neon-color">
+              <p><a href="menu.html">&#8617; Back Menu</a></p>
+          </div>
+        </div>
+    </div>
+
+<!--
+    <div class="gridcontainer">
+        <div class="griditem"></div>
+        <div class="griditem"></div>
+        <div class="griditem"></div>
+        <div class="griditem"></div>
+        <div class="griditem"></div>
+        <div class="griditem"></div>
+        <div class="griditem"></div>
+    </div>
+-->
 
 
-response = connection.query(cmd) # send the command, and parse the response
-print(response.value) # returns unit-bearing values thanks to Pint
-print(response.value.to("mph")) # user-friendly unit conversions
-
-
-
-#sqlite> .save FILE
-
-#
-# obd.OBD            # main OBD connection class
-# obd.Async          # asynchronous OBD connection class
-# obd.commands       # command tables
-# obd.Unit           # unit tables (a Pint UnitRegistry)
-# obd.OBDStatus      # enum for connection status
-# obd.scan_serial    # util function for manually scanning for OBD adapters
-# obd.OBDCommand     # class for making your own OBD Commands
-# obd.ECU            # enum for marking which ECU a command should listen to
-# obd.logger         # the OBD module's root logger (for debug)
-
-
-# from obd import OBDCommand, Unit
-# from obd.protocols import ECU
-# from obd.utils import bytes_to_int
-#
-# def rpm(messages):
-#     """ decoder for RPM messages """
-#     d = messages[0].data
-#     v = bytes_to_int(d) / 4.0  # helper function for converting byte arrays to ints
-#     return v * Unit.RPM # construct a Pint Quantity
-#
-# c = OBDCommand("RPM", \          # name
-#                "Engine RPM", \   # description
-#                b"010C", \        # command
-#                2, \              # number of return bytes to expect
-#                rpm, \            # decoding function
-#                ECU.ENGINE, \     # (optional) ECU filter
-#                True)             # (optional) allow a "01" to be added for speed
+</body>
+</html>
 

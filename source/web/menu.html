@@ -1,54 +1,74 @@
-import obd
-import sqlite3
+<!DOCTYPE html>
+<html>
+<title>Live</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="resource/css/w3.css">
+<style>
+    body {background-color:#000000;
+           margin:0px;
+           }
+    .small-box {
+                float:left;
+                width:350px;
+                height:40%;
+                text-align:center;
+                padding:20px;
+                margin:20px;
+                -webkit-border-radius: 800px;
+                -moz-border-radius: 800px;
+                border-radius: 800px;
+                border: 2px solid #00ebb3  /*rgb(125, 222, 213)*/;
+                color:#00ebb3/*rgb(125, 222, 213)*/;
+                }
 
-conn = sqlite3.connect('test.db')
-c = conn.cursor()
-# t = ('RHAT',)
-c.execute('SELECT * FROM tb1')
-print(c.fetchone())
-# Save (commit) the changes
-# conn.commit()
-conn.close()
+    .small-box:hover {
+         background-color: #00ebb3;
+         color: #000000;
+         font-weight:bold;
+         border: 5px solid #111111;
+         opacity: 0.9;
+     }
 
-connection = obd.OBD() # auto-connects to USB or RF port
-cmd = obd.commands.SPEED # select an OBD command (sensor)
+    .title {font-size:4em;}
+    .container-custom {padding:50px 0px 50px 0px;width:100%;}
+
+    a:link {
+       text-decoration: none;
+    }
+
+    /* visited link */
+    a:visited {
+        text-decoration: none;
+    }
+
+    /* mouse over link */
+    a:hover {
+        text-decoration: none;
+    }
+
+    /* selected link */
+    a:active {
+       text-decoration: none;
+    }
+
+</style>
+<body>
+
+<div class="w3-container container-custom">
+  <div class="outer">
+      <div class="small-box real-fuel-efficiency">
+          <div class="title"><a href="live.html">LIVE</a></div>
+      </div>
+  </div>
+  <div class="outer">
+      <div class="small-box avg-fuel-efficiency">
+          <div class="title"><a href="history.html">HISTORY</a></div>
+      </div>
+  </div>
+</div>
 
 
-response = connection.query(cmd) # send the command, and parse the response
-print(response.value) # returns unit-bearing values thanks to Pint
-print(response.value.to("mph")) # user-friendly unit conversions
 
-
-
-#sqlite> .save FILE
-
-#
-# obd.OBD            # main OBD connection class
-# obd.Async          # asynchronous OBD connection class
-# obd.commands       # command tables
-# obd.Unit           # unit tables (a Pint UnitRegistry)
-# obd.OBDStatus      # enum for connection status
-# obd.scan_serial    # util function for manually scanning for OBD adapters
-# obd.OBDCommand     # class for making your own OBD Commands
-# obd.ECU            # enum for marking which ECU a command should listen to
-# obd.logger         # the OBD module's root logger (for debug)
-
-
-# from obd import OBDCommand, Unit
-# from obd.protocols import ECU
-# from obd.utils import bytes_to_int
-#
-# def rpm(messages):
-#     """ decoder for RPM messages """
-#     d = messages[0].data
-#     v = bytes_to_int(d) / 4.0  # helper function for converting byte arrays to ints
-#     return v * Unit.RPM # construct a Pint Quantity
-#
-# c = OBDCommand("RPM", \          # name
-#                "Engine RPM", \   # description
-#                b"010C", \        # command
-#                2, \              # number of return bytes to expect
-#                rpm, \            # decoding function
-#                ECU.ENGINE, \     # (optional) ECU filter
-#                True)             # (optional) allow a "01" to be added for speed
+</body>
+</html>
 
