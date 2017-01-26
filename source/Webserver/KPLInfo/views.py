@@ -4,7 +4,6 @@ from django.http import HttpResponse
 
 def menu(request):
     return render(request, 'KPLInfo/menu.html')
-    #return HttpResponse("Hello World")
 
 def live(request):
     return render(request, 'KPLInfo/live.html')

@@ -2,11 +2,11 @@
 <html>
 <title>Live</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="resource/css/w3.css">
+<link rel="stylesheet" href="KPLInfo/resource/css/w3.css">
 <style>
     body {background-color:#000000;
            margin:0px;
-           }
+         }
     .small-box {
                 float:left;
                 width:350px;
@@ -19,7 +19,8 @@
                 border-radius: 800px;
                 border: 2px solid #00ebb3  /*rgb(125, 222, 213)*/;
                 color:#00ebb3/*rgb(125, 222, 213)*/;
-                }
+                font-size:4em;
+            }
 
     .small-box:hover {
          background-color: #00ebb3;
@@ -27,48 +28,32 @@
          font-weight:bold;
          border: 5px solid #111111;
          opacity: 0.9;
+         cursor:pointer;
+         font-size:4em;
      }
 
-    .title {font-size:4em;}
     .container-custom {padding:50px 0px 50px 0px;width:100%;}
-
-    a:link {
-       text-decoration: none;
-    }
-
-    /* visited link */
-    a:visited {
-        text-decoration: none;
-    }
-
-    /* mouse over link */
-    a:hover {
-        text-decoration: none;
-    }
-
-    /* selected link */
-    a:active {
-       text-decoration: none;
-    }
-
 </style>
 <body>
 
 <div class="w3-container container-custom">
   <div class="outer">
-      <div class="small-box real-fuel-efficiency">
-          <div class="title"><a href = "live/">LIVE</a></div>
-
+      <div class="small-box real-fuel-efficiency"  onclick="goPage('live')">
+          LIVE
       </div>
   </div>
   <div class="outer">
-      <div class="small-box avg-fuel-efficiency">
-          <div class="title"><a href="history/">HISTORY</a></div>
+      <div class="small-box avg-fuel-efficiency" onclick="goPage('history')">
+          HISTORY
       </div>
   </div>
 </div>
 
-
+<script>
+        function goPage(v){
+            window.location.assign(v);
+    }
+</script>
 
 </body>
 </html>
