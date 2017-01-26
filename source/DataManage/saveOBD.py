@@ -1,6 +1,8 @@
 import obd
 import sqlite3
 
+import sys
+
 conn = sqlite3.connect('test.db')
 c = conn.cursor()
 # t = ('RHAT',)
@@ -17,6 +19,19 @@ cmd = obd.commands.SPEED # select an OBD command (sensor)
 response = connection.query(cmd) # send the command, and parse the response
 print(response.value) # returns unit-bearing values thanks to Pint
 print(response.value.to("mph")) # user-friendly unit conversions
+
+pygame.time.set_timer(pygame.USEREVENT,1000) #1초마다 타이머 이벤트 발생
+
+for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+        sys.exit()
+
+    elif event.type == pygame.USEREVENT:  # 1초마다 1번 공이 아래로 이동
+        # 테이블 insert 함수 호출
+
+
+
+
 
 
 
