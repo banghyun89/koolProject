@@ -2,56 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cfae27eb-9b50-4f5f-a126-9cccdb221b92" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/IntelliLang.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_windows/git.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_windows/keymap.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_windows/laf.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/colors.scheme.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/conda_packages.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/debugger.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/diff.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/document/design/20170119_database_design" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/document/design/a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/document/design/obd mode1.numbers" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/document/design/obd mode1.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/document/design/structure.gliffy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/document/design/structure2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/editor.codeinsight.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/editor.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/filetypes.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/DataManage/main.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/DataManage/readOBD.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/DataManage/saveOBD.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/DataManage/sqlCollection.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/apps.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/migrations/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/resource/css/font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/resource/css/w3-theme-black.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/resource/css/w3.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/resource/fonts/fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/resource/fonts/fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/resource/fonts/fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/resource/fonts/fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/resource/images/history.JPG" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/resource/images/live.JPG" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/Webserver/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/Webserver/settings.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/Webserver/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/Webserver/wsgi.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/db.sqlite3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/manage.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web-browsers.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -172,7 +122,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="DataManage" />
+              <option name="myItemId" value="Webserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPLInfo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -186,7 +140,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="document" />
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataManage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -412,7 +370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1485421142336</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="초기화">
+      <created>1485422239010</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1485422239010</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -453,7 +418,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit" />
     <MESSAGE value="DataManage(main.py, readOBD.py, saveOBD.py, sqlCollection.py)&#10;&#10;WebServer/KPLInfo/templates/KPLInfo/  : menu.html, menu2.html, history.html, live.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="DataManage(main.py, readOBD.py, saveOBD.py, sqlCollection.py)&#10;&#10;WebServer/KPLInfo/templates/KPLInfo/  : menu.html, menu2.html, history.html, live.html" />
+    <MESSAGE value="초기화" />
+    <option name="LAST_COMMIT_MESSAGE" value="초기화" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
