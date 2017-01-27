@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
+from .models import Obd
+
 
 def menu(request):
     return render(request, 'KPLInfo/menu.html')
-    #return HttpResponse("Hello World")
 
 def live(request):
-    return render(request, 'KPLInfo/live.html')
+    afv = "14.0";
+    row = Obd.objects.order_by('time').last()
+    rfv = row.kpl
+    return render(request, 'KPLInfo/live.html', {'realFuelValue':rfv,'avgFuelValue':afv})
 
 
 def history(request):

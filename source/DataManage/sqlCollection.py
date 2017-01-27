@@ -2,15 +2,17 @@ import sqlite3
 
 dbname = 'obd.db'
 
-def tablecreate():
+def create(dbname):
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
+
     try:
-        cursor.execute("""CREATE TABLE rowOBDdata (
-                             rpm INTEGER PRIMARY KEY UNIQUE NOT NULL,
-                             speed INTEGER NOT NULL,
-                             maf INTEGER NOT NULL,
-                             timedata DATE NOT NULL)""")
+        cursor.execute("""CREATE TABLE row_obd (
+                             id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
+                             time DATE NOT NULL,
+                             vss FLOAT NOT NULL,
+                             maf FLOAT NOT NULL,
+                             kpl FLOAT NOT NULL);""")
 
     except sqlite3.Error as e:
         print('Failed to creat table:', e)
@@ -18,14 +20,33 @@ def tablecreate():
     connection.commit()
     connection.close()
 
-    return None
+    return True
 
-def tableselect():
+def put_data(obd_data):
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
 
     try:
-        results = cursor.execute("SELECT * FROM rowOBDdata")
+        data = []
+        for i in obd_data:
+            data.append(i)
+
+        cursor.execute("INSERT INTO rowOBDdata (time, vss, maf, kpl) VALUES (?, ?, ?, ?)", (data[0], data[1], data[2], data[3]))
+
+    except sqlite3.Error as e:
+        print('Failed to insert data:', e)
+
+    connection.commit()
+    connection.close()
+
+    return True
+
+def get_history_data(time_cond):
+    connection = sqlite3.connect(dbname)
+    cursor = connection.cursor()
+
+    try:
+        results = cursor.execute("SELECT time,vss,maf,kpl FROM rowOBDdata Where time between ? and ?",(time_cond[0],time_cond[1]))
         response = []
         for row in results.fetchall():
             response.append(row)
@@ -38,21 +59,20 @@ def tableselect():
 
     return (response)
 
-def tableinsert(rpm, speed, maf, timedata):
+def get_live_data():
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
-    rpm = rpm
-    speed = speed
-    maf = maf
-    timedata = timedata
 
     try:
-        cursor.execute("INSERT INTO rowOBDdata (rpm, speed, maf, timedata) VALUES (?, ?, ?, ?)", (rpm, speed, maf, timedata))
+        results = cursor.execute("SELECT kpl FROM rowOBDdata ORDER BY id DESC")
+        respone = []
+        for row in results.fetchall():
+            respone.append(row)
 
     except sqlite3.Error as e:
-        print('Failed to insert data:', e)
+        print('Failed to select data:', e)
 
     connection.commit()
     connection.close()
 
-    return None
+    return (respone)

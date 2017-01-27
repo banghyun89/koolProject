@@ -1,8 +1,9 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <title>Live</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="resource/css/w3.css">
+<link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
 <style>
     body {background-color:#000000;
            margin:0px;
@@ -21,8 +22,7 @@
     .value {font-size:4em;}
     .unit {font-size:1.4em;}
 
-    .td-common {
-                    width:150px;
+    .back-menu-div {
                     text-align:center;
                     padding:2px;
                     color:#00ebb3/*rgb(125, 222, 213)*/;
@@ -55,24 +55,41 @@
 <div class="w3-container container-custom">
     <div class="small-box real-fuel-efficiency">
         <div class="title">주행연비</div>
-        <div class="value">10.0</div>
+        <div class="value"></div>
         <div class="unit">kpl</div>
     </div>
     <div class="small-box avg-fuel-efficiency">
         <div class="title">평균연비</div>
-        <div class="value">14.1</div>
+        <div class="value"></div>
         <div class="unit">kpl</div>
     </div>
-    <div class="w3-row w3-container row-border" style="clear:both;">
-      <div class="w3-col s4 td-common w3-center">
-         <p></p> <a href="{% url 'KPLInfo:home' %}">&#8617; Back Menu</a></p>
-              <!--<p><a href="menu.html">&#8617; Back Menu</a></p>-->
+    <div class="w3-row w3-container " style="clear:both;">
+      <div class="w3-col w3-center back-menu-div">
+           <a href="{% url 'home' %}">&#8617; Back Menu</a>
       </div>
     </div>
 </div>
 
 
+<script>
+    var realFuelValue = "10.0";
+    var avgFuelValue = "14.0";
 
+     setInterval(function(){
+        //callLive();
+        //주행연비
+         var realFuelObj = document.getElementsByClassName("real-fuel-efficiency")[0];
+         realFuelObj.getElementsByClassName("value")[0].innerHTML = {{realFuelValue}};
+
+         //평균연비
+         var avgFuelObj = document.getElementsByClassName("avg-fuel-efficiency")[0];
+         avgFuelObj.getElementsByClassName("value")[0].innerHTML = {{avgFuelValue}};
+
+        realFuelValue++;
+      }, 1000);
+
+
+</script>
 </body>
 </html>
 
