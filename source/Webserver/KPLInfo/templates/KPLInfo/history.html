@@ -8,45 +8,21 @@
     body {background-color:#000000;
            margin:0px;
           }
-    .row-border {
-        margin:0px;
-        padding:0px;
-    }
-    .grid-wrap {
-        margin-top:20px;
-        margin-left:100px;
-    }
-    .td-title {
-        font-size:1.5em;
-        font-weight:bold;
-    }
-    .td-common {
-                    width:150px;
-                    text-align:center;
-                    padding:10px;
-                    border: 1px solid #00ebb3  /*rgb(125, 222, 213)*/;
-                    color:#00ebb3/*rgb(125, 222, 213)*/;
-                    font-size:1.2em;
-                }
-     .td-common p { margin:2px;}
-     .neon-color { color:#00ebb3;}
-
-    /* div.gridcontainer
-    {
-        width: 76px;
-        line-height: 0;
-        border-right:1px solid black;
-        border-bottom:1px solid black;
+    table {
+        padding-top:15px;
     }
 
-    div.griditem
-    {
-        display:inline-block;
-        border-left:1px solid black;
-        border-top:1px solid black;
-        width: 18px;
-        height: 18px;
-    }   */
+    table, th, td {
+            text-align:center;
+            border-collapse: collapse;
+            border: 1px solid #00ebb3  /*rgb(125, 222, 213)*/;
+            color:#00ebb3/*rgb(125, 222, 213)*/;
+            font-size:1em;
+     }
+
+    th, td {padding: 4px 15px 4px 15px;
+            min-width:150px;
+               }
 
     a {font-size:1.2em;}
 
@@ -70,85 +46,122 @@
     a:active {
        text-decoration: none;
     }
+    .w3-container-custom {padding-left:20px;}
+    .w3-container-custom > div {}
+    .search-zone {}
+    .search-zone div {display: inline-block;
+                      height:30px;
+                      margin-top: 20px;
+                      margin-bottom: 20px;
+                      padding-right:10px;}
+    .back-home {paddin-top:20px;
+                color:#00ebb3/*rgb(125, 222, 213)*/;
+                font-size:1em;
+                text-align:center;}
+
 </style>
 <body>
-    <div class="grid-wrap">
-        <div class="w3-row w3-container row-border">
-          <div class="w3-col s2 td-common td-title w3-center">
-            <p>Time</p>
-          </div>
-          <div class="w3-col s2 td-common td-title w3-center">
-            <p>kpl</p>
-          </div>
+    <div class="w3-container w3-container-custom">
+        <div class="search-zone ">
+            <div>
+                <select class="w3-select" id="periodSelect">
+                  <option value="" disabled selected>Choose Search period</option>
+                  <option value="1">Today</option>
+                  <option value="10">10 days</option>
+                  <option value="30">30 days</option>
+                </select>
+            </div>
+            <div><button class="w3-btn w3-green" onclick="searchHistory()">Search</button></div>
+            <div><button class="w3-btn w3-green" onclick="goMenu()">Back Menu</button></div>
+
         </div>
-        <div class="w3-row w3-container row-border">
-          <div class="w3-col s2 td-common w3-center">
-            <p>2017/01/22 16:10</p>
-          </div>
-          <div class="w3-col s2 td-common w3-center">
-            <p>10.01 kpl</p>
-          </div>
-        </div>
-        <div class="w3-row w3-container row-border">
-          <div class="w3-col s2 td-common w3-center">
-            <p>2017/01/22 16:00</p>
-          </div>
-          <div class="w3-col s2 td-common w3-center">
-            <p>10.02 kpl</p>
-          </div>
-        </div>
-        <div class="w3-row w3-container row-border">
-          <div class="w3-col s2 td-common w3-center">
-            <p>2017/01/22 15:50</p>
-          </div>
-          <div class="w3-col s2 td-common w3-center">
-            <p>10.02 kpl</p>
-          </div>
-        </div>
-        <div class="w3-row w3-container row-border">
-          <div class="w3-col s2 td-common w3-center">
-            <p>2017/01/22 15:40</p>
-          </div>
-          <div class="w3-col s2 td-common w3-center">
-            <p>10.02 kpl</p>
-          </div>
-        </div>
-        <div class="w3-row w3-container row-border">
-          <div class="w3-col s2 td-common w3-center">
-            <p>2017/01/22 15:30</p>
-          </div>
-          <div class="w3-col s2 td-common w3-center">
-            <p>10.02 kpl</p>
-          </div>
-        </div>
-        <div class="w3-row w3-container row-border">
-          <div class="w3-col s2 td-common w3-center">
-            <p>2017/01/22 15:20</p>
-          </div>
-          <div class="w3-col s2 td-common w3-center">
-            <p>10.02 kpl</p>
-          </div>
-        </div>
-        <div class="w3-row w3-container row-border">
-          <div class="w3-col s4 w3-center neon-color">
-              <a href="{% url 'home' %}">&#8617; Back Menu</a>
-          </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>VSS</th>
+                        <th>MAF</th>
+                        <th>KPL</th>
+                    </tr>
+                </thead>
+                <tbody id="historyTableTbody">
+                    <tr>
+                        <td>2016/1/2 12:00:01</td>
+                        <td>12.3</td>
+                        <td>212.2</td>
+                        <td>21.4</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+<script>
+    function searchHistory(){
+        var e = document.getElementById("periodSelect");
+        var v = e.options[e.selectedIndex].value;
+        if(v == ""){
+            alert("기간을 선택해주세요.");
+        }  else {
+            callHistory(v);
+        }
+    }
 
-<!--
-    <div class="gridcontainer">
-        <div class="griditem"></div>
-        <div class="griditem"></div>
-        <div class="griditem"></div>
-        <div class="griditem"></div>
-        <div class="griditem"></div>
-        <div class="griditem"></div>
-        <div class="griditem"></div>
-    </div>
--->
+    function callHistory(v) {
+      var xhttp;
+      var p = v;
+      if (window.XMLHttpRequest) {
+        // code for modern browsers
+        xhttp = new XMLHttpRequest();
+      } else {
+        // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var r = this.responseText;
+          var s = JSON.parse(r);
+          var l;
+          if(s != "" && s != null && s.list != null){
+              l = s.list;
+              console.log(l);
+               makeTable(l);
+          } else {
+            alert("No result data..");
+          }
 
 
+         }
+      };
+      xhttp.open("GET", "getHistoryData/?searchPeriod="+p, true);
+      xhttp.send();
+    }
+
+    function makeTable(v){
+        var l = v;
+        var tableObj = document.getElementById("historyTableTbody");
+        var trObj;
+        var tdObj;
+        var tdObj2;
+        var textElement;
+        tableObj.innerHTML = "";
+
+        for(var i=0; i<l.length;i++){
+            trObj = document.createElement("TR");
+            for(var j=0; j<l[i].length;j++){
+                tdObj = document.createElement("TD");
+                textElement= document.createTextNode(l[i][j]);
+                tdObj.appendChild(textElement);
+                trObj.appendChild(tdObj);
+            }
+            tableObj.appendChild(trObj);
+        }
+    }
+
+    function goMenu(){
+       window.location.assign("{% url 'home' %}");
+    }
+</script>
 </body>
 </html>
 
