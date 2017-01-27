@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cfae27eb-9b50-4f5f-a126-9cccdb221b92" name="Default" comment="commit webserver">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/manage_2.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/db.sqlite3" afterPath="$PROJECT_DIR$/source/Webserver/db.sqlite3" />
+    <list default="true" id="cfae27eb-9b50-4f5f-a126-9cccdb221b92" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/resource/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/static/resource/css/font-awesome.min.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/resource/css/w3-theme-black.css" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/static/resource/css/w3-theme-black.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/resource/css/w3.css" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/static/resource/css/w3.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/resource/fonts/fontawesome-webfont.eot" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/static/resource/fonts/fontawesome-webfont.eot" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/resource/fonts/fontawesome-webfont.svg" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/static/resource/fonts/fontawesome-webfont.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/resource/fonts/fontawesome-webfont.ttf" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/static/resource/fonts/fontawesome-webfont.ttf" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/resource/fonts/fontawesome-webfont.woff" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/static/resource/fonts/fontawesome-webfont.woff" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/resource/images/history.JPG" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/static/resource/images/history.JPG" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/resource/images/live.JPG" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/static/resource/images/live.JPG" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/koolproject.iml" afterPath="$PROJECT_DIR$/.idea/koolproject.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/DataManage/sqlCollection.py" afterPath="$PROJECT_DIR$/source/DataManage/sqlCollection.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/models.py" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/urls.py" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/views.py" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/Webserver/settings.py" afterPath="$PROJECT_DIR$/source/Webserver/Webserver/settings.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,7 +38,40 @@
     <favorites_list name="koolproject" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source/Webserver/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding>
+                <element signature="e#501#540#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sqlCollection.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/DataManage/sqlCollection.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="795">
+              <caret line="53" column="30" lean-forward="true" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -66,23 +109,27 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/source/Webserver/manage.py" />
         <option value="$PROJECT_DIR$/source/Webserver 복사본/Webserver/urls.py" />
-        <option value="$PROJECT_DIR$/source/Webserver/Webserver/settings.py" />
         <option value="$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/views.py" />
-        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html" />
         <option value="$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/urls.py" />
         <option value="$PROJECT_DIR$/source/Webserver/Webserver/urls.py" />
-        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/views.py" />
         <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/urls.py" />
         <option value="$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/templates/KPLInfo/live.html" />
-        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html" />
         <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html" />
+        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html" />
+        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html" />
+        <option value="$PROJECT_DIR$/source/Webserver/Webserver/settings.py" />
+        <option value="$PROJECT_DIR$/source/Webserver/models.py" />
+        <option value="$PROJECT_DIR$/source/DataManage/sqlCollection.py" />
+        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/models.py" />
+        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/views.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="784" />
+    <option name="x" value="1440" />
+    <option name="y" value="67" />
+    <option name="width" value="2560" />
+    <option name="height" value="1440" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -188,33 +235,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Webserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KPLInfo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KPLInfo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="koolProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="koolProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
+              <option name="myItemId" value="DataManage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -226,18 +247,19 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/source/Webserver" />
-      <recent name="C:\Users\User\PycharmProjects\koolproject\source\Webserver\KPLInfo\templates\KPLInfo" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/source/Webserver/KPLInfo/static" />
       <recent name="$PROJECT_DIR$/source/Webserver" />
       <recent name="$PROJECT_DIR$/source/Webserver/koolenv/lib/python3.5/site-packages" />
       <recent name="$PROJECT_DIR$/source/Webserver/koolenv/lib/python3.5" />
       <recent name="$PROJECT_DIR$/source/Webserver/koolenv/lib" />
-      <recent name="$PROJECT_DIR$/source/Webserver/koolenv" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/source/Webserver" />
+      <recent name="C:\Users\User\PycharmProjects\koolproject\source\Webserver\KPLInfo\templates\KPLInfo" />
     </key>
   </component>
   <component name="RunManager" selected="Python.sqlCollection">
@@ -456,7 +478,14 @@
       <option name="project" value="LOCAL" />
       <updated>1485455653205</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="commit webserver2">
+      <created>1485455933163</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1485455933163</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -469,16 +498,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="784" extended-state="6" />
+    <frame x="1440" y="67" width="2560" height="1440" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18393235" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.102796376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3468208" sideWeight="0.2149401" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32808024" sideWeight="0.49119097" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34671533" sideWeight="0.21977156" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919708" sideWeight="0.4958645" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16569343" sideWeight="0.4895628" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3468208" sideWeight="0.7850599" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34671533" sideWeight="0.78022844" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -486,7 +516,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.49707174" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.49753347" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -499,7 +528,8 @@
     <MESSAGE value="DataManage(main.py, readOBD.py, saveOBD.py, sqlCollection.py)&#10;&#10;WebServer/KPLInfo/templates/KPLInfo/  : menu.html, menu2.html, history.html, live.html" />
     <MESSAGE value="초기화" />
     <MESSAGE value="commit webserver" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit webserver" />
+    <MESSAGE value="commit webserver2" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit webserver2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -508,25 +538,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/source/web/menu2.html" />
-    <entry file="file://$PROJECT_DIR$/source/python/requestLiveData.py" />
-    <entry file="file://$PROJECT_DIR$/source/python/requestHistoryData.py" />
-    <entry file="file://$PROJECT_DIR$/source/python/main.py" />
-    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/resource/css/w3.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="64" lean-forward="false" selection-start-line="13" selection-start-column="64" selection-end-line="13" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/python/readOBD.py" />
-    <entry file="file://$PROJECT_DIR$/source/python/saveOBD.py" />
-    <entry file="file://$PROJECT_DIR$/source/python/sqlCollection.py" />
-    <entry file="file://$PROJECT_DIR$/document/design/structure2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/DataManage/readOBD.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -622,21 +633,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/manage.py" />
-    <entry file="file://$PROJECT_DIR$/source/Webserver/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -661,67 +657,163 @@
     <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/tests.py" />
     <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/Webserver/settings.py" />
     <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/Webserver/wsgi.py" />
-    <entry file="file://$PROJECT_DIR$/source/Webserver/Webserver/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1230">
-          <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/templates/KPLInfo/menu.html" />
     <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/Webserver/urls.py" />
     <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/urls.py" />
     <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/views.py" />
-    <entry file="file://$PROJECT_DIR$/source/Webserver/Webserver/urls.py">
+    <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/templates/KPLInfo/history.html" />
+    <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/templates/KPLInfo/live.html" />
+    <entry file="file://$PROJECT_DIR$/source/Webserver/koolenv/lib/python3.5/site-packages/django/contrib/sessions/backends/signed_cookies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#35#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="46" column="17" lean-forward="true" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
+        <state relative-caret-position="216">
+          <caret line="41" column="64" lean-forward="false" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="64" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/templates/KPLInfo/history.html" />
     <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="38" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="38" />
+        <state relative-caret-position="120">
+          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
           <folding>
             <element signature="e#0#32#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/templates/KPLInfo/live.html" />
+    <entry file="file://$PROJECT_DIR$/source/Webserver/Webserver/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="46" column="47" lean-forward="false" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="47" />
+          <folding>
+            <marker date="1485484434000" expanded="true" signature="44:1509" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="131" column="54" lean-forward="false" selection-start-line="131" selection-start-column="54" selection-end-line="131" selection-end-column="54" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+        <state relative-caret-position="642">
+          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/db.sqlite3">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/Webserver/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="55" column="6" lean-forward="true" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/migrations/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/DataManage/sqlCollection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="53" column="30" lean-forward="true" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/obd.db">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="81" column="3" lean-forward="true" selection-start-line="81" selection-start-column="3" selection-end-line="81" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="30" lean-forward="true" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="e#501#540#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

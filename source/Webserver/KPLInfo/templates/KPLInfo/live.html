@@ -1,8 +1,9 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <title>Live</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="resource/css/w3.css">
+<link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
 <style>
     body {background-color:#000000;
            margin:0px;
@@ -75,17 +76,18 @@
     var avgFuelValue = "14.0";
 
      setInterval(function(){
+        //callLive();
+        //주행연비
+         var realFuelObj = document.getElementsByClassName("real-fuel-efficiency")[0];
+         realFuelObj.getElementsByClassName("value")[0].innerHTML = {{realFuelValue}};
 
+         //평균연비
+         var avgFuelObj = document.getElementsByClassName("avg-fuel-efficiency")[0];
+         avgFuelObj.getElementsByClassName("value")[0].innerHTML = {{avgFuelValue}};
 
+        realFuelValue++;
       }, 1000);
 
-    //주행연비
-     var realFuelObj = document.getElementsByClassName("real-fuel-efficiency")[0];
-     realFuelObj.getElementsByClassName("value")[0].innerHTML = realFuelValue;
-
-     //평균연비
-     var avgFuelObj = document.getElementsByClassName("avg-fuel-efficiency")[0];
-     avgFuelObj.getElementsByClassName("value")[0].innerHTML = avgFuelValue;
 
 </script>
 </body>
