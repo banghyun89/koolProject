@@ -78,8 +78,6 @@
      setInterval(function(){
         callLive();
 
-
-        realFuelValue++;
       }, 1000);
 
 
@@ -103,8 +101,9 @@
 
          //평균연비
          var avgFuelObj = document.getElementsByClassName("avg-fuel-efficiency")[0];
-            avgFuelObj.getElementsByClassName("value")[0].innerHTML = s.avgFuelValue;
+            avgFuelObj.getElementsByClassName("value")[0].innerHTML = realFuelValue;
             console.log("avg=="+s.avgFuelValue, "real===="+s.realFuelValue);
+            realFuelValue++
         }
       };
       xhttp.open("GET", "getLiveData", true);
