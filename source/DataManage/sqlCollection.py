@@ -2,6 +2,7 @@ import sqlite3
 
 dbname = 'obd.db'
 
+
 def create(dbname):
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
@@ -22,6 +23,7 @@ def create(dbname):
 
     return True
 
+
 def put_data(obd_data):
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
@@ -31,7 +33,8 @@ def put_data(obd_data):
         for i in obd_data:
             data.append(i)
 
-        cursor.execute("INSERT INTO rowOBDdata (time, vss, maf, kpl) VALUES (?, ?, ?, ?)", (data[0], data[1], data[2], data[3]))
+        cursor.execute("INSERT INTO rowOBDdata (time, vss, maf, kpl) VALUES (?, ?, ?, ?)",
+                       (data[0], data[1], data[2], data[3]))
 
     except sqlite3.Error as e:
         print('Failed to insert data:', e)
@@ -41,12 +44,16 @@ def put_data(obd_data):
 
     return True
 
-def get_history_data(time_cond):
+
+def get_history_data(time_cond_list):
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
-
     try:
-        results = cursor.execute("SELECT time,vss,maf,kpl FROM rowOBDdata Where time between ? and ?",(time_cond[0],time_cond[1]))
+        data = []
+        for i in time_cond_list:
+            data.append(i)
+        results = cursor.execute("SELECT time, vss, maf, kpl FROM rowOBDdata WHERE time >= ? AND time <= ?",(data[0], data[1]))
+        #results = cursor.execute("SELECT time, vss, maf, kpl FROM rowOBDdata WHERE time >= '2017-01-27' AND time <= '2017-01-27'")
         response = []
         for row in results.fetchall():
             response.append(row)
@@ -59,12 +66,13 @@ def get_history_data(time_cond):
 
     return (response)
 
+
 def get_live_data():
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
 
     try:
-        results = cursor.execute("SELECT kpl FROM rowOBDdata ORDER BY id DESC")
+        results = cursor.execute("SELECT kpl FROM rowOBDdata ORDER BY id DESC LIMIT 1")
         respone = []
         for row in results.fetchall():
             respone.append(row)

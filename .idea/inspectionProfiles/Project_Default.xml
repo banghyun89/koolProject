@@ -5,6 +5,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="source.Webserver.KPLInfo.models.RowOBDData" />
+          <option value="source.Webserver.KPLInfo.views.*" />
         </list>
       </option>
     </inspection_tool>
