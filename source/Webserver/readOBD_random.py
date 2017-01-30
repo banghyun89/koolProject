@@ -26,9 +26,9 @@ class cmdObj:
 class obdObj:
     def query(self,v):
         if v == 'cmd1' :
-            return cmdObj(round(random.uniform(0, 200.99), 2)) #vss
+            return cmdObj(round(random.uniform(30, 200.99), 2)) #vss
         else :
-            return cmdObj(round(random.uniform(0, 99.99), 2)) #maf
+            return cmdObj(round(random.uniform(50, 99.99), 2)) #maf
 
 connection = obdObj()
 
