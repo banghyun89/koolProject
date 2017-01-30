@@ -12,24 +12,26 @@
     .container-custom {width:100%;padding-left:30px;}
     .small-box {
                 display: inline-block;
-                margin-top:10px;
-                padding-top: 20px;
-                border: 2px solid rgb(140,250,245);
-                background-color: rgb(140,250,245);
+                padding-top: 15px;
                 color: #000000;
-                width: 180px;
-                height: 180px;
-                line-height:40px;
+                line-height:35px;
                 text-align: center;
                 border-radius: 50%;
      }
-     .small-box:hover {
-         background-color: #000000;
-         color: rgb(140,250,245);
+
+    .time {width: 150px; height: 150px; margin-top:20px; background: linear-gradient(to bottom right, #ffcccc 0%, #8cfaf5 0%);}
+    .kpl {width: 140px;height: 140px; margin:30px 0px 0px 15px; background: linear-gradient(to bottom right, #ffcccc 0%, #8cfaf5 0%);}
+    .speed {width: 140px; height: 140px; margin:10px;background: linear-gradient(to bottom right, #ffcccc 0%, #8cfaf5 0%);}
+    .maf {width: 140px;height: 140px; margin-left:5px; background: linear-gradient(to bottom right, #ffcccc 0%, #8cfaf5 0%);}
+
+     .small-box:hover  {
+         background: linear-gradient(to bottom right, #ffcccc 0%,  #8cfaf5 0%);
+         opacity:0.5;
+         color: #000000;
      }
 
-    .title {font-size:1.3em;}
-    .value {font-size:2.5em;}
+    .title {font-size:1.1em;}
+    .value {font-size:2.1em;}
     .unit {font-size:1.0em;}
 
     .back-menu-div {
@@ -69,10 +71,10 @@
 <div class="w3-container container-custom">
     <div class="small-box time" >
         <span class="title">Time</span><br/>
-        <span class="value" style="font-size:2em">00:00:00</span><br/>
+        <span class="value" style="font-size:1.8em">00:00:00</span><br/>
         <span class="unit">2017-01-01</span>
     </div>
-    <div class="small-box real-fuel-efficiency">
+    <div class="small-box kpl">
         <span class="title">KPL</span><br/>
         <span class="value">0</span><br/>
         <span class="unit">km/l</span>
@@ -119,18 +121,24 @@
           var s = JSON.parse(r);
           var l = s.list;
 
-          if(l.length > 0 && l[0].length > 0)
+          if(l.length > 0 && l[0].length > 0){
             l = l[0];
-          else
+            setBackCss("kpl", Number(l[1]));
+            setBackCss("speed", Number(l[2]));
+            setBackCss("maf", Number(l[3]));
+          } else {
             l = [0,0,0,0];
-
+          }
             //시간
             var timeValue = l[0];
             var timeList = timeValue.split(" ");
             document.getElementsByClassName("time")[0].getElementsByClassName("value")[0].innerHTML = timeList[1];
             document.getElementsByClassName("time")[0].getElementsByClassName("unit")[0].innerHTML = timeList[0];
+
+
+
             //주행연비
-            document.getElementsByClassName("real-fuel-efficiency")[0].getElementsByClassName("value")[0].innerHTML = l[1];
+            document.getElementsByClassName("kpl")[0].getElementsByClassName("value")[0].innerHTML = l[1];
             //speed
             document.getElementsByClassName("speed")[0].getElementsByClassName("value")[0].innerHTML = l[2];
             //MAF
@@ -140,6 +148,24 @@
       };
       xhttp.open("GET", "getLiveData", true);
       xhttp.send();
+    }
+
+    function setBackCss(s,c){
+        var stdObj = {kpl:{mid:30,max:100},
+                     speed:{mid:80,max:300},
+                     maf:{mid:60,max:100}
+                    }; //kpl,speed,maf warning standard number
+        var ration;
+        if(c>stdObj[s].mid){
+            ratio = Math.round(c/stdObj[s].max *100);
+            document.getElementsByClassName(s)[0].setAttribute("style", getBackCss(ratio));
+        } else {
+            document.getElementsByClassName(s)[0].setAttribute("style", "");
+        }
+    }
+    function getBackCss(v){
+        var half = Math.round(v/2);
+        return "background: linear-gradient(to bottom right, #ffcccc "+half+"%, #8cfaf5 "+v+"%);";
     }
 
 </script>
