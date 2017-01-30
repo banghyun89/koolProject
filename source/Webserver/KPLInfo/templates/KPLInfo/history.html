@@ -7,25 +7,52 @@
 <style>
     body {background-color:#000000;
            margin:0px;
+           color:rgb(140,250,245);
           }
-    table {
-        padding-top:15px;
+    .tableWrap {
+        width:100%;
+        min-height:40px;
+        height:300px;
+        overflow-y:scroll;
+        overflow-x:hidden;
     }
-
+    table {
+        width:98%;
+    }
+    th,td {
+        height: 20px;
+    }
     table, th, td {
-            text-align:center;
             border-collapse: collapse;
-            border: 1px solid #00ebb3  /*rgb(125, 222, 213)*/;
-            color:#00ebb3/*rgb(125, 222, 213)*/;
-            font-size:1em;
+            border: 1px solid rgb(140,250,245);
+            padding: 4px 0px 4px 0px;
      }
+    .text-align-center, th {text-align:center;}
+    .text-align-right {text-align:right;}
 
-    th, td {padding: 4px 15px 4px 15px;
-            min-width:150px;
-               }
 
+    .width-10 {width:10%;min-width:60px;}
+    .width-15 {width:15%;min-width:80px;}
+    .width-5 {width:5%;min-width:40px;}
+
+    .w3-container-custom {padding-left:20px;}
+    .w3-container-custom > div {}
+    .search-zone {}
+    .search-zone div {display: inline-block;
+                      height:30px;
+                      margin-top: 20px;
+                      margin-bottom: 20px;
+                      padding-right:10px;}
+
+
+    .back-menu-div {
+                    margin:auto;
+                    width:200px;
+                    margin-top:30px;
+                    padding:2px;
+                    font-size:1.2em;
+                }
     a {font-size:1.2em;}
-
     a:link {
        text-decoration: none;
     }
@@ -38,7 +65,6 @@
     /* mouse over link */
     a:hover {
         text-decoration: none;
-        font-size:1.5em;
         text-weight:bold;
     }
 
@@ -46,19 +72,6 @@
     a:active {
        text-decoration: none;
     }
-    .w3-container-custom {padding-left:20px;}
-    .w3-container-custom > div {}
-    .search-zone {}
-    .search-zone div {display: inline-block;
-                      height:30px;
-                      margin-top: 20px;
-                      margin-bottom: 20px;
-                      padding-right:10px;}
-    .back-home {paddin-top:20px;
-                color:#00ebb3/*rgb(125, 222, 213)*/;
-                font-size:1em;
-                text-align:center;}
-
 </style>
 <body>
     <div class="w3-container w3-container-custom">
@@ -66,50 +79,83 @@
             <div>
                 <select class="w3-select" id="periodSelect">
                   <option value="" disabled selected>Choose Search period</option>
-                  <option value="1">Today</option>
-                  <option value="10">10 days</option>
-                  <option value="30">30 days</option>
+                  <option value="1" >Today</option>
+                  <option value="10">7 days</option>
+                  <option value="30">10 days</option>
                 </select>
             </div>
             <div><button class="w3-btn w3-green" onclick="searchHistory()">Search</button></div>
-            <div><button class="w3-btn w3-green" onclick="goMenu()">Back Menu</button></div>
 
         </div>
-        <div>
+        <div style="padding-top:15px;">
+            <p>
+                Total count :
+                <span class="totalCountSpan">0</span>
+            </p>
             <table>
                 <thead>
                     <tr>
+                        <th class="width-5">No.</th>
+                        <th class="width-15">Time</th>
+                        <th class="width-10">VSS</th>
+                        <th class="width-10">MAF</th>
+                        <th class="width-10">KPL</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tableWrap" id="tableWrapDiv" onscroll="onScrollDiv()">
+            <table>
+                <!--<thead>
+                    <tr>
+                        <th>No.</th>
                         <th>Time</th>
                         <th>VSS</th>
                         <th>MAF</th>
                         <th>KPL</th>
                     </tr>
-                </thead>
+                </thead>-->
                 <tbody id="historyTableTbody">
                     <tr>
-                        <td>2016/1/2 12:00:01</td>
-                        <td>12.3</td>
-                        <td>212.2</td>
-                        <td>21.4</td>
+                        <td colspan="5"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <div class="back-menu-div">
+            <a href="{% url 'home' %}">&#8617; Back Menu</a>
+        </div>
+
     </div>
 <script>
+    //define gobal variables
+    var rowCnt = 20; // ? rows per 1page
+    var callCnt = 0; // total calling count
+    var totalCnt = 0;
+    var firstId = 0;
+    var lastNumber = 0; //grid 'No.' column value.
+    var period = 1;
+    //call when loading page
+    callHistory(1); //1days
+
     function searchHistory(){
         var e = document.getElementById("periodSelect");
         var v = e.options[e.selectedIndex].value;
+
         if(v == ""){
             alert("기간을 선택해주세요.");
         }  else {
+            callCnt = 0;
+            totalCnt = 0;
+            lastNumber = 0;
+            period = v;
+            firstId= 0;
             callHistory(v);
         }
     }
 
-    function callHistory(v) {
+    function callHistory(t) {
       var xhttp;
-      var p = v;
       if (window.XMLHttpRequest) {
         // code for modern browsers
         xhttp = new XMLHttpRequest();
@@ -133,34 +179,77 @@
 
          }
       };
-      xhttp.open("GET", "getHistoryData/?searchPeriod="+p, true);
+      xhttp.open("GET", "getHistoryData/?searchPeriod="+t+"&rowCnt="+rowCnt+"&callCnt="+callCnt+"&firstId="+firstId, true);
       xhttp.send();
+
     }
 
     function makeTable(v){
-        var l = v;
+        var l = (v.length>0)? v[0]:[];
+        var c = (v.length>0)? v[1]:0;
         var tableObj = document.getElementById("historyTableTbody");
         var trObj;
         var tdObj;
         var tdObj2;
         var textElement;
-        tableObj.innerHTML = "";
+        var count = lastNumber;
+        var classList = ["width-5","width-15","width-10","width-10","width-10"];
+        var classList2 = ["text-align-center","text-align-center","text-align-right","text-align-right","text-align-right"];
+        if(callCnt == 0){
+            tableObj.innerHTML = "";
+
+            //total Count;
+            totalCnt = c;
+
+            if(l.length > 0)
+            firstId = l[0][0];
+
+            document.getElementsByClassName("totalCountSpan")[0].innerHTML = Number(totalCnt).toLocaleString('en');
+        }
+        console.log(totalCnt);
 
         for(var i=0; i<l.length;i++){
+            count++
             trObj = document.createElement("TR");
-            for(var j=0; j<l[i].length;j++){
+            tdObj = document.createElement("TD");
+            textElement= document.createTextNode(count);
+            tdObj.setAttribute("class", classList[0]+" "+classList2[0]);
+            tdObj.appendChild(textElement);
+            trObj.appendChild(tdObj);
+            for(var j=1; j<l[i].length;j++){
                 tdObj = document.createElement("TD");
                 textElement= document.createTextNode(l[i][j]);
+                tdObj.setAttribute("class", classList[j]+" "+classList2[j]);
                 tdObj.appendChild(textElement);
                 trObj.appendChild(tdObj);
             }
             tableObj.appendChild(trObj);
         }
+
+
+         /////////////////////////
+         //change global variable
+         ////////////////////////
+          lastNumber = count;
+          callCnt++;
+         /////////////////////////
     }
 
+    // back menu
     function goMenu(){
        window.location.assign("{% url 'home' %}");
     }
+
+    //div table scroll event
+    function onScrollDiv() {
+        var divObj = document.getElementsByClassName("tableWrap")[0];
+        if( divObj.scrollTop > 320){
+
+            console.log("totalCnt =="+ totalCnt, "  lastNumber==="+lastNumber);
+            callHistory(period);
+        }
+    }
+
 </script>
 </body>
 </html>

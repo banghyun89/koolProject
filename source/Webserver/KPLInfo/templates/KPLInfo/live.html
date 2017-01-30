@@ -6,26 +6,33 @@
 <link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
 <style>
     body {background-color:#000000;
+           color:rgb(140,250,245);
            margin:0px;
            }
-    .small-box {float:left;
-                min-width:200px;
-                height:40%;
-                text-align:center;
-                padding:15px;
-                margin:20px;
-                border-radius: 30px;
-                border: 2px solid #00ebb3  /*rgb(125, 222, 213)*/;
-                color:#00ebb3/*rgb(125, 222, 213)*/;
+    .container-custom {width:100%;padding-left:30px;}
+    .small-box {
+                display: inline-block;
+                margin-top:10px;
+                padding-top: 20px;
+                border: 2px solid rgb(140,250,245);
+                width: 180px;
+                height: 180px;
+                line-height:40px;
+                text-align: center;
+                border-radius: 50%;
+
                 }
-    .title {font-size:2em;}
-    .value {font-size:4em;}
-    .unit {font-size:1.4em;}
+    .title {font-size:1.3em;}
+    .value {font-size:2.5em;}
+    .unit {font-size:1.0em;}
 
     .back-menu-div {
-                    text-align:center;
+                    display: inline-block;
+                    text-align: center;
+                    width:180px;
+                    height:180px;
+                    margin-top:10px;
                     padding:2px;
-                    color:#00ebb3/*rgb(125, 222, 213)*/;
                     font-size:1.2em;
                 }
     a {font-size:1.2em;}
@@ -42,31 +49,40 @@
     a:hover {
         text-decoration: none;
         text-weight:bold;
-        font-size:1.5em;
     }
 
     /* selected link */
     a:active {
        text-decoration: none;
     }
+
 </style>
 <body>
 
 <div class="w3-container container-custom">
+    <div class="small-box time" >
+        <span class="title">Time</span><br/>
+        <span class="value" style="font-size:2em">00:00:00</span><br/>
+        <span class="unit">2017-01-01</span>
+    </div>
     <div class="small-box real-fuel-efficiency">
-        <div class="title">주행연비</div>
-        <div class="value"></div>
-        <div class="unit">kpl</div>
+        <span class="title">KPL</span><br/>
+        <span class="value">0</span><br/>
+        <span class="unit">km/l</span>
     </div>
-    <div class="small-box avg-fuel-efficiency">
-        <div class="title">평균연비</div>
-        <div class="value"></div>
-        <div class="unit">kpl</div>
+    <div class="small-box speed">
+        <span class="title">SPEED</span><br/>
+        <span class="value">0</span><br/>
+        <span class="unit">km/h</span>
     </div>
-    <div class="w3-row w3-container " style="clear:both;">
-      <div class="w3-col w3-center back-menu-div">
-           <a href="{% url 'home' %}">&#8617; Back Menu</a>
-      </div>
+    <div class="small-box maf">
+        <span class="title">MAF</span><br/>
+        <span class="value">0</span><br/>
+        <span class="unit">g/s</span>
+
+    </div>
+    <div class="back-menu-div">
+        <a href="{% url 'home' %}">&#8617; Back Menu</a>
     </div>
 </div>
 
@@ -94,16 +110,25 @@
         if (this.readyState == 4 && this.status == 200) {
           var r = this.responseText;
           var s = JSON.parse(r);
+          var l = s.list;
 
-        //주행연비
-        var realFuelObj = document.getElementsByClassName("real-fuel-efficiency")[0];
-            realFuelObj.getElementsByClassName("value")[0].innerHTML = s.realFuelValue;
+          if(l.length > 0 && l[0].length > 0)
+            l = l[0];
+          else
+            l = [0,0,0,0];
 
-         //평균연비
-         var avgFuelObj = document.getElementsByClassName("avg-fuel-efficiency")[0];
-            avgFuelObj.getElementsByClassName("value")[0].innerHTML = realFuelValue;
-            console.log("avg=="+s.avgFuelValue, "real===="+s.realFuelValue);
-            realFuelValue++
+            //시간
+            var timeValue = l[0];
+            var timeList = timeValue.split(" ");
+            document.getElementsByClassName("time")[0].getElementsByClassName("value")[0].innerHTML = timeList[1];
+            document.getElementsByClassName("time")[0].getElementsByClassName("unit")[0].innerHTML = timeList[0];
+            //주행연비
+            document.getElementsByClassName("real-fuel-efficiency")[0].getElementsByClassName("value")[0].innerHTML = l[1];
+            //speed
+            document.getElementsByClassName("speed")[0].getElementsByClassName("value")[0].innerHTML = l[2];
+            //MAF
+            document.getElementsByClassName("maf")[0].getElementsByClassName("value")[0].innerHTML = l[3];
+
         }
       };
       xhttp.open("GET", "getLiveData", true);
