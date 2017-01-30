@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cfae27eb-9b50-4f5f-a126-9cccdb221b92" name="Default" comment="commit WebPages">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/DataManage/obd.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/Webserver/readOBD.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/DataManage/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/DataManage/readOBD.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/db.sqlite3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/rowOBDdata/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/rowOBDdata/migrations/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/rowOBDdata/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/rowOBDdata/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/rowOBDdata/views.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/DataManage/main.py" afterPath="$PROJECT_DIR$/source/DataManage/main_template.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/koolproject.iml" afterPath="$PROJECT_DIR$/.idea/koolproject.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="cfae27eb-9b50-4f5f-a126-9cccdb221b92" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/Webserver/readOBD_random.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source/DataManage/obd.db" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source/DataManage/saveOBD.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source/Webserver/rowOBDdata/__init__.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source/DataManage/sqlCollection.py" afterPath="$PROJECT_DIR$/source/Webserver/sqlCollection.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/KPLInfo/views.py" afterPath="$PROJECT_DIR$/source/Webserver/KPLInfo/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/obd.db" afterPath="$PROJECT_DIR$/source/Webserver/obd.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/Webserver/readOBD.py" afterPath="$PROJECT_DIR$/source/Webserver/readOBD.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,13 +31,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="readOBD.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="readOBD.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/Webserver/readOBD.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="71" column="0" lean-forward="true" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+            <state relative-caret-position="-190">
+              <caret line="15" column="8" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="readOBD_random.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/Webserver/readOBD_random.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sqlCollection.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/Webserver/sqlCollection.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1290">
+              <caret line="86" column="19" lean-forward="false" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="live.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="48" column="13" lean-forward="true" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+              <folding>
+                <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -51,9 +78,33 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="39" />
+            <state relative-caret-position="255">
+              <caret line="49" column="18" lean-forward="true" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="history.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="33" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -71,7 +122,14 @@
     <findStrings>
       <find>TEMPLATE</find>
       <find>SETTINGS_PATH</find>
+      <find>00ebb3</find>
+      <find>200px</find>
+      <find>lastId</find>
     </findStrings>
+    <replaceStrings>
+      <replace>180px</replace>
+      <replace>totalCnt</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -100,25 +158,26 @@
         <option value="$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/urls.py" />
         <option value="$PROJECT_DIR$/source/Webserver/Webserver/urls.py" />
         <option value="$PROJECT_DIR$/source/Webserver 복사본/KPLInfo/templates/KPLInfo/live.html" />
-        <option value="$PROJECT_DIR$/source/Webserver/Webserver/settings.py" />
         <option value="$PROJECT_DIR$/source/Webserver/models.py" />
         <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/models.py" />
         <option value="$PROJECT_DIR$/source/DataManage/setup.py" />
-        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html" />
         <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/urls.py" />
-        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html" />
         <option value="$PROJECT_DIR$/source/DataManage/main.py" />
-        <option value="$PROJECT_DIR$/source/DataManage/sqlCollection.py" />
-        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html" />
         <option value="$PROJECT_DIR$/source/DataManage/readOBD.py" />
-        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/views.py" />
+        <option value="$PROJECT_DIR$/source/Webserver/Webserver/settings.py" />
         <option value="$PROJECT_DIR$/source/Webserver/readOBD.py" />
+        <option value="$PROJECT_DIR$/source/DataManage/sqlCollection.py" />
+        <option value="$PROJECT_DIR$/source/Webserver/sqlCollection.py" />
+        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/views.py" />
+        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html" />
+        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html" />
+        <option value="$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1486" />
+    <option name="width" value="1440" />
     <option name="height" value="790" />
   </component>
   <component name="ProjectView">
@@ -136,7 +195,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -185,29 +243,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="koolenv" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="koolProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="koolProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Webserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Webserver" />
+              <option name="myItemId" value="KPLInfo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -232,6 +268,70 @@
               <option name="myItemId" value="KPLInfo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPLInfo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="koolProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="koolProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Webserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPLInfo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="koolProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="koolProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Webserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KPLInfo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migrations" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -254,6 +354,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -261,11 +362,6 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/source/Webserver" />
-      <recent name="$PROJECT_DIR$/source/DataManage" />
-      <recent name="C:\Users\User\PycharmProjects\koolproject\source\Webserver\KPLInfo\templates\KPLInfo" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/source/Webserver/KPLInfo/static" />
       <recent name="$PROJECT_DIR$/source/Webserver" />
@@ -273,25 +369,13 @@
       <recent name="$PROJECT_DIR$/source/Webserver/koolenv/lib/python3.5" />
       <recent name="$PROJECT_DIR$/source/Webserver/koolenv/lib" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/source/Webserver" />
+      <recent name="$PROJECT_DIR$/source/DataManage" />
+      <recent name="C:\Users\User\PycharmProjects\koolproject\source\Webserver\KPLInfo\templates\KPLInfo" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.readOBD (1)">
-    <configuration default="false" name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/source/Webserver" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="koolproject" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/source/Webserver/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.readOBD_random">
     <configuration default="false" name="readOBD" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -307,28 +391,6 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/source/DataManage/readOBD.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests in koolProject" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="koolproject" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="$PROJECT_DIR$" />
-      <option name="TEST_TYPE" value="TEST_FOLDER" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
     <configuration default="false" name="saveOBD" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -361,6 +423,40 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="koolproject" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/source/Webserver/readOBD.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="readOBD_random" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/source/Webserver" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="koolproject" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/source/Webserver/readOBD_random.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="sqlCollection (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/source/Webserver" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="koolproject" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/source/Webserver/sqlCollection.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -518,19 +614,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.sqlCollection" />
-      <item index="1" class="java.lang.String" itemvalue="Python.main (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.readOBD" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in koolProject" />
-      <item index="4" class="java.lang.String" itemvalue="Python.saveOBD" />
-      <item index="5" class="java.lang.String" itemvalue="Python.readOBD (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Python.readOBD" />
+      <item index="2" class="java.lang.String" itemvalue="Python.saveOBD" />
+      <item index="3" class="java.lang.String" itemvalue="Python.readOBD (1)" />
+      <item index="4" class="java.lang.String" itemvalue="Python.readOBD_random" />
+      <item index="5" class="java.lang.String" itemvalue="Python.sqlCollection (1)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.readOBD (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Python.readOBD" />
-        <item index="2" class="java.lang.String" itemvalue="Python.saveOBD" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in koolProject" />
-        <item index="4" class="java.lang.String" itemvalue="Python.main (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Python.readOBD_random" />
+        <item index="1" class="java.lang.String" itemvalue="Python.sqlCollection (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.readOBD (1)" />
+        <item index="3" class="java.lang.String" itemvalue="Python.readOBD" />
+        <item index="4" class="java.lang.String" itemvalue="Python.saveOBD" />
       </list>
     </recent_temporary>
   </component>
@@ -622,7 +718,14 @@
       <option name="project" value="LOCAL" />
       <updated>1485521483661</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="commit Webserver~~~~~">
+      <created>1485620119000</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1485620119000</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -640,17 +743,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1486" height="790" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="790" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17610921" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17477097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37965617" sideWeight="0.45454547" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16473988" sideWeight="0.4895628" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16189112" sideWeight="0.4895628" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32808024" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3252149" sideWeight="0.51937985" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30802292" sideWeight="0.51937985" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37965617" sideWeight="0.54545456" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3581662" sideWeight="0.54545456" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -674,7 +777,8 @@
     <MESSAGE value="commit webserver3" />
     <MESSAGE value="commit readObd" />
     <MESSAGE value="commit WebPages" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit WebPages" />
+    <MESSAGE value="commit Webserver~~~~~" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit Webserver~~~~~" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -683,14 +787,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/source/Webserver/Webserver/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/Webserver 복사본/urls.py" />
     <entry file="file://$PROJECT_DIR$/source/Webserver/Webserver 복사본/wsgi.py" />
     <entry file="file://$PROJECT_DIR$/source/Webserver/Webserver/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -751,34 +847,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/db.sqlite3">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/migrations/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/db.sqlite3" />
+    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/migrations/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/admin.py" />
+    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/models.py" />
     <entry file="file://$PROJECT_DIR$/source/Webserver/obd.db">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
@@ -825,13 +897,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/Webserver/main.py" />
-    <entry file="file://$PROJECT_DIR$/source/Webserver/Webserver/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/Webserver/manage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -839,77 +904,90 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="123" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="48" column="12" lean-forward="false" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/DataManage/saveOBD.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="10" lean-forward="true" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/DataManage/readOBD.py" />
+    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/views.py" />
+    <entry file="file://$PROJECT_DIR$/source/Webserver/Webserver/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="90" column="13" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/readOBD.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-190">
+          <caret line="15" column="8" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/DataManage/readOBD.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="68" column="21" lean-forward="true" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="20" lean-forward="false" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/DataManage/sqlCollection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="26" column="22" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="22" />
+        <state relative-caret-position="300">
+          <caret line="82" column="49" lean-forward="false" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/rowOBDdata/views.py">
+    <entry file="file://$PROJECT_DIR$/source/Webserver/readOBD_random.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="210">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/sqlCollection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1290">
+          <caret line="86" column="19" lean-forward="false" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="39" />
-          <folding />
+        <state relative-caret-position="255">
+          <caret line="49" column="18" lean-forward="true" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/Webserver/readOBD.py">
+    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/live.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="71" column="0" lean-forward="true" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+        <state relative-caret-position="240">
+          <caret line="48" column="13" lean-forward="true" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/history.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="33" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

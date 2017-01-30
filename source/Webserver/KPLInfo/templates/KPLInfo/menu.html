@@ -7,47 +7,45 @@
 <style>
     body {background-color:#000000;
            margin:0px;
+           color: rgb(140,250,245);
          }
     .small-box {
-                float:left;
-                width:350px;
-                height:40%;
-                text-align:center;
-                padding:20px;
-                margin:20px;
-                -webkit-border-radius: 800px;
-                -moz-border-radius: 800px;
-                border-radius: 800px;
-                border: 2px solid #00ebb3  /*rgb(125, 222, 213)*/;
-                color:#00ebb3/*rgb(125, 222, 213)*/;
-                font-size:4em;
-            }
+                margin:auto;
+                margin-bottom:30px;
+                border: 2px solid rgb(140,250,245);
+                width: 200px;
+                height: 200px;
+                line-height:200px;
+                text-align: center;
+                border-radius: 70%;
+                font-size:2em;
+
+                }
 
     .small-box:hover {
-         background-color: #00ebb3;
+         background-color: rgb(140,250,245);
          color: #000000;
          font-weight:bold;
          border: 5px solid #111111;
          opacity: 0.9;
          cursor:pointer;
-         font-size:4em;
+         font-size:2em;
      }
-
+    .title {width:200px;text-align:center;font-size:2em;margin:auto;padding-bottom:30px;}
     .container-custom {padding:50px 0px 50px 0px;width:100%;}
 </style>
 <body>
 
 <div class="w3-container container-custom">
-  <div class="outer">
+       <div class="title">
+          MENU
+      </div>
       <div class="small-box real-fuel-efficiency"  onclick="goPage('live')">
           LIVE
       </div>
-  </div>
-  <div class="outer">
       <div class="small-box avg-fuel-efficiency" onclick="goPage('history')">
           HISTORY
       </div>
-  </div>
 </div>
 
 <script>
