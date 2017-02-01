@@ -1,0 +1,194 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<title>Live</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
+<style>
+    body {background-color:#000000;
+           color:rgb(140,250,245);
+           margin:0px;
+           }
+    .container-custom {width:100%;padding-left:30px;}
+    .small-box {
+                display: inline-block;
+                padding-top: 15px;
+                color: #000000;
+                line-height:35px;
+                text-align: center;
+                border-radius: 50%;
+                background: linear-gradient(to bottom right, #ffcccc 0%, #8cfaf5 0%);
+     }
+
+    #time {width: 150px; height: 150px; margin-top:20px;}
+    #kpl {width: 140px;height: 140px; margin:30px 0px 0px 15px;}
+    #speed {width: 140px; height: 140px; margin:10px;}
+    #maf {width: 140px;height: 140px; margin-left:5px; margin-top:10px;}
+
+     .small-box:hover  {
+         background: linear-gradient(to bottom right, #ffcccc 0%,  #8cfaf5 0%);
+         opacity:0.5;
+         color: #000000;
+     }
+
+    .title {font-size:1.1em;}
+    .value {font-size:2.1em;}
+    .unit {font-size:1.0em;}
+
+    .back-menu-div {
+                    display: inline-block;
+                    text-align: center;
+                    width:180px;
+                    height:180px;
+                    margin-top:10px;
+                    padding:2px;
+                    font-size:1.2em;
+                }
+    a {font-size:1.2em;}
+    a:link {
+       text-decoration: none;
+    }
+
+    /* visited link */
+    a:visited {
+        text-decoration: none;
+    }
+
+    /* mouse over link */
+    a:hover {
+        text-decoration: none;
+        text-weight:bold;
+        font-size:1.4em;
+    }
+
+    /* selected link */
+    a:active {
+       text-decoration: none;
+    }
+
+</style>
+<body>
+
+<div class="w3-container container-custom">
+    <div class="small-box" id="time" >
+        <span class="title">Time</span><br/>
+        <span class="value" style="font-size:1.8em">00:00:00</span><br/>
+        <span class="unit">2017-01-01</span>
+    </div>
+    <div class="small-box" id="kpl">
+        <span class="title">KPL</span><br/>
+        <span class="value">0</span><br/>
+        <span class="unit">km/l</span>
+    </div>
+    <div class="small-box" id="speed">
+        <span class="title">SPEED</span><br/>
+        <span class="value">0</span><br/>
+        <span class="unit">km/h</span>
+    </div>
+    <div class="small-box" id="maf">
+        <span class="title">MAF</span><br/>
+        <span class="value">0</span><br/>
+        <span class="unit">g/s</span>
+
+    </div>
+    <div class="back-menu-div">
+        <a href="{% url 'home' %}">&#8617; Back Menu</a>
+    </div>
+</div>
+
+
+<script>
+
+    //call live data every second
+     setInterval(function(){
+        callLive();
+      }, 1000);
+
+    //Today
+    function getToday(){
+        var currentDate = new Date();
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1;
+        var year = currentDate.getFullYear();
+        return year+"-"+month+"-"+day;
+    }
+
+    function callLive() {
+      var xhttp;
+      var rsList;
+
+      if (window.XMLHttpRequest) {
+        // code for modern browsers
+        xhttp = new XMLHttpRequest();
+        } else {
+        // code for IE6, IE5 ..
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //result list
+          rsList = JSON.parse(this.responseText).list;
+          displayData(rsList);
+        }
+      };
+      xhttp.open("GET", "getLiveData", true);
+      xhttp.send();
+    }
+
+    //display data each circle
+    function displayData(list){
+        var rsList = list;
+        var dataObj = { kpl:{mid:30,max:100,value:0},
+                        speed:{mid:80,max:300,value:0},
+                        maf:{mid:60,max:100,value:0},
+                        time:{value:getToday()},
+                      };
+        var timeList, timeValue;
+
+        if(rsList != "undefined" && rsList.length > 0 ){
+            dataObj.time.value = rsList[0];
+            dataObj.kpl.value = parseFloat(rsList[1]);
+            dataObj.speed.value = parseFloat(rsList[2]);
+            dataObj.maf.value = parseFloat(rsList[3]);
+
+            //make background color
+            setBackgroundCss(dataObj,"kpl",dataObj.kpl.value);
+            setBackgroundCss(dataObj,"speed",dataObj.speed.value);
+            setBackgroundCss(dataObj,"maf",dataObj.maf.value);
+          }
+
+        //time infomation split
+        timeValue = dataObj.time.value;
+        timeList = timeValue.split(" ");
+        document.getElementById("time").getElementsByClassName("value")[0].innerHTML = timeList[1]; //time Info
+        document.getElementById("time").getElementsByClassName("unit")[0].innerHTML = timeList[0]; //date Info
+
+        //주행연비
+        document.getElementById("kpl").getElementsByClassName("value")[0].innerHTML = dataObj.kpl.value;
+        //speed
+        document.getElementById("speed").getElementsByClassName("value")[0].innerHTML = dataObj.speed.value;
+        //MAF
+        document.getElementById("maf").getElementsByClassName("value")[0].innerHTML = dataObj.maf.value;
+    }
+
+    //set Circle background color
+    function setBackgroundCss(obj,type,value){
+        var nomalRatio, warningRatio;
+        var stdObj = obj;
+        if(value > stdObj[type].mid){
+            nomalRatio = Math.round(value/stdObj[type].max *100);
+            warningRatio= Math.round(nomalRatio/1.5);
+            document.getElementById(type).setAttribute("style", getCss(warningRatio,nomalRatio));
+        } else {
+            document.getElementById(type).setAttribute("style", "");
+        }
+    }
+
+    function getCss(warning,normal){
+        return "background: linear-gradient(to bottom left, #ffcccc "+warning+"%, #8cfaf5 "+normal+"%);";
+    }
+
+</script>
+</body>
+</html>
+

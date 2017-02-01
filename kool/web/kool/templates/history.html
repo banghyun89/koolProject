@@ -1,0 +1,316 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<title>History</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
+<style>
+    body {background-color:#000000;
+           margin:0px;
+           color:rgb(140,250,245);
+          }
+
+
+    .tableWrap {
+        width:96%;
+        margin:auto;
+        min-height:40px;
+        height:300px;
+        overflow-y:scroll;
+    }
+    .tableWrapHead {
+        width:96%;
+        margin:auto;
+        overflow-y:scroll;
+        padding-top:15px;
+    }
+    table {
+        width:99%;
+    }
+    th,td {
+        height: 20px;
+    }
+    table, th, td {
+            border-collapse: collapse;
+            border: 1px solid rgb(140,250,245);
+            padding: 4px 0px 4px 0px;
+     }
+
+    .width-10 {width:10%;min-width:60px;padding-right:5px;}
+    .width-15 {width:15%;min-width:80px;}
+    .width-5 {width:5%;min-width:40px;}
+
+    td:nth-child(1) {width:5%;min-width:40px;text-align:center;}
+    td:nth-child(2) {width:15%;min-width:80px;text-align:center;}
+    td:nth-child(3) {width:10%;min-width:60px;text-align:right;padding-right:5px;}
+    td:nth-child(4) {width:10%;min-width:60px;text-align:right;padding-right:5px;}
+    td:nth-child(5) {width:10%;min-width:60px;text-align:right;padding-right:5px;}
+
+    .w3-container-custom {padding-left:20px;}
+    .w3-container-custom > div {}
+    .search-zone div {display: inline-block;
+                      height:30px;
+                      margin-top: 20px;
+                      margin-bottom: 20px;
+                      padding-right:10px;}
+
+    .back-menu-div {
+                    margin:auto;
+                    width:200px;
+                    margin-top:30px;
+                    padding:2px;
+                    font-size:1.2em;
+                }
+    a {font-size:1.2em;}
+    a:link {
+       text-decoration: none;
+    }
+
+    /* visited link */
+    a:visited {
+        text-decoration: none;
+    }
+
+    /* mouse over link .*/
+    a:hover {
+        text-decoration: none;
+        text-weight:bold;
+        font-size:1.4em;
+    }
+
+    /* selected link */
+    a:active {
+       text-decoration: none;
+    }
+
+
+
+
+</style>
+<body>
+    <div class="w3-container w3-container-custom">
+        <div class="search-zone ">
+            <div>
+                <select class="w3-select" id="periodSelect">
+                  <option value="" disabled selected>Choose Search period</option>
+                  <option value="0" >Today</option>
+                  <option value="1" >2 days</option>
+                  <option value="7">a Week</option>
+                  <option value="10">10 days</option>
+                  <option value="30">a Month</option>
+                </select>
+            </div>
+            <div>
+                <button class="w3-btn w3-round-large w3-khaki w3-hover-orange" onclick="searchOnClick()"><b>Search</b></button>
+                <button class="w3-btn w3-round-large w3-khaki w3-hover-orange" onclick="searchOnClick("refresh")"><b>&#8635; Refresh</b></button>
+            </div>
+
+        </div>
+        <div class="tableWrapHead">
+            <p>
+                Total count :
+                <span id="totalCountSpan">0</span>
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="width-5">No.</th>
+                        <th class="width-15">Time</th>
+                        <th class="width-10">VSS</th>
+                        <th class="width-10">MAF</th>
+                        <th class="width-10">KPL</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tableWrap" id="tableWrapDiv" onscroll="onScrollDiv()">
+            <table>
+                <!--<thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Time</th>
+                        <th>VSS</th>
+                        <th>MAF</th>
+                        <th>KPL</th>
+                    </tr>
+                </thead>-->
+                <tbody id="historyTableTbody">
+                    <tr>
+                        <td colspan="5"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="back-menu-div">
+            <a href="{% url 'home' %}">&#8617; Back Menu</a>
+        </div>
+
+    </div>
+<script>
+    //define gobal variables
+    //a object to search Condition
+    var searchCondObj = {
+                            rowLimitCount:20, // 20 rows per 1 page
+                            callCnt:0, // total call service count
+                            totalCnt:0, // total count of searching
+                            latestIndex:0, // limit row Id
+                            lastNumber:0, //current page's last row index for Table "No." column
+                            period:1, //defalut 1 days
+                            init:function(periodValue){
+                                this.callCnt = 0;
+                                this.totalCnt = 0;
+                                this.latestIndex= 0;
+                                this.lastNumber = 0;
+                                this.period = periodValue;
+                            }
+                        };
+
+    //call when page load
+    callHistory(0); //1days
+
+    function searchOnClick(){
+
+        var index = document.getElementById("periodSelect").selectedIndex;
+        var selectValue = document.getElementById("periodSelect").options[index].value;
+
+        if(selectValue == ""){
+            document.getElementById("periodSelect").selectedIndex = 1;
+            callHistory(selectValue);
+        }  else {
+            searchCondObj.init(selectValue);
+            callHistory(selectValue);
+        }
+    }
+
+    function callHistory(periodValue) {
+        var todayObj = getToday();
+        var today = setDateFormat(todayObj);
+        var fromday = getMinusDate(periodValue,todayObj);
+
+        var paramString = "?fromDate="+fromday+" 00:00:00"
+                        +"&toDate="+today+" 23:59:59"
+                        +"&latestIndex="+searchCondObj.latestIndex
+                        +"&fromRow="+parseInt(searchCondObj.callCnt) * parseInt(searchCondObj.rowLimitCount)
+                        +"&rowLimitCount="+parseInt(searchCondObj.rowLimitCount);
+
+        callService(paramString);
+    }
+
+    function callService(paramValue){
+      var xhttp;
+      if (window.XMLHttpRequest) {
+        // code for modern browsers
+        xhttp = new XMLHttpRequest();
+      } else {
+        // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var rsObj = JSON.parse(this.responseText);
+          if(isNotEmpty(rsObj)){
+              makeTable(rsObj);
+          } else {
+              alert("No result data..");
+          }
+         }
+      };
+      xhttp.open("GET", "getHistoryData/"+paramValue, true);
+      xhttp.send();
+    }
+
+    function isNotEmpty(value){
+        if(value != null && value != "undefined" && value != ""){
+            return true;
+        }
+        return false;
+    }
+
+    function makeTable(obj){
+        var rsList = isNotEmpty(obj.list)? obj.list:[];
+        var count = searchCondObj.lastNumber;
+        var tableObj = document.getElementById("historyTableTbody");
+        var trObj, tdObj, tdObj2 , textElement;
+
+          /////////////////////////
+         //change global variable
+         ////////////////////////
+        if(searchCondObj.callCnt == 0){
+            tableObj.innerHTML = "";
+            searchCondObj.totalCnt = isNotEmpty(obj.totalCount)? obj.totalCount:0;
+
+            document.getElementsByClassName("tableWrap")[0].scrollTop = 0;
+
+            if(rsList.length > 0){
+                searchCondObj.latestIndex = rsList[0][0];
+            }
+
+            document.getElementById("totalCountSpan").innerHTML = parseInt(searchCondObj.totalCnt).toLocaleString('en');
+        }
+
+         if(rsList.length > 0){
+            searchCondObj.callCnt++;
+         }
+         /////////////////////////
+
+
+        for(var i=0; i<rsList.length;i++){
+            count++
+            trObj = document.createElement("TR");
+            tdObj = document.createElement("TD");
+            textElement= document.createTextNode(count);
+            tdObj.appendChild(textElement);
+            trObj.appendChild(tdObj);
+            for(var j=1; j<rsList[i].length;j++){
+                tdObj = document.createElement("TD");
+                textElement= document.createTextNode(rsList[i][j]);
+                tdObj.appendChild(textElement);
+                trObj.appendChild(tdObj);
+            }
+            tableObj.appendChild(trObj);
+        }
+
+        if(rsList.length > 0){
+            searchCondObj.lastNumber = count;
+        }
+
+    }
+
+    // back menu
+    function goMenu(){
+       window.location.assign("{% url 'home' %}");
+    }
+
+    //div table scroll event
+    function onScrollDiv() {
+        var divObj = document.getElementsByClassName("tableWrap")[0];
+        if( divObj.scrollTop > 320){
+            callHistory(searchCondObj.period);
+        }
+    }
+
+     //Today
+    function getToday(){
+        return new Date();
+    }
+    function setDateFormat(dateValue){
+        var day = lpad((dateValue.getDate()).toString(), 2, 0);
+        var month = lpad((dateValue.getMonth() + 1).toString(), 2, 0);
+        var year = dateValue.getFullYear();
+        return year+"-"+month+"-"+day;
+    }
+    function getMinusDate(days,today){
+        var date = today;
+        date.setDate(date.getDate() - parseInt(days));
+        return setDateFormat(date);
+    }
+    function lpad(str ,padLength, padString){
+        var string = str;
+        while(string.length < padLength)
+            string = padString + string;
+        return string;
+    }
+</script>
+</body>
+</html>
+
