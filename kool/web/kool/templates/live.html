@@ -29,6 +29,7 @@
          background: linear-gradient(to bottom right, #ffcccc 0%,  #8cfaf5 0%);
          opacity:0.5;
          color: #000000;
+         cursor:pointer;
      }
 
     .title {font-size:1.1em;}
@@ -44,6 +45,35 @@
                     padding:2px;
                     font-size:1.2em;
                 }
+    .graph {
+            width:98%;
+            height:50px;
+            padding-top:5px;
+            margin:auto;
+            font-size:1pt;
+          }
+     .graph div {vertical-align:text-top;
+            display:inline-block;
+            margin:0px;
+            padding:0px;
+            opacity:0.8;
+            background: linear-gradient(to bottom, #000000 0%, #000066 100%);
+
+          }
+
+ /*   #kplGraph {z-index:10;
+
+             }
+    #speedGraph {z-index:20;
+                margin-top:60px;
+                opacity:0.9;
+
+              }
+    #mafGraph {z-index:30;
+               margin-top:120px;
+               opacity:0.9;
+             }
+*/
     a {font-size:1.2em;}
     a:link {
        text-decoration: none;
@@ -70,34 +100,58 @@
 <body>
 
 <div class="w3-container container-custom">
+
+    <div class="">
+        <a href="{% url 'home' %}">&#8617; Back Menu</a>
+    </div>
     <div class="small-box" id="time" >
         <span class="title">Time</span><br/>
         <span class="value" style="font-size:1.8em">00:00:00</span><br/>
         <span class="unit">2017-01-01</span>
     </div>
-    <div class="small-box" id="kpl">
-        <span class="title">KPL</span><br/>
+    <div class="small-box" id="kpl" onclick="circleOnClick(this)">
+        <span class="title">&#9728; KPL</span><br/>
         <span class="value">0</span><br/>
         <span class="unit">km/l</span>
     </div>
-    <div class="small-box" id="speed">
-        <span class="title">SPEED</span><br/>
+    <div class="small-box" id="speed" onclick="circleOnClick(this)">
+        <span class="title">&#9729; SPEED</span><br/>
         <span class="value">0</span><br/>
         <span class="unit">km/h</span>
     </div>
-    <div class="small-box" id="maf">
-        <span class="title">MAF</span><br/>
+    <div class="small-box" id="maf" onclick="circleOnClick(this)">
+        <span class="title">&#9790; MAF</span><br/>
         <span class="value">0</span><br/>
         <span class="unit">g/s</span>
 
     </div>
-    <div class="back-menu-div">
-        <a href="{% url 'home' %}">&#8617; Back Menu</a>
+    <div id="graphDiv">
+        <div id="kplGraph" class="graph">
+        </div>
+        <div id="speedGraph" class="graph">
+        </div>
+        <div id="mafGraph" class="graph">
+        </div>
     </div>
 </div>
 
 
 <script>
+    //define Global Variable
+    var dataHistoryObj = {kpl:{secondList:[],
+                               longTermList:[],
+                               displayCount:0
+                              },
+                          speed:{secondList:[],
+                               longTermList:[],
+                               displayCount:0
+                              },
+                          maf:{secondList:[],
+                               longTermList:[],
+                               displayCount:0
+                              },
+                          longTermUnit:60
+                         }
 
     //call live data every second
      setInterval(function(){
@@ -138,9 +192,9 @@
     //display data each circle
     function displayData(list){
         var rsList = list;
-        var dataObj = { kpl:{mid:30,max:100,value:0},
-                        speed:{mid:80,max:300,value:0},
-                        maf:{mid:60,max:100,value:0},
+        var dataObj = { kpl:{mid:30,max:100,value:0,symbol:"&#9728;"},
+                        speed:{mid:80,max:300,value:0,symbol:"&#9729;"},
+                        maf:{mid:60,max:100,value:0,symbol:"&#9790;"},
                         time:{value:getToday()},
                       };
         var timeList, timeValue;
@@ -152,9 +206,13 @@
             dataObj.maf.value = parseFloat(rsList[3]);
 
             //make background color
-            setBackgroundCss(dataObj,"kpl",dataObj.kpl.value);
-            setBackgroundCss(dataObj,"speed",dataObj.speed.value);
-            setBackgroundCss(dataObj,"maf",dataObj.maf.value);
+            setCircleCss(dataObj,"kpl",dataObj.kpl.value);
+            setCircleCss(dataObj,"speed",dataObj.speed.value);
+            setCircleCss(dataObj,"maf",dataObj.maf.value);
+            //make graph
+            setGraphCss(dataObj,"kpl",dataObj.kpl.value);
+            setGraphCss(dataObj,"speed",dataObj.speed.value);
+            setGraphCss(dataObj,"maf",dataObj.maf.value);
           }
 
         //time infomation split
@@ -172,20 +230,96 @@
     }
 
     //set Circle background color
-    function setBackgroundCss(obj,type,value){
+    function setCircleCss(obj,type,value){
         var nomalRatio, warningRatio;
         var stdObj = obj;
+        var styleText = "";
+        var divObj;
+        nomalRatio = Math.round(value/stdObj[type].max *100);
+
         if(value > stdObj[type].mid){
-            nomalRatio = Math.round(value/stdObj[type].max *100);
-            warningRatio= Math.round(nomalRatio/1.5);
-            document.getElementById(type).setAttribute("style", getCss(warningRatio,nomalRatio));
-        } else {
-            document.getElementById(type).setAttribute("style", "");
+            warningRatio = Math.round(nomalRatio/1.6);
+            styleText = getCss(warningRatio,nomalRatio);
         }
+
+        document.getElementById(type).setAttribute("style", styleText);
+
+    }
+      /*var dataHistoryObj = {kpl:{secondList:[],
+                               longTermList:[]
+                              },
+                          speed:{tempList:[],
+                               longTermList:[]
+                              },
+                          maf:{tempList:[],
+                               longTermList:[]
+                              },
+                          longTermUnit:60
+                         }*/
+    function setGraphCss(obj,type,value){
+        var nomalRatio, warningRatio;
+        var stdObj = obj;
+        var styleText = "";
+        var graphObj = document.getElementById(type+"Graph");
+        var limitLength = parseInt( document.getElementById("graphDiv").clientWidth)/10;
+        var divObj= document.createElement("DIV");
+            divObj.innerHTML = stdObj[type].symbol;
+            nomalRatio = Math.round(value/stdObj[type].max *100);
+            divObj.setAttribute("style", getGraphCss(nomalRatio));
+            divObj.setAttribute("class", "data-grains");
+
+        if( dataHistoryObj[type].displayCount > limitLength ){
+            graphObj.innerHTML = "";
+            dataHistoryObj[type].displayCount = 0;
+        }
+
+        graphObj.appendChild(divObj);
+        dataHistoryObj[type].displayCount++
+
+        //add value global variable
+        dataHistoryObj[type].secondList.push(value);
+        console.log(type,value,dataHistoryObj[type].secondList.length, document.getElementById(type+"Graph").clientWidth);
+    }
+
+    function getGraphCss(value){
+        var ratio = parseInt(value);
+        var colorTableList = [  [0,10,"#8cfaf5"],
+                                [11,20,"#9dfbf6"],
+                                [21,30,"#b6fcf8"],
+                                [31,40,"#cefdfb"],
+                                [41,50,"#e7fefd"],
+                                [51,60,"#ffffff"],
+                                [61,70,"#ffe6e6"],
+                                [71,75,"#ffcccc"],
+                                [76,80,"#ffb3b3"],
+                                [81,85,"#ff9999"],
+                                [86,90,"#ff8080"],
+                                [91,93,"#ff6666"],
+                                [94,96,"#ff4d4d"],
+                                [97,98,"#ff3333"],
+                                [99,100,"#ff1a1a"]];
+        var dataHeight =  40 - Math.round((ratio/100) * 40);
+        var heightStyle = "height:"+dataHeight+"px;padding-top:"+dataHeight+"px;";
+        var colorStyle = "color: "+colorTableList[0][2]+";";
+
+        for(var i=0; i<colorTableList.length; i++){
+            if(ratio >= colorTableList[i][0] && ratio <= colorTableList[i][1] || i == colorTableList.length-1){
+                return heightStyle + "color: "+colorTableList[i][2]+";";
+            }
+        }
+        return  colorStyle + heightStyle;
     }
 
     function getCss(warning,normal){
         return "background: linear-gradient(to bottom left, #ffcccc "+warning+"%, #8cfaf5 "+normal+"%);";
+    }
+    function circleOnClick(obj){
+        var graphObj = document.getElementById(obj.id+"Graph");
+        var styleValue = "";
+        if(graphObj.style.display != "none"){
+            styleValue ="display:none;";
+        }
+        graphObj.setAttribute("style", styleValue);
     }
 
 </script>

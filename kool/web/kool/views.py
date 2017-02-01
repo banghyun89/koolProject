@@ -19,7 +19,7 @@ def getHistoryData(request):
     param.append(int(request.GET.get('latestIndex')))
     param.append(int(request.GET.get('fromRow')))
     param.append(int(request.GET.get('rowLimitCount')))
-
+    print(param)
     rsList = sqlCollection.get_history_data(param)
 
     return JsonResponse({'list': rsList[0], 'totalCount': rsList[1]})

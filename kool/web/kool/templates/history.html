@@ -61,7 +61,7 @@
                     padding:2px;
                     font-size:1.2em;
                 }
-    a {font-size:1.2em;}
+    a {}
     a:link {
        text-decoration: none;
     }
@@ -74,8 +74,6 @@
     /* mouse over link .*/
     a:hover {
         text-decoration: none;
-        text-weight:bold;
-        font-size:1.4em;
     }
 
     /* selected link */
@@ -89,8 +87,9 @@
 </style>
 <body>
     <div class="w3-container w3-container-custom">
+
         <div class="search-zone ">
-            <div>
+            <div style="margin:10px 10px 0px 0px ;padding:0px;">
                 <select class="w3-select" id="periodSelect">
                   <option value="" disabled selected>Choose Search period</option>
                   <option value="0" >Today</option>
@@ -101,8 +100,11 @@
                 </select>
             </div>
             <div>
-                <button class="w3-btn w3-round-large w3-khaki w3-hover-orange" onclick="searchOnClick()"><b>Search</b></button>
-                <button class="w3-btn w3-round-large w3-khaki w3-hover-orange" onclick="searchOnClick("refresh")"><b>&#8635; Refresh</b></button>
+                <button class="w3-btn w3-round-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick()">Search</button>
+                <button class="w3-btn w3-round-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick('refresh')">&#8635; Refresh</button>
+                <button class="w3-btn w3-round-small w3-green w3-hover-orange" style="margin-top:5px;" ><a href="{% url 'home' %}">&#8617; Back Menu</a></button>
+
+
             </div>
 
         </div>
@@ -141,15 +143,12 @@
                 </tbody>
             </table>
         </div>
-        <div class="back-menu-div">
-            <a href="{% url 'home' %}">&#8617; Back Menu</a>
-        </div>
 
     </div>
 <script>
     //define gobal variables
     //a object to search Condition
-    var searchCondObj = {
+    var searchCondObj = {   lockYn:false,
                             rowLimitCount:20, // 20 rows per 1 page
                             callCnt:0, // total call service count
                             totalCnt:0, // total count of searching
@@ -183,15 +182,21 @@
     }
 
     function callHistory(periodValue) {
-        var todayObj = getToday();
+        var todayObj = new Date();
         var today = setDateFormat(todayObj);
         var fromday = getMinusDate(periodValue,todayObj);
+        var rowLimitCnt = searchCondObj.rowLimitCount;
+        var callCount = parseInt(searchCondObj.callCnt);
+        if(callCount > 0 && searchCondObj.totalCnt - searchCondObj.lastNumber < searchCondObj.rowLimitCount) {
+            rowLimitCnt = searchCondObj.totalCnt - searchCondObj.lastNumber;
+
+        }
 
         var paramString = "?fromDate="+fromday+" 00:00:00"
                         +"&toDate="+today+" 23:59:59"
                         +"&latestIndex="+searchCondObj.latestIndex
-                        +"&fromRow="+parseInt(searchCondObj.callCnt) * parseInt(searchCondObj.rowLimitCount)
-                        +"&rowLimitCount="+parseInt(searchCondObj.rowLimitCount);
+                        +"&fromRow="+callCount * parseInt(searchCondObj.rowLimitCount)
+                        +"&rowLimitCount="+parseInt(rowLimitCnt);
 
         callService(paramString);
     }
@@ -206,6 +211,7 @@
         xhttp = new ActiveXObject("Microsoft.XMLHTTP");
       }
       xhttp.onreadystatechange = function() {
+
         if (this.readyState == 4 && this.status == 200) {
           var rsObj = JSON.parse(this.responseText);
           if(isNotEmpty(rsObj)){
@@ -230,14 +236,16 @@
         var rsList = isNotEmpty(obj.list)? obj.list:[];
         var count = searchCondObj.lastNumber;
         var tableObj = document.getElementById("historyTableTbody");
+        var divScrollObj = document.getElementById("tableWrapDiv");
         var trObj, tdObj, tdObj2 , textElement;
 
+        divScrollObj.style.overflowY= "hidden";
           /////////////////////////
          //change global variable
          ////////////////////////
         if(searchCondObj.callCnt == 0){
             tableObj.innerHTML = "";
-            searchCondObj.totalCnt = isNotEmpty(obj.totalCount)? obj.totalCount:0;
+            searchCondObj.totalCnt = isNotEmpty(obj.totalCount)? parseInt(obj.totalCount):0;
 
             document.getElementsByClassName("tableWrap")[0].scrollTop = 0;
 
@@ -252,7 +260,6 @@
             searchCondObj.callCnt++;
          }
          /////////////////////////
-
 
         for(var i=0; i<rsList.length;i++){
             count++
@@ -274,6 +281,8 @@
             searchCondObj.lastNumber = count;
         }
 
+         searchCondObj.lockYn = false;
+         divScrollObj.style.overflowY= "";
     }
 
     // back menu
@@ -284,7 +293,8 @@
     //div table scroll event
     function onScrollDiv() {
         var divObj = document.getElementsByClassName("tableWrap")[0];
-        if( divObj.scrollTop > 320){
+        if( divObj.scrollTop > 320 && searchCondObj.totalCnt > searchCondObj.lastNumber && !searchCondObj.lockYn ){
+            searchCondObj.lockYn = true;
             callHistory(searchCondObj.period);
         }
     }
