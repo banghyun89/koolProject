@@ -204,7 +204,8 @@
     //div table scroll event
     function onScrollDiv() {
         var divObj = document.getElementsByClassName("tableWrap")[0];
-        if( divObj.scrollTop > 370 && searchCondObj.totalCnt > searchCondObj.lastNumber && !searchCondObj.lockYn ){
+        console.log(divObj.scrollTop);
+        if( divObj.scrollTop > 180 && searchCondObj.totalCnt > searchCondObj.lastNumber && !searchCondObj.lockYn ){
             searchCondObj.lockYn = true;
             callHistory(searchCondObj.period);
         }
