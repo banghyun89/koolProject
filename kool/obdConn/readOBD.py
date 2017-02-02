@@ -2,10 +2,11 @@ import sys
 sys.path.append("..")
 import obd
 import time
+import termios
 import random
 from dbConn import sqlCollection
 
-connection = obd.OBD('/dev/pts/1') # auto-connects to USB or RF port
+connection = obd.OBD('/dev/pts/21') # auto-connects to USB or RF port
 cmd1 = obd.commands.SPEED   # select an OBD command (sensor) Unit.kph ; km/h range : 0~1000
 cmd2 = obd.commands.MAF     # select an OBD command (sensor) Mass Air Flow g/s
 
@@ -16,7 +17,10 @@ while 1:
         vss = connection.query(cmd1) # send the command, and parse the response
         maf = connection.query(cmd2)
 
-        if (vss is None) and (maf is None):
+        if vss is None or maf is None:
+            continue
+
+        if (vss.value.magnitude > 300) or (maf.value.magnitude >700):
             continue
 
     #   print(vss)
@@ -30,7 +34,7 @@ while 1:
 
     #   print(vss.value.magnitude)
     #   print(maf.value.magnitude)
-        kpl = round(30.215 * ((vss.value.magnitude) / (maf.value.magnitude)),2)
+        kpl = round(3.0215 * ((vss.value.magnitude) / (maf.value.magnitude)),2)
         dataList.append(kpl)
 
         print(dataList)
@@ -46,5 +50,5 @@ while 1:
     #    print(valStr + " kpl")
         time.sleep(1)
 
-    except IOError as e:
-        print(e)
+    except termios.error:
+        continue
