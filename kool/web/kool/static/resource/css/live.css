@@ -1,0 +1,52 @@
+    body {background-color:#000000;
+           color:rgb(140,250,245);
+           margin:0px;
+         }
+
+
+    a {font-size:1.2em;}
+    a:link {
+       text-decoration: none;
+    }
+
+    /* visited link */
+    a:visited {
+        text-decoration: none;
+    }
+
+    /* mouse over link */
+    a:hover {
+        text-decoration: none;
+        text-weight:bold;
+        font-size:1.4em;
+    }
+
+    /* selected link */
+    a:active {
+       text-decoration: none;
+    }
+
+    .container-custom {width:98%;margin:auto;padding:20px;}
+
+    .search-zone div {display: inline-block;
+                      height:30px;
+                      margin-top: 20px;
+                      margin-bottom: 20px;
+                      padding-right:10px;}
+    .small-box {
+                width: 120px; height: 120px;
+                display: inline-block;
+                padding-top: 15px;
+                margin:10px;
+                color: #000000;
+                line-height:30px;
+                text-align: center;
+                border-radius: 50%;
+                background: linear-gradient(to bottom right, #ffcccc 0%, #8cfaf5 0%);
+     }
+
+
+    #time .value {font-size:1.2em}
+    .title {font-size:1.0em;}
+    .value {font-size:1.5em;}
+    .unit {font-size:0.8em;}

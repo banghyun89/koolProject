@@ -1,0 +1,66 @@
+body {background-color:#000000;
+           margin:0px;
+           color:rgb(140,250,245);
+           font-size:0.8em;
+          }
+
+.w3-container-custom {padding-left:20px;}
+.search-zone div {display: inline-block;
+                  height:30px;
+                  margin-top: 20px;
+                  margin-bottom: 20px;
+                  padding-right:10px;}
+
+.tableWrap {
+    width:96%;
+    margin:auto;
+    min-height:40px;
+    height:350px;
+    overflow-y:scroll;
+}
+.tableWrapHead {
+    width:96%;
+    margin:auto;
+    overflow-y:scroll;
+    padding-top:15px;
+}
+table {
+    width:99%;
+}
+th,td {
+    height: 20px;
+}
+table, th, td {
+        border-collapse: collapse;
+        border: 1px solid rgb(140,250,245);
+        padding: 4px 0px 4px 0px;
+ }
+
+.width-10 {width:10%;min-width:60px;padding-right:5px;}
+.width-15 {width:15%;min-width:80px;}
+.width-5 {width:5%;min-width:40px;}
+
+td:nth-child(1) {width:5%;min-width:40px;text-align:center;}
+td:nth-child(2) {width:15%;min-width:80px;text-align:center;}
+td:nth-child(3) {width:10%;min-width:60px;text-align:right;padding-right:5px;}
+td:nth-child(4) {width:10%;min-width:60px;text-align:right;padding-right:5px;}
+td:nth-child(5) {width:10%;min-width:60px;text-align:right;padding-right:5px;}
+
+a:link {
+   text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+    text-decoration: none;
+}
+
+/* mouse over link .*/
+a:hover {
+    text-decoration: none;
+}
+
+/* selected link */
+a:active {
+   text-decoration: none;
+}

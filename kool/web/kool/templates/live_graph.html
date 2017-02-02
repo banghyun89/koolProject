@@ -6,36 +6,58 @@
 <link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
 <link rel="stylesheet" href="{% static 'resource/css/live.css' %}">
 <style>
-
+    .graph {
+            width:98%;
+            height:80px;
+            padding-top:5px;
+            margin:auto;
+            font-size:15px;
+          }
+     .graph div {vertical-align:text-top;
+            display:inline-block;
+            margin:0px;
+            padding:0px;
+            opacity:0.8;
+            background: linear-gradient(to bottom, #000000 0%, #000066 100%);
+          }
 </style>
 <body>
 
 <div class="w3-container container-custom">
     <div class="search-zone ">
         <div>
-           <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;"><a href="{% url 'live_graph' %}">Graph</a></button>
+           <button class="w3-btn w3-round-large w3-small w3-orange w3-hover-khaki" style="margin-top:5px;"><a href="{% url 'live' %}">Simple</a></button>
            <button class="w3-btn w3-round-large w3-small w3-green w3-hover-orange" style="margin-top:5px;"><a href="{% url 'home' %}">Menu</a></button>
         </div>
     </div>
     <div class="small-box" id="time" >
         <span class="title">Time</span><br/>
-        <span class="value" >00:00:00</span><br/>
+        <span class="value">00:00:00</span><br/>
         <span class="unit">2017-01-01</span>
     </div>
     <div class="small-box" id="kpl" onclick="circleOnClick(this)">
-        <span class="title">KPL</span><br/>
+        <span class="title">&#9728; KPL</span><br/>
         <span class="value">0</span><br/>
         <span class="unit">km/l</span>
     </div>
     <div class="small-box" id="speed" onclick="circleOnClick(this)">
-        <span class="title">SPEED</span><br/>
+        <span class="title">&#9729; SPEED</span><br/>
         <span class="value">0</span><br/>
         <span class="unit">km/h</span>
     </div>
     <div class="small-box" id="maf" onclick="circleOnClick(this)">
-        <span class="title">MAF</span><br/>
+        <span class="title">&#9790; MAF</span><br/>
         <span class="value">0</span><br/>
         <span class="unit">g/s</span>
+
+    </div>
+    <div id="graphDiv">
+        <div id="kplGraph" class="graph">
+        </div>
+        <div id="speedGraph" class="graph">
+        </div>
+        <div id="mafGraph" class="graph">
+        </div>
     </div>
 </div>
 
@@ -113,6 +135,10 @@
             setCircleCss(dataObj,"kpl",dataObj.kpl.value);
             setCircleCss(dataObj,"speed",dataObj.speed.value);
             setCircleCss(dataObj,"maf",dataObj.maf.value);
+            /////////////////////////////////////////////////
+            //make graph
+            displayGraph(dataObj,"Graph"); //every second
+            ////////////////////////////////////////////////
           }
 
         //time infomation split
@@ -151,8 +177,75 @@
     }
 
     function circleOnClick(obj){
-
+        var graphObj = document.getElementById(obj.id+"Graph");
+        var styleValue = "";
+        if(graphObj.style.display != "none"){
+            styleValue ="display:none;";
+        }
+        graphObj.setAttribute("style", styleValue);
     }
+
+    function displayGraph(dataObj,divId){
+        setGraphCss(dataObj,"kpl",divId);
+        setGraphCss(dataObj,"speed",divId);
+        setGraphCss(dataObj,"maf",divId);
+    }
+
+    function setGraphCss(obj,type,divId){
+        var nomalRatio, warningRatio;
+        var stdObj = obj;
+        var styleText = "";
+        var value = stdObj[type].value;
+        var graphObj = document.getElementById(type+divId);
+        var limitLength = parseInt( document.getElementById("graphDiv").clientWidth)/15;
+        var divObj= document.createElement("DIV");
+            divObj.innerHTML = stdObj[type].symbol;
+            nomalRatio = Math.round(value/stdObj[type].max *100);
+            divObj.setAttribute("style", getGraphCss(nomalRatio));
+            divObj.setAttribute("class", "data-grains");
+
+        if( dataHistoryObj[type].displayCount > limitLength ){
+            graphObj.innerHTML = "";
+            dataHistoryObj[type].displayCount = 0;
+        }
+
+        graphObj.appendChild(divObj);
+        dataHistoryObj[type].displayCount++
+
+        //add value global variable
+        dataHistoryObj[type].secondList.push(value);
+        console.log(type,value,dataHistoryObj[type].secondList.length, document.getElementById(type+"Graph").clientWidth);
+    }
+
+    function getGraphCss(value){
+        var ratio = parseInt(value);
+        var colorTableList = [  [0,10,"#8cfaf5"],
+                                [11,20,"#9dfbf6"],
+                                [21,30,"#b6fcf8"],
+                                [31,40,"#cefdfb"],
+                                [41,50,"#e7fefd"],
+                                [51,60,"#ffffff"],
+                                [61,70,"#ffe6e6"],
+                                [71,75,"#ffcccc"],
+                                [76,80,"#ffb3b3"],
+                                [81,85,"#ff9999"],
+                                [86,90,"#ff8080"],
+                                [91,93,"#ff6666"],
+                                [94,96,"#ff4d4d"],
+                                [97,98,"#ff3333"],
+                                [99,100,"#ff1a1a"]];
+        var dataHeight =  70 - Math.round((ratio/100) * 70);
+        var heightStyle = "height:"+dataHeight+"px;padding-top:"+dataHeight+"px;";
+        var colorStyle = "color: "+colorTableList[0][2]+";";
+
+        for(var i=0; i<colorTableList.length; i++){
+            if(ratio >= colorTableList[i][0] && ratio <= colorTableList[i][1] || i == colorTableList.length-1){
+                return heightStyle + "color: "+colorTableList[i][2]+";";
+            }
+        }
+        return  colorStyle + heightStyle;
+    }
+
 
 </script>
 </body>
