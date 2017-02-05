@@ -1,5 +1,5 @@
 import sys
-sys.path.append("..")
+sys.path.append('..')
 #import obd
 import time
 import random
@@ -9,10 +9,26 @@ from dbConn import sqlCollection
 #cmd1 = obd.commands.SPEED   # select an OBD command (sensor) Unit.kph ; km/h range : 0~1000
 #cmd2 = obd.commands.MAF     # select an OBD command (sensor) Mass Air Flow g/s
 
-cmd1 = 'cmd1'
-cmd2 = 'cmd2'
-
-dataList = []
+cmd1 = 'SPEED'
+cmd2 = 'MAF'
+cmd3 = 'RPM'
+cmd4 = 'COOLANT_TEMP'
+cmd5 = 'FUEL_LEVEL'
+cmd6 = 'AMBIENT_AIR_TEMP'
+cmd7 = 'OIL_TEMP'
+cmd8 = 'CONTROL_MODULE_VOLTAGE'
+cmd9 = 'INTAKE_TEMP'
+inputDict = {}
+sensorDict = {  'SPEED': {'min':30,'max':250},
+                'MAF': {'min':0,'max':100},
+                'RPM': {'min':0,'max':100},
+                'COOLANT_TEMP': {'min':0,'max':100},
+                'FUEL_LEVEL': {'min':0,'max':100},
+                'AMBIENT_AIR_TEMP': {'min':0,'max':100},
+                'OIL_TEMP': {'min':0,'max':100},
+                'CONTROL_MODULE_VOLTAGE': {'min':0,'max':100},
+                'INTAKE_TEMP': {'min':0,'max':100}
+              }
 
 class valueObj:
     def __init__(self, number):
@@ -23,13 +39,9 @@ class cmdObj:
         self.time = time.time()
         self.value = valueObj(number)
 
-
 class obdObj:
-    def query(self,v):
-        if v == 'cmd1' :
-            return cmdObj(round(random.uniform(30, 200.99), 2)) #vss
-        else :
-            return cmdObj(round(random.uniform(50, 99.99), 2)) #maf
+    def query(self,sensorName):
+        return cmdObj(round(random.uniform(sensorDict[sensorName]['min'],sensorDict[sensorName]['max']), 2))
 
 connection = obdObj()
 
@@ -41,31 +53,29 @@ while 1:
         if (vss is None) and (maf is None):
             continue
 
-    #   print(vss)
-    #   print(maf)
-
-        currentTime = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(vss.time))
-#        print(currentTime)
-        dataList.append(currentTime)
-        dataList.append(vss.value.magnitude)
-        dataList.append(maf.value.magnitude)
-
-    #   print(vss.value.magnitude)
-    #   print(maf.value.magnitude)
+        currentTime = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(vss.time))
         kpl = round(30.215 * ((vss.value.magnitude) / (maf.value.magnitude)),2)
-        dataList.append(kpl)
 
-        print(dataList)
+        inputDict['time'] = currentTime
+        inputDict['kpl'] = kpl
+        inputDict['vss'] = vss.value.magnitude
+        inputDict['maf'] = maf.value.magnitude
+        inputDict['rpm'] = connection.query(cmd3).value.magnitude
+        inputDict['coolant_temp'] = connection.query(cmd4).value.magnitude
+        inputDict['fuel_level'] = connection.query(cmd5).value.magnitude
+        inputDict['ambient_air_temp'] = connection.query(cmd6).value.magnitude
+        inputDict['oil_temp'] = connection.query(cmd7).value.magnitude
+        inputDict['control_module_voltage'] = connection.query(cmd8).value.magnitude
+        inputDict['intake_temp'] = connection.query(cmd9).value.magnitude
+
+        print(inputDict)
         print('')
 
         #dbinsert
-        sqlCollection.put_data(dataList)
+        sqlCollection.put_data(inputDict)
 
         dataList = []
 
-    #    print(1/kpl)
-    #    valStr = str(kpl)
-    #    print(valStr + " kpl")
         time.sleep(1)
 
     except IOError as e:

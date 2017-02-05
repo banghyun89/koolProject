@@ -13,16 +13,18 @@
             margin:auto;
             font-size:15px;
           }
+     #mafGraph {font-size:17px;}
      .graph div {vertical-align:text-top;
             display:inline-block;
             margin:0px;
             padding:0px;
             opacity:0.8;
-            background: linear-gradient(to bottom, #000000 0%, #000066 100%);
+
           }
 </style>
+<script src="{% static 'resource/js/jquery-3.1.1.min.js' %}"></script>
+<script src="{% static 'resource/js/common.js' %}"></script>
 <body>
-
 <div class="w3-container container-custom">
     <div class="search-zone ">
         <div>
@@ -46,7 +48,7 @@
         <span class="unit">km/h</span>
     </div>
     <div class="small-box" id="maf" onclick="circleOnClick(this)">
-        <span class="title">&#9790; MAF</span><br/>
+        <span class="title">&#9733; MAF</span><br/>
         <span class="value">0</span><br/>
         <span class="unit">g/s</span>
 
@@ -84,18 +86,8 @@
         callLive();
       }, 1000);
 
-    //Today
-    function getToday(){
-        var currentDate = new Date();
-        var day = currentDate.getDate();
-        var month = currentDate.getMonth() + 1;
-        var year = currentDate.getFullYear();
-        return year+"-"+month+"-"+day;
-    }
-
     function callLive() {
       var xhttp;
-      var rsList;
 
       if (window.XMLHttpRequest) {
         // code for modern browsers
@@ -106,40 +98,42 @@
       }
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          //result list
-          rsList = JSON.parse(this.responseText).list;
-          displayData(rsList);
+          var rsObj = JSON.parse(this.responseText);
+         // console.log(rsObj);
+          if(isObject(rsObj)){
+              displayData(rsObj);
+          } else {
+              alert("No result data..");
+          }
         }
       };
       xhttp.open("GET", "getLiveData", true);
       xhttp.send();
     }
-
     //display data each circle
     function displayData(list){
         var rsList = list;
         var dataObj = { kpl:{mid:30,max:100,value:0,symbol:"&#9728;"},
                         speed:{mid:80,max:300,value:0,symbol:"&#9729;"},
-                        maf:{mid:60,max:100,value:0,symbol:"&#9790;"},
-                        time:{value:getToday()},
+                        maf:{mid:60,max:100,value:0,symbol:"&#9733;"},
+                        time:{value:setDateFormat(new Date())},
                       };
         var timeList, timeValue;
 
-        if(rsList != "undefined" && rsList.length > 0 ){
-            dataObj.time.value = rsList[0];
-            dataObj.kpl.value = parseFloat(rsList[1]);
-            dataObj.speed.value = parseFloat(rsList[2]);
-            dataObj.maf.value = parseFloat(rsList[3]);
+        dataObj.time.value = rsList.time;
+        dataObj.kpl.value = parseFloat(rsList.kpl);
+        dataObj.speed.value = parseFloat(rsList.vss);
+        dataObj.maf.value = parseFloat(rsList.maf);
 
-            //make background color
-            setCircleCss(dataObj,"kpl",dataObj.kpl.value);
-            setCircleCss(dataObj,"speed",dataObj.speed.value);
-            setCircleCss(dataObj,"maf",dataObj.maf.value);
-            /////////////////////////////////////////////////
-            //make graph
-            displayGraph(dataObj,"Graph"); //every second
-            ////////////////////////////////////////////////
-          }
+        //make background color
+        setCircleCss(dataObj,"kpl",dataObj.kpl.value);
+        setCircleCss(dataObj,"speed",dataObj.speed.value);
+        setCircleCss(dataObj,"maf",dataObj.maf.value);
+        /////////////////////////////////////////////////
+        //make graph
+        displayGraph(dataObj,"Graph"); //every second
+        ////////////////////////////////////////////////
+
 
         //time infomation split
         timeValue = dataObj.time.value;
@@ -186,6 +180,17 @@
     }
 
     function displayGraph(dataObj,divId){
+        var limitLength = parseInt( document.getElementById("graphDiv").clientWidth)/16;
+        if( dataHistoryObj["kpl"].displayCount > limitLength ){
+            document.getElementById("kpl"+divId).innerHTML = "";
+            document.getElementById("speed"+divId).innerHTML = "";
+            document.getElementById("maf"+divId).innerHTML = "";
+
+            dataHistoryObj["kpl"].displayCount = 0;
+            dataHistoryObj["speed"].displayCount = 0;
+            dataHistoryObj["maf"].displayCount = 0;
+        }
+
         setGraphCss(dataObj,"kpl",divId);
         setGraphCss(dataObj,"speed",divId);
         setGraphCss(dataObj,"maf",divId);
@@ -197,24 +202,18 @@
         var styleText = "";
         var value = stdObj[type].value;
         var graphObj = document.getElementById(type+divId);
-        var limitLength = parseInt( document.getElementById("graphDiv").clientWidth)/15;
+
         var divObj= document.createElement("DIV");
             divObj.innerHTML = stdObj[type].symbol;
             nomalRatio = Math.round(value/stdObj[type].max *100);
             divObj.setAttribute("style", getGraphCss(nomalRatio));
             divObj.setAttribute("class", "data-grains");
 
-        if( dataHistoryObj[type].displayCount > limitLength ){
-            graphObj.innerHTML = "";
-            dataHistoryObj[type].displayCount = 0;
-        }
-
         graphObj.appendChild(divObj);
         dataHistoryObj[type].displayCount++
 
         //add value global variable
         dataHistoryObj[type].secondList.push(value);
-        console.log(type,value,dataHistoryObj[type].secondList.length, document.getElementById(type+"Graph").clientWidth);
     }
 
     function getGraphCss(value){
@@ -234,7 +233,8 @@
                                 [94,96,"#ff4d4d"],
                                 [97,98,"#ff3333"],
                                 [99,100,"#ff1a1a"]];
-        var dataHeight =  70 - Math.round((ratio/100) * 70);
+        var dataHeight =  60 - Math.round((ratio/100) * 60);
+        if(dataHeight < 5 ) dataHeight = 5
         var heightStyle = "height:"+dataHeight+"px;padding-top:"+dataHeight+"px;";
         var colorStyle = "color: "+colorTableList[0][2]+";";
 

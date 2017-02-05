@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
 <link rel="stylesheet" href="{% static 'resource/css/history.css' %}">
-<style>
-</style>
+<script src="{% static 'resource/js/jquery-3.1.1.min.js' %}"></script>
+<script src="{% static 'resource/js/common.js' %}"></script>
 <body>
     <div class="w3-container w3-container-custom">
 
@@ -22,31 +22,56 @@
                 </select>
             </div>
             <div>
-                <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick()">Search</button>
-                <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick('refresh')">Refresh</button>
-                <button class="w3-btn w3-round-large w3-small w3-orange w3-hover-khaki" style="margin-top:5px;" ><a href="{% url 'history' %}">Grid</a></button>
-                <button class="w3-btn w3-round-large w3-small w3-green w3-hover-orange" style="margin-top:5px;" ><a href="{% url 'home' %}">Menu</a></button>
+                <button class="w3-btn w3-round-large w3-large w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick()">Search</button>
+                <button class="w3-btn w3-round-large w3-large w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick('refresh')">Refresh</button>
+                <button class="w3-btn w3-round-large w3-large w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="window.location.assign('{% url 'history_graph' %}');">Graph</button>
+                <button class="w3-btn w3-round-large w3-large w3-green w3-hover-orange" style="margin-top:5px;"  onclick="window.location.assign('{% url 'home' %}');">Menu</button>
             </div>
         </div>
+        <p style="padding-top:15px;paddin-bottom:10px;">
+            Total count :
+            <span id="totalCountSpan">0</span>
+        </p>
         <div class="tableWrapHead">
-            <p>
-                Total count :
-                <span id="totalCountSpan">0</span>
-            </p>
             <table>
                 <thead>
                     <tr>
-                        <th class="width-5">No.</th>
-                        <th class="width-15">Time</th>
-                        <th class="width-10">VSS</th>
-                        <th class="width-10">MAF</th>
-                        <th class="width-10">KPL</th>
+                        <th class="width-5" >No.</th>
+                        <th class="width-15">Time
+                        </th>
+                        <th class="width-10" >KPL (g/s)</th>
+                        <th class="width-10" >VSS (kph)</th>
+                        <th class="width-10" >MAF</th>
+                        <th class="width-10" >RPM</th>
+                        <th class="width-10" >Control module voltage (volt)</th>
+                        <th class="width-10" >Fuel Level Input (%)</th>
+                        <th class="width-10" >Engine Coolant Temperature (celsius)</th>
+                        <th class="width-10" >Ambient air temperature (celsius)</th>
+                        <th class="width-10" >Engine oil temperature (celsius)</th>
+                        <th class="width-10" >Intake Air temperature (celsius)</th>
                     </tr>
+
                 </thead>
             </table>
         </div>
         <div class="tableWrap" id="tableWrapDiv" onscroll="onScrollDiv()">
-            <table>
+            <table style="margin-top:-80px;">
+                 <thead>
+                    <tr>
+                        <th class="width-5">No.</th>
+                        <th class="width-15">Time</th>
+                        <th class="width-10">KPL (g/s)</th>
+                        <th class="width-10" >VSS (kph)</th>
+                        <th class="width-10" >MAF</th>
+                        <th class="width-10" >RPM</th>
+                        <th class="width-10" >Control module voltage (volt)</th>
+                        <th class="width-10" >Fuel Level Input (%)</th>
+                        <th class="width-10" >Engine Coolant Temperature (celsius)</th>
+                        <th class="width-10" >Ambient air temperature (celsius)</th>
+                        <th class="width-10" >Engine oil temperature (celsius)</th>
+                        <th class="width-10" >Intake Air temperature (celsius)</th>
+                    </tr>
+                </thead>
                 <tbody id="historyTableTbody">
                     <tr>
                         <td colspan="5"></td>
@@ -54,8 +79,8 @@
                 </tbody>
             </table>
         </div>
+
     </div>
-<script src="{% static 'resource/d3/d3.min.js' %}"></script>
 <script>
     //define gobal variables
     //a object to search Condition
@@ -136,13 +161,6 @@
       xhttp.send();
     }
 
-    function isNotEmpty(value){
-        if(value != null && value != "undefined" && value != ""){
-            return true;
-        }
-        return false;
-    }
-
     function makeTable(obj){
         var rsList = isNotEmpty(obj.list)? obj.list:[];
         var count = searchCondObj.lastNumber;
@@ -196,40 +214,16 @@
          divScrollObj.style.overflowY= "";
     }
 
-    // back menu
-    function goMenu(){
-       window.location.assign("{% url 'home' %}");
-    }
-
     //div table scroll event
     function onScrollDiv() {
         var divObj = document.getElementsByClassName("tableWrap")[0];
+
+         document.getElementsByClassName("tableWrapHead")[0].scrollLeft = divObj.scrollLeft;
+
         if( divObj.scrollTop > 180 && searchCondObj.totalCnt > searchCondObj.lastNumber && !searchCondObj.lockYn ){
             searchCondObj.lockYn = true;
             callHistory(searchCondObj.period);
         }
-    }
-
-     //Today
-    function getToday(){
-        return new Date();
-    }
-    function setDateFormat(dateValue){
-        var day = lpad((dateValue.getDate()).toString(), 2, 0);
-        var month = lpad((dateValue.getMonth() + 1).toString(), 2, 0);
-        var year = dateValue.getFullYear();
-        return year+"-"+month+"-"+day;
-    }
-    function getMinusDate(days,today){
-        var date = today;
-        date.setDate(date.getDate() - parseInt(days));
-        return setDateFormat(date);
-    }
-    function lpad(str ,padLength, padString){
-        var string = str;
-        while(string.length < padLength)
-            string = padString + string;
-        return string;
     }
 </script>
 </body>

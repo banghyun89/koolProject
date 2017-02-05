@@ -10,7 +10,7 @@ def menu(request):
 
 def getLiveData(request):
     rsList = sqlCollection.get_live_data()
-    return JsonResponse({'list': rsList})
+    return JsonResponse(rsList)
 
 def getHistoryData(request):
     param = []
@@ -30,13 +30,17 @@ def live(request):
 def history(request):
     return render(request, 'templates/history.html')
 
+
+
+
+
 def live_graph(request):
     return render(request, 'templates/live_graph.html')
 
 
 def getLiveData_graph(request):
     rsList = sqlCollection.get_live_data()
-    return JsonResponse({'list': rsList})
+    return JsonResponse(rsList)
 
 def history_graph(request):
     return render(request, 'templates/history_graph.html')
