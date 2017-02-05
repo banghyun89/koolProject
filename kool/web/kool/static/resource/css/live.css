@@ -44,9 +44,13 @@
                 border-radius: 50%;
                 background: linear-gradient(to bottom right, #ffcccc 0%, #8cfaf5 0%);
      }
-
+    .small-box:hover {
+        opacity:0.7;
+        cursor:pointer;
+     }
 
     #time .value {font-size:1.2em}
+    .title-small-font {font-size:0.5em;}
     .title {font-size:1.0em;}
     .value {font-size:1.5em;}
     .unit {font-size:0.8em;}
