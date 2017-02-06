@@ -26,13 +26,12 @@
        text-decoration: none;
     }
 
-    .container-custom {width:98%;margin:auto;padding:20px;}
-
+    .container-custom {margin:0;margin:auto;width:98%;}
+    .search-zone {}
     .search-zone div {display: inline-block;
                       height:30px;
                       margin-top: 20px;
-                      margin-bottom: 20px;
-                      padding-right:10px;}
+                      margin-bottom: 20px;}
     .small-box {
                 width: 120px; height: 120px;
                 display: inline-block;
@@ -44,6 +43,7 @@
                 border-radius: 50%;
                 background: linear-gradient(to bottom right, #ffcccc 0%, #8cfaf5 0%);
      }
+     .display-inline-block {display: inline-block;}
     .small-box:hover {
         opacity:0.7;
         cursor:pointer;
