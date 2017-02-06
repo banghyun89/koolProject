@@ -41,9 +41,9 @@
 <script>
     //dashboard
      var sensorObj = {  data:{
-                            kpl:{mid:30,max:100,value:0,title:"KPL",unit:"km/l",openYN:true},
-                            vss:{mid:60,max:300,value:0,title:"SPEED",unit:"km/h",openYN:true},
-                            maf:{mid:35,max:160,value:0,title:"MAF",unit:"g/s",openYN:true},
+                            kpl:{mid:100,max:200,value:0,title:"KPL",unit:"km/l",openYN:true},
+                            vss:{mid:150,max:300,value:0,title:"SPEED",unit:"km/h",openYN:true},
+                            maf:{mid:70,max:160,value:0,title:"MAF",unit:"g/s",openYN:true},
                             rpm:{mid:50,max:100,value:0,title:"RPM",unit:"",openYN:true},
                             control_module_voltage:{mid:50,max:100,value:0,title:"Control Module",unit:"V",openYN:true},
                             fuel_level:{mid:50,max:100,value:0,title:"Fuel Level",unit:"%",openYN:true},
@@ -123,8 +123,8 @@
                                 options = {
                                   width: chartWidth, height: chartWidth,
                                   min : obj[index].min, max: obj[index].max,
-                                  redFrom:  obj[index].min, redTo: obj[index].max,
-                                  yellowFrom: obj[index].mid, yellowTo: obj[index].max-10,
+                                  yellowFrom:  obj[index].mid, yellowTo: obj[index].mid+Math.round(obj[index].max*0.3),
+                                  redFrom: obj[index].mid+Math.round(obj[index].max*0.3), redTo: obj[index].max,
                                   minorTicks: 5
                                 };
 
