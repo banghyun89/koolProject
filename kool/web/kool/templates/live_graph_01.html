@@ -1,0 +1,253 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<title>Live</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
+<link rel="stylesheet" href="{% static 'resource/css/live.css' %}">
+<style>
+    .graph {
+            width:98%;
+            height:80px;
+            padding-top:5px;
+            margin:auto;
+            font-size:15px;
+          }
+     #mafGraph {font-size:17px;}
+     .graph div {vertical-align:text-top;
+            display:inline-block;
+            margin:0px;
+            padding:0px;
+            opacity:0.8;
+
+          }
+</style>
+<script src="{% static 'resource/js/jquery-3.1.1.min.js' %}"></script>
+<script src="{% static 'resource/js/common.js' %}"></script>
+<body>
+<div class="w3-container container-custom">
+    <div class="search-zone ">
+        <div>
+           <button class="w3-btn w3-round-large w3-small w3-orange w3-hover-khaki" style="margin-top:5px;"><a href="{% url 'live' %}">Simple</a></button>
+           <button class="w3-btn w3-round-large w3-small w3-green w3-hover-orange" style="margin-top:5px;"><a href="{% url 'home' %}">Menu</a></button>
+        </div>
+    </div>
+    <div class="small-box" id="time" >
+        <span class="title">Time</span><br/>
+        <span class="value">00:00:00</span><br/>
+        <span class="unit">2017-01-01</span>
+    </div>
+    <div class="small-box" id="kpl" onclick="circleOnClick(this)">
+        <span class="title">&#9728; KPL</span><br/>
+        <span class="value">0</span><br/>
+        <span class="unit">km/l</span>
+    </div>
+    <div class="small-box" id="speed" onclick="circleOnClick(this)">
+        <span class="title">&#9729; SPEED</span><br/>
+        <span class="value">0</span><br/>
+        <span class="unit">km/h</span>
+    </div>
+    <div class="small-box" id="maf" onclick="circleOnClick(this)">
+        <span class="title">&#9733; MAF</span><br/>
+        <span class="value">0</span><br/>
+        <span class="unit">g/s</span>
+
+    </div>
+    <div id="graphDiv">
+        <div id="kplGraph" class="graph">
+        </div>
+        <div id="speedGraph" class="graph">
+        </div>
+        <div id="mafGraph" class="graph">
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //define Global Variable
+    var dataHistoryObj = {kpl:{secondList:[],
+                               longTermList:[],
+                               displayCount:0
+                              },
+                          speed:{secondList:[],
+                               longTermList:[],
+                               displayCount:0
+                              },
+                          maf:{secondList:[],
+                               longTermList:[],
+                               displayCount:0
+                              },
+                          longTermUnit:60
+                         }
+
+    //call live data every second
+     setInterval(function(){
+        callLive();
+      }, 1000);
+
+    function callLive() {
+      var xhttp;
+
+      if (window.XMLHttpRequest) {
+        // code for modern browsers
+        xhttp = new XMLHttpRequest();
+        } else {
+        // code for IE6, IE5 ..
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var rsObj = JSON.parse(this.responseText);
+         // console.log(rsObj);
+          if(isObject(rsObj)){
+              displayData(rsObj);
+          } else {
+              alert("No result data..");
+          }
+        }
+      };
+      xhttp.open("GET", "getLiveData", true);
+      xhttp.send();
+    }
+    //display data each circle
+    function displayData(list){
+        var rsList = list;
+        var dataObj = { kpl:{mid:30,max:100,value:0,symbol:"&#9728;"},
+                        speed:{mid:80,max:300,value:0,symbol:"&#9729;"},
+                        maf:{mid:60,max:100,value:0,symbol:"&#9733;"},
+                        time:{value:setDateFormat(new Date())},
+                      };
+        var timeList, timeValue;
+
+        dataObj.time.value = rsList.time;
+        dataObj.kpl.value = parseFloat(rsList.kpl);
+        dataObj.speed.value = parseFloat(rsList.vss);
+        dataObj.maf.value = parseFloat(rsList.maf);
+
+        //make background color
+        setCircleCss(dataObj,"kpl",dataObj.kpl.value);
+        setCircleCss(dataObj,"speed",dataObj.speed.value);
+        setCircleCss(dataObj,"maf",dataObj.maf.value);
+        /////////////////////////////////////////////////
+        //make graph
+        displayGraph(dataObj,"Graph"); //every second
+        ////////////////////////////////////////////////
+
+
+        //time infomation split
+        timeValue = dataObj.time.value;
+        timeList = timeValue.split(" ");
+        document.getElementById("time").getElementsByClassName("value")[0].innerHTML = timeList[1]; //time Info
+        document.getElementById("time").getElementsByClassName("unit")[0].innerHTML = timeList[0]; //date Info
+
+        //주행연비
+        document.getElementById("kpl").getElementsByClassName("value")[0].innerHTML = dataObj.kpl.value;
+        //speed
+        document.getElementById("speed").getElementsByClassName("value")[0].innerHTML = dataObj.speed.value;
+        //MAF
+        document.getElementById("maf").getElementsByClassName("value")[0].innerHTML = dataObj.maf.value;
+    }
+
+    //set Circle background color
+    function setCircleCss(obj,type,value){
+        var nomalRatio, warningRatio;
+        var stdObj = obj;
+        var styleText = "";
+        var divObj;
+        nomalRatio = Math.round(value/stdObj[type].max *100);
+
+        if(value > stdObj[type].mid){
+            warningRatio = Math.round(nomalRatio/1.6);
+            styleText = getCss(warningRatio,nomalRatio);
+        }
+
+        document.getElementById(type).setAttribute("style", styleText);
+
+    }
+
+    function getCss(warning,normal){
+        return "background: linear-gradient(to bottom left, #ffcccc "+warning+"%, #8cfaf5 "+normal+"%);";
+    }
+
+    function circleOnClick(obj){
+        var graphObj = document.getElementById(obj.id+"Graph");
+        var styleValue = "";
+        if(graphObj.style.display != "none"){
+            styleValue ="display:none;";
+        }
+        graphObj.setAttribute("style", styleValue);
+    }
+
+    function displayGraph(dataObj,divId){
+        var limitLength = parseInt( document.getElementById("graphDiv").clientWidth)/16;
+        if( dataHistoryObj["kpl"].displayCount > limitLength ){
+            document.getElementById("kpl"+divId).innerHTML = "";
+            document.getElementById("speed"+divId).innerHTML = "";
+            document.getElementById("maf"+divId).innerHTML = "";
+
+            dataHistoryObj["kpl"].displayCount = 0;
+            dataHistoryObj["speed"].displayCount = 0;
+            dataHistoryObj["maf"].displayCount = 0;
+        }
+
+        setGraphCss(dataObj,"kpl",divId);
+        setGraphCss(dataObj,"speed",divId);
+        setGraphCss(dataObj,"maf",divId);
+    }
+
+    function setGraphCss(obj,type,divId){
+        var nomalRatio, warningRatio;
+        var stdObj = obj;
+        var styleText = "";
+        var value = stdObj[type].value;
+        var graphObj = document.getElementById(type+divId);
+
+        var divObj= document.createElement("DIV");
+            divObj.innerHTML = stdObj[type].symbol;
+            nomalRatio = Math.round(value/stdObj[type].max *100);
+            divObj.setAttribute("style", getGraphCss(nomalRatio));
+            divObj.setAttribute("class", "data-grains");
+
+        graphObj.appendChild(divObj);
+        dataHistoryObj[type].displayCount++
+
+        //add value global variable
+        dataHistoryObj[type].secondList.push(value);
+    }
+
+    function getGraphCss(value){
+        var ratio = parseInt(value);
+        var colorTableList = [  [0,10,"#8cfaf5"],
+                                [11,20,"#9dfbf6"],
+                                [21,30,"#b6fcf8"],
+                                [31,40,"#cefdfb"],
+                                [41,50,"#e7fefd"],
+                                [51,60,"#ffffff"],
+                                [61,70,"#ffe6e6"],
+                                [71,75,"#ffcccc"],
+                                [76,80,"#ffb3b3"],
+                                [81,85,"#ff9999"],
+                                [86,90,"#ff8080"],
+                                [91,93,"#ff6666"],
+                                [94,96,"#ff4d4d"],
+                                [97,98,"#ff3333"],
+                                [99,100,"#ff1a1a"]];
+        var dataHeight =  60 - Math.round((ratio/100) * 60);
+        if(dataHeight < 5 ) dataHeight = 5
+        var heightStyle = "height:"+dataHeight+"px;padding-top:"+dataHeight+"px;";
+        var colorStyle = "color: "+colorTableList[0][2]+";";
+
+        for(var i=0; i<colorTableList.length; i++){
+            if(ratio >= colorTableList[i][0] && ratio <= colorTableList[i][1] || i == colorTableList.length-1){
+                return heightStyle + "color: "+colorTableList[i][2]+";";
+            }
+        }
+        return  colorStyle + heightStyle;
+    }
+
+
+</script>
+</body>
+</html>
+
