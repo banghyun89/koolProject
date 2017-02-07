@@ -80,7 +80,7 @@ def put_data(obd_data):
 
 def get_history_data(list):
     pagingSql = """
-                     SELECT 0,
+                     SELECT
                             strftime('%Y-%m-%d %H:%M', time) as time,
                             printf('%.2f', avg(kpl)) as kpl,
                             printf('%.2f', avg(vss)) as vss,
@@ -101,7 +101,7 @@ def get_history_data(list):
                    LIMIT ?, ?
                 """
     firstCallSql = """
-                     SELECT max(id),
+                     SELECT
                             strftime('%Y-%m-%d %H:%M', time) as time,
                             printf('%.2f', avg(kpl)) as kpl,
                             printf('%.2f', avg(vss)) as vss,
@@ -120,6 +120,12 @@ def get_history_data(list):
                       ORDER BY id DESC
                       LIMIT ?, ?
                    """
+    firstCallSqlMaxId = """
+                     SELECT max(id) as maxId
+                       FROM rowOBDdata
+                      WHERE time >= ?
+                        AND time <= ?
+                   """
     totalCountSql = """
                         SELECT count(*) totalCount
                           FROM (SELECT strftime('%Y-%m-%d %H:%M', time)
@@ -137,6 +143,7 @@ def get_history_data(list):
             response = []
             selectList = []
             count = 0
+            maxId = 0
 
             if data[2] > 0 : # paging sql when scroll table in the live page
                 results = cursor.execute(pagingSql, (data[0], data[1], data[2], data[3], data[4]))
@@ -147,6 +154,10 @@ def get_history_data(list):
 
                 for row in results.fetchall():
                     selectList.append(row)
+
+                results2 = cursor.execute(firstCallSqlMaxId, (data[0], data[1]))
+                maxId = results2.fetchone()[0]
+
                 countList = cursor.execute(totalCountSql,(data[0], data[1]))
                 count = countList.fetchone()[0]
                 if count is None:
@@ -161,6 +172,7 @@ def get_history_data(list):
 
     response.append(selectList)
     response.append(count)
+    response.append(maxId)
     return (response)
 
 def get_live_data():

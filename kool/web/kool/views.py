@@ -55,4 +55,4 @@ def getHistoryData_graph(request):
     print(param)
     rsList = sqlCollection.get_history_data(param)
 
-    return JsonResponse({'list': rsList[0], 'totalCount': rsList[1]})
+    return JsonResponse({'list': rsList[0], 'totalCount': rsList[1], 'maxId':rsList[2]})

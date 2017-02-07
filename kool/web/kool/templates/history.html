@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
 <link rel="stylesheet" href="{% static 'resource/css/history.css' %}">
+<script src="{% static 'resource/googleGraph/loader.js' %}"></script>
 <script src="{% static 'resource/js/jquery-3.1.1.min.js' %}"></script>
 <script src="{% static 'resource/js/common.js' %}"></script>
 <body>
@@ -22,41 +23,20 @@
                 </select>
             </div>
             <div>
-                <button class="w3-btn w3-round-large w3-large w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick()">Search</button>
-                <button class="w3-btn w3-round-large w3-large w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick('refresh')">Refresh</button>
-                <button class="w3-btn w3-round-large w3-large w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="window.location.assign('{% url 'history_graph' %}');">Graph</button>
-                <button class="w3-btn w3-round-large w3-large w3-green w3-hover-orange" style="margin-top:5px;"  onclick="window.location.assign('{% url 'home' %}');">Menu</button>
+                <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick()">Search</button>
+                <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick('refresh')">Refresh</button>
+                <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="window.location.assign('{% url 'history_graph' %}');">Graph</button>
+                <button class="w3-btn w3-round-large w3-small w3-green w3-hover-orange" style="margin-top:5px;"  onclick="window.location.assign('{% url 'home' %}');">Menu</button>
             </div>
         </div>
-        <p style="padding-top:15px;paddin-bottom:10px;">
+
+        <p style="padding:15px;">
             Total count :
             <span id="totalCountSpan">0</span>
         </p>
-        <div class="tableWrapHead">
-            <table>
+        <div class="tableWrapHead" >
+            <table id="tableTitle">
                 <thead>
-                    <tr>
-                        <th class="width-5" >No.</th>
-                        <th class="width-15">Time
-                        </th>
-                        <th class="width-10" >KPL (g/s)</th>
-                        <th class="width-10" >VSS (kph)</th>
-                        <th class="width-10" >MAF</th>
-                        <th class="width-10" >RPM</th>
-                        <th class="width-10" >Control module voltage (volt)</th>
-                        <th class="width-10" >Fuel Level Input (%)</th>
-                        <th class="width-10" >Engine Coolant Temperature (celsius)</th>
-                        <th class="width-10" >Ambient air temperature (celsius)</th>
-                        <th class="width-10" >Engine oil temperature (celsius)</th>
-                        <th class="width-10" >Intake Air temperature (celsius)</th>
-                    </tr>
-
-                </thead>
-            </table>
-        </div>
-        <div class="tableWrap" id="tableWrapDiv" onscroll="onScrollDiv()">
-            <table style="margin-top:-80px;">
-                 <thead>
                     <tr>
                         <th class="width-5">No.</th>
                         <th class="width-15">Time</th>
@@ -64,12 +44,32 @@
                         <th class="width-10" >VSS (kph)</th>
                         <th class="width-10" >MAF</th>
                         <th class="width-10" >RPM</th>
-                        <th class="width-10" >Control module voltage (volt)</th>
-                        <th class="width-10" >Fuel Level Input (%)</th>
-                        <th class="width-10" >Engine Coolant Temperature (celsius)</th>
-                        <th class="width-10" >Ambient air temperature (celsius)</th>
-                        <th class="width-10" >Engine oil temperature (celsius)</th>
-                        <th class="width-10" >Intake Air temperature (celsius)</th>
+                        <th class="width-10" >Control module</th>
+                        <th class="width-10" >Fuel Level(%)</th>
+                        <th class="width-10" >Engine Coolant Temp</th>
+                        <th class="width-10" >Ambient air temp</th>
+                        <th class="width-10" >Engine oil temp</th>
+                        <th class="width-10" >Intake Air temp</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tableWrap" id="tableWrapDiv" onscroll="onScrollDiv()">
+            <table id="historyTable" style="">
+                 <thead>
+                    <tr style="">
+                        <th class="width-5">No.</th>
+                        <th class="width-15">Time</th>
+                        <th class="width-10">KPL (g/s)</th>
+                        <th class="width-10" >VSS (kph)</th>
+                        <th class="width-10" >MAF</th>
+                        <th class="width-10" >RPM</th>
+                        <th class="width-10" >Control module</th>
+                        <th class="width-10" >Fuel Level(%)</th>
+                        <th class="width-10" >Engine Coolant Temp</th>
+                        <th class="width-10" >Ambient air temp</th>
+                        <th class="width-10" >Engine oil temp</th>
+                        <th class="width-10" >Intake Air temp</th>
                     </tr>
                 </thead>
                 <tbody id="historyTableTbody">
@@ -100,8 +100,12 @@
                             }
                         };
 
-    //call when page load
-    callHistory(0); //1days
+     $(document).ready(function(){
+        //call when page load
+        callHistory(0); //1days
+
+    });
+
 
     function searchOnClick(){
 
@@ -176,11 +180,10 @@
             tableObj.innerHTML = "";
             searchCondObj.totalCnt = isNotEmpty(obj.totalCount)? parseInt(obj.totalCount):0;
 
-            document.getElementsByClassName("tableWrap")[0].scrollTop = 0;
+            document.getElementById("tableWrapDiv").scrollTop = 0;
 
-            if(rsList.length > 0){
-                searchCondObj.latestIndex = rsList[0][0];
-            }
+            searchCondObj.latestIndex = isNotEmpty(obj.maxId)? parseInt(obj.maxId):0;
+
 
             document.getElementById("totalCountSpan").innerHTML = parseInt(searchCondObj.totalCnt).toLocaleString('en');
         }
@@ -197,7 +200,7 @@
             textElement= document.createTextNode(count);
             tdObj.appendChild(textElement);
             trObj.appendChild(tdObj);
-            for(var j=1; j<rsList[i].length;j++){
+            for(var j=0; j<rsList[i].length;j++){
                 tdObj = document.createElement("TD");
                 textElement= document.createTextNode(rsList[i][j]);
                 tdObj.appendChild(textElement);
@@ -216,7 +219,7 @@
 
     //div table scroll event
     function onScrollDiv() {
-        var divObj = document.getElementsByClassName("tableWrap")[0];
+        var divObj = document.getElementById("tableWrapDiv");
 
          document.getElementsByClassName("tableWrapHead")[0].scrollLeft = divObj.scrollLeft;
 
