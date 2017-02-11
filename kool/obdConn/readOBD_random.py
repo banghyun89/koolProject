@@ -54,7 +54,7 @@ while 1:
             continue
 
         currentTime = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(vss.time))
-        kpl = round(30.215 * ((vss.value.magnitude) / (maf.value.magnitude)),2)
+        kpl = round( ((vss.value.magnitude) / (maf.value.magnitude)),2)
 
         inputDict['time'] = currentTime
         inputDict['kpl'] = kpl

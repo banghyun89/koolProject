@@ -153,6 +153,7 @@
 
        chartWidth = (Math.round($("#chart_div").width())*0.9> 400 || Math.round($("#chart_div").width())*0.9 < 200  ) ? 200: (Math.round($("#chart_div").width())*0.9)/2;
 
+       chartWidth = 200;
 
        //draw chart
        google.charts.load('current', {'packages':['gauge']});
@@ -169,20 +170,18 @@
 
                  $("#"+id).hide();
                  $(this).text("Hide!");
-                 sensorObj[id]["openYN"]= false;
+                 sensorObj.data[id]["openYN"]= false;
              } else {
                 $("#"+id).show();
                 $(this).text("Display!");
-                sensorObj[id]["openYN"]= true;
+                sensorObj.data[id]["openYN"]= true;
              }
          });
 
          //call live data every second
          setInterval(function(){
-            callLive();
-          }, 1000);
-
-
+             callLive();
+         }, 1000);
     });
 
 

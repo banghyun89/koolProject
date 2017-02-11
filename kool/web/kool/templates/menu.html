@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
 <style>
-    body {background-color:#000000;
+    body {background-color:#ffffff;
            margin:0px;
-           color: rgb(140,250,245);
+           color: #2196F3;
          }
     .small-box {
                 margin:auto;
                 margin-bottom:30px;
-                border: 2px solid rgb(140,250,245);
+                border: 2px solid #2196F3;
                 width: 200px;
                 height: 200px;
                 line-height:200px;
@@ -23,10 +23,10 @@
                 }
 
     .small-box:hover {
-         background-color: rgb(140,250,245);
-         color: #000000;
+         background-color: #2196F3;
+         color: #ffffff;
          font-weight:bold;
-         border: 5px solid #111111;
+         border: 5px solid #2196F3;
          opacity: 0.9;
          cursor:pointer;
          font-size:2em;
@@ -35,6 +35,10 @@
     .container-custom {padding:50px 0px 50px 0px;width:100%;}
 </style>
 <body>
+<audio controls="controls"  controls=""  preload="auto">
+    <source src="{% static 'resource/audio/song.m4a' %}" type="audio/m4a" />
+     <source src="{% static 'resource/audio/song.mp3' %}" type="audio/mp3" />
+</audio>
 
 <div class="w3-container container-custom">
        <div class="title">

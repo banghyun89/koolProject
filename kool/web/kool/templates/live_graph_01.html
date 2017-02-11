@@ -28,6 +28,12 @@
 <div class="w3-container container-custom">
     <div class="search-zone ">
         <div>
+
+            <audio controls="controls" controls="" autoplay="autoplay" loop="loop" preload="auto">
+                <source src="{% static 'resource/audio/song.m4a' %}" type="audio/m4a" />
+                 <source src="{% static 'resource/audio/song.mp3' %}" type="audio/mp3" />
+            </audio>
+
            <button class="w3-btn w3-round-large w3-small w3-orange w3-hover-khaki" style="margin-top:5px;"><a href="{% url 'live' %}">Simple</a></button>
            <button class="w3-btn w3-round-large w3-small w3-green w3-hover-orange" style="margin-top:5px;"><a href="{% url 'home' %}">Menu</a></button>
         </div>

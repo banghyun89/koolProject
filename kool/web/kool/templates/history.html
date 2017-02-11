@@ -1,147 +1,546 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
-<title>History</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
-<link rel="stylesheet" href="{% static 'resource/css/history.css' %}">
-<script src="{% static 'resource/googleGraph/loader.js' %}"></script>
-<script src="{% static 'resource/js/jquery-3.1.1.min.js' %}"></script>
-<script src="{% static 'resource/js/common.js' %}"></script>
-<body>
-    <div class="w3-container w3-container-custom">
+<head>
+    <title>history</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'resource/css/jquery-ui.min.css' %}">
+    <script src="{% static 'resource/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'resource/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'resource/js/common.js' %}"></script>
+    <script src="{% static 'resource/d3/d3.v3.js' %}"></script>
 
-        <div class="search-zone ">
-            <div style="margin:10px 10px 0px 0px ;padding:0px;">
-                <select class="w3-select" id="periodSelect">
-                  <option value="" disabled selected>Choose Search period</option>
-                  <option value="0" >Today</option>
-                  <option value="1" >2 days</option>
-                  <option value="7">a Week</option>
-                  <option value="10">10 days</option>
-                  <option value="30">a Month</option>
-                </select>
-            </div>
-            <div>
-                <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick()">Search</button>
-                <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick('refresh')">Refresh</button>
-                <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="window.location.assign('{% url 'history_graph' %}');">Graph</button>
-                <button class="w3-btn w3-round-large w3-small w3-green w3-hover-orange" style="margin-top:5px;"  onclick="window.location.assign('{% url 'home' %}');">Menu</button>
-            </div>
-        </div>
+    <style>
+    body,h1,h2,h3,h4,h5 {font-family: sans-serif}
+    body {font-size:16px;}
+    .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+    .w3-half img:hover{opacity:1}
+    #listTable th, #listTable td {border:1px solid #ccc;min-width:100px;}
 
-        <p style="padding:15px;">
-            Total count :
-            <span id="totalCountSpan">0</span>
-        </p>
-        <div class="tableWrapHead" >
-            <table id="tableTitle">
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .grid path,
+    .grid line {
+      fill: none;
+      stroke: rgba(0, 0, 0, 0.25);
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke-width: 2.5px;
+    }
+    </style>
+</head>
+<body onresize="bodyOnresize()">
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-blue w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold" id="mySidenav"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-padding-xlarge w3-hide-large w3-display-topleft w3-hover-white" style="width:100%;font-size:22px">Close Menu</a>
+  <div class="w3-container">
+    <h3 class="w3-padding-64">The OBD on the load</h3>
+  </div>
+  <a href="#" onclick="w3_close();window.location.assign('{% url 'home' %}');" class="w3-padding w3-hover-white">MENU</a>
+  <a href="#" onclick="w3_close();window.location.assign('{% url 'live' %}');" class="w3-padding w3-hover-white">Live Page</a>
+  <a href="#" onclick="w3_close();window.location.assign('{% url 'history_01' %}');" class="w3-padding w3-hover-white">History page ver1</a>
+  <a href="#" onclick="w3_close();window.location.assign('{% url 'history_graph' %}');" class="w3-padding w3-hover-white">History page ver2</a>
+  <!--<a href="#" onclick="settingOnclick()" class="w3-padding w3-hover-white">Setting</a> -->
+</nav>
+  <div class="w3-display-container w3-large" style="width:100%;height:40px;">
+      <div class="w3-display-right" style="margin:10px;">
+        <button class="w3-btn w3-large w3-round w3-blue w3-border" style="font-size:15px!important;padding:5px 7px 5px 7px;" onclick="searchOnClick()">Search</button>
+
+        <button class="w3-btn w3-large w3-blue w3-round w3-border graph-button" style="font-size:15px!important;padding:5px 7px 5px 7px;" onclick="chartOnClick()">Show Graph</button>
+      </div>
+  </div>
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-blue w3-xlarge w3-padding ">
+  <a href="javascript:void(0)" class="w3-btn w3-blue  w3-margin-right" onclick="w3_open()">☰</a>
+
+  <div class="w3-display-container w3-show-inline-block w3-right" style="padding-top:4px;">
+    <button class="w3-btn w3-large w3-round w3-white w3-border" style="font-size:15px!important;padding:5px 7px 5px 7px;" onclick="searchOnClick()">Search</button>
+
+    <button class="w3-btn w3-large w3-white w3-round w3-border graph-button" style="font-size:15px!important;padding:5px 7px 5px 7px;" onclick="chartOnClick()">Show Graph</button>
+  </div>
+</header>
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+      <div class="w3-display-container" id="searchCondDiv" style="margin-top:50px;margin-bottom:10px;height:120px;">
+          <form>
+              <div class="w3-row" style="padding-bottom:10px;">
+                  <div class="w3-col s4" style="padding-top:2px;padding-left:20px;">From Date</div>
+                  <div class="w3-col s8"><input type="text" id="from" name="from" class="w3-border" style="text-align:center;"></div>
+             </div>
+              <div class="w3-row" style="padding-bottom:10px;">
+                  <div class="w3-col s4" style="padding-top:2px;padding-left:20px;">To Date</div>
+                  <div class="w3-col s8"><input type="text" id="to" name="to" class="w3-border" style="text-align:center;"></div>
+             </div>
+            <div class="w3-accordion">
+               <div class="w3-row">
+                   <div class="w3-col s4" style="padding-left:20px;">Sensor type</div>
+                   <div class="w3-col s8"style="">
+                        <input class="w3-check" type="radio" id="allSensor" name="sensorRadio" value="allSensor" onclick="onclickSensorBtn(this,'selectSensorDiv')">
+                        <label class="w3-validate" for="allSensor" style="padding-right:20px;">all</label>
+                        <input class="w3-check" type="radio" id="selectSensor" value="selectSensor" name="sensorRadio" onclick="onclickSensorBtn(this,'selectSensorDiv')">
+                        <label class="w3-validate" for="selectSensor">select sensor</label>
+                   </div>
+                </div>
+                <div id="selectSensorDiv" class="w3-accordion-content w3-container w3-light-grey w3-padding-8">
+                </div>
+            </div>
+          </form>
+      </div>
+     <div id="chart" style="display:none;">
+        <svg id="lineChartSvg" style="width:100%;height:500px;"></svg>
+    </div>
+    <!-- Sensor list  -->
+    <!--<div class="w3-container" style="padding-left:20px;">
+       Total : <span id="totalCount">0</span>
+    </div>-->
+    <div class="w3-container">
+        <div class="w3-responsive">
+
+            <table id="listTable" class="w3-table-all w3-hoverable">
                 <thead>
-                    <tr>
-                        <th class="width-5">No.</th>
-                        <th class="width-15">Time</th>
-                        <th class="width-10">KPL (g/s)</th>
-                        <th class="width-10" >VSS (kph)</th>
-                        <th class="width-10" >MAF</th>
-                        <th class="width-10" >RPM</th>
-                        <th class="width-10" >Control module</th>
-                        <th class="width-10" >Fuel Level(%)</th>
-                        <th class="width-10" >Engine Coolant Temp</th>
-                        <th class="width-10" >Ambient air temp</th>
-                        <th class="width-10" >Engine oil temp</th>
-                        <th class="width-10" >Intake Air temp</th>
+                    <tr class="w3-light-blue">
                     </tr>
                 </thead>
-            </table>
-        </div>
-        <div class="tableWrap" id="tableWrapDiv" onscroll="onScrollDiv()">
-            <table id="historyTable" style="">
-                 <thead>
-                    <tr style="">
-                        <th class="width-5">No.</th>
-                        <th class="width-15">Time</th>
-                        <th class="width-10">KPL (g/s)</th>
-                        <th class="width-10" >VSS (kph)</th>
-                        <th class="width-10" >MAF</th>
-                        <th class="width-10" >RPM</th>
-                        <th class="width-10" >Control module</th>
-                        <th class="width-10" >Fuel Level(%)</th>
-                        <th class="width-10" >Engine Coolant Temp</th>
-                        <th class="width-10" >Ambient air temp</th>
-                        <th class="width-10" >Engine oil temp</th>
-                        <th class="width-10" >Intake Air temp</th>
-                    </tr>
-                </thead>
-                <tbody id="historyTableTbody">
+                <tbody>
                     <tr>
-                        <td colspan="5"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
+      </div>
     </div>
+    <!-- Modal page for Sensor Setting menu -->
+    <div id="settingModal" class="w3-modal w3-animate-opacity" style="color:#000000;">
+        <div class="w3-modal-content w3-card-8">
+          <header class="w3-container w3-gray">
+            <span onclick="document.getElementById('settingModal').style.display='none'" class="w3-closebtn">&times;</span>
+            <h2>Setting</h2>
+          </header>
+          <div class="w3-container" id="list-sensor">
+              <ul class="w3-ul w3-card-10">
+
+              </ul>
+          </div>
+         <footer class="w3-container w3-gray">
+          <p></p>
+         </footer>
+       </div>
+    </div>
+<!-- End page content -->
+</div>
+
 <script>
-    //define gobal variables
-    //a object to search Condition
-    var searchCondObj = {   lockYn:false,
-                            rowLimitCount:20, // 20 rows per 1 page
-                            callCnt:0, // total call service count
-                            totalCnt:0, // total count of searching
-                            latestIndex:0, // limit row Id
-                            lastNumber:0, //current page's last row index for Table "No." column
-                            period:1, //defalut 1 days
-                            init:function(periodValue){
-                                this.callCnt = 0;
-                                this.totalCnt = 0;
-                                this.latestIndex= 0;
-                                this.lastNumber = 0;
-                                this.period = periodValue;
+var sensorObj = {  dataObj :{
+                            kpl:{mid:30,max:100,value:0,title:"KPL",unit:"km/l",openYN:true,keyYn:true},
+                            vss:{mid:60,max:300,value:0,title:"SPEED",unit:"km/h",openYN:true,keyYn:false},
+                            maf:{mid:35,max:160,value:0,title:"MAF",unit:"g/s",openYN:true,keyYn:false},
+                            rpm:{mid:50,max:100,value:0,title:"RPM",unit:"",openYN:true,keyYn:false},
+                            control_module_voltage:{mid:50,max:100,value:0,title:"Control Module Volt",unit:"Volt",openYN:true,keyYn:false},
+                            fuel_level:{mid:50,max:100,value:0,title:"Fuel level",unit:"%",openYN:true,keyYn:false},
+                            coolant_temp:{mid:50,max:100,value:0,title:"Coolant Temp",unit:"°F",openYN:true,keyYn:false},
+                            ambient_air_temp:{mid:50,max:100,value:0,title:"Ambient Air Temp",unit:"°F",openYN:true,keyYn:false},
+                            oil_temp:{mid:50,max:100,value:0,title:"Oil Temp",unit:"°F",openYN:true,keyYn:false},
+                            intake_temp:{mid:50,max:100,value:0,title:"Intake Air Temp",unit:"°F",openYN:true,keyYn:false}
+                        },
+                        makeSensorList : function(){
+                            var closeButtonObj = document.createElement('span');
+
+                            $("#selectSensorDiv").html("");
+
+                            $(closeButtonObj).addClass("w3-btn w3-large w3-round w3-blue w3-border w3-right")
+                                             .text("close")
+                                             .click(function(){
+                                                  $("#selectSensorDiv").removeClass("w3-show");
+                                              }).appendTo($("#selectSensorDiv"));
+
+                            $("#selectSensorDiv").append("<br>");
+
+                            for(var index in this.dataObj) {
+                                this.makeTag(index);
+                                $("#selectSensorDiv").append("<br>");
                             }
-                        };
 
-     $(document).ready(function(){
-        //call when page load
-        callHistory(0); //1days
+                        },
+                        makeTag : function(sensorName){
+                            var inputObj = document.createElement('input');
+                            var labelObj = document.createElement('label');
 
-    });
+                                $(inputObj).addClass("w3-check w3-padding-4")
+                                           .attr("id",sensorName)
+                                           .attr("name","chkList")
+                                           .attr("type","checkbox").appendTo($("#selectSensorDiv"));
+                                $(labelObj).addClass("w3-validate w3-padding-4")
+                                           .attr("style","padding-right:20px;")
+                                           .attr("for",sensorName)
+                                           .text(" "+this.dataObj[sensorName].title)
+                                           .appendTo($("#selectSensorDiv"));
 
 
-    function searchOnClick(){
+                        },
+                        selectColList : [],
+                        resultlist : [],
+                        totalCount : 0,
+                        makeTable : function(obj){
+                            var thObj;
+                            var tdObj;
+                            var trObj;
+                            this.selectColList = obj.selectColList;
+                            this.resultlist = obj.list;
+                            this.totalCount = obj.totalCount;
+                            //$("#totalCount").text(this.totalCount);
+                            $("#listTable thead tr").html("");
+                            $("#listTable tbody").html("");
+                            //time
+                            for(var i in this.selectColList) {
+                                for(var j in this.resultlist[i]) {
+                                    if(this.selectColList[i] == "time"){
+                                        if(j==0){
+                                            thObj = document.createElement('th');
+                                            $(thObj).text("Sensor")
+                                                     .css("text-align","center")
+                                                     .css("min-width","150px")
+                                                     .css("max-width","250px")
+                                                     .appendTo($("#listTable thead tr"));
+                                        }
+                                        thObj = document.createElement('th');
+                                        $(thObj).text(this.resultlist[i][j]).css("text-align","center").appendTo($("#listTable thead tr"));
+                                    } else {
+                                        if(j==0){
+                                            trObj = document.createElement('tr');
+                                            tdObj = document.createElement('td');
+                                            $(tdObj).text(this.dataObj[this.selectColList[i]].title).css("min-width","200px").css("text-align","left").appendTo($(trObj));
+                                        }
+                                         tdObj = document.createElement('td');
+                                         $(tdObj).text(this.resultlist[i][j]).css("text-align","right").appendTo($(trObj));
 
-        var index = document.getElementById("periodSelect").selectedIndex;
-        var selectValue = document.getElementById("periodSelect").options[index].value;
+                                         if(j == this.resultlist[i].length-1){
+                                             $(trObj).appendTo($("#listTable tbody"));
+                                         }
 
-        if(selectValue == ""){
-            document.getElementById("periodSelect").selectedIndex = 1;
-            callHistory(selectValue);
-        }  else {
-            searchCondObj.init(selectValue);
-            callHistory(selectValue);
-        }
+                                    }
+
+                                }
+                            }
+                           // $("#lineChartSvg").width($("#listTable").width());
+
+                            this.makeChartObj();
+
+                         },
+                         chartDataObj : { XTickList : [], data : []},
+                         makeChartObj : function(){
+
+                            var rsData = [];
+                            var subObj;
+                            for(var i in this.selectColList) {
+                                 if(this.selectColList[i] != "time"){
+                                    subObj = {};
+                                    subObj.label = this.dataObj[this.selectColList[i]].title;
+                                    subObj.x = [];
+                                    subObj.y = [];
+                                    subObj.time = [];
+                                    for(var j in this.resultlist[i]) {
+                                        subObj.x.push(parseInt(j));
+                                        subObj.y.push(parseFloat(this.resultlist[i][j]));
+                                        subObj.time.push(this.resultlist[0][j]);
+                                    }
+                                    this.chartDataObj.data.push(subObj);
+                                } else {
+                                    this.chartDataObj.XTickList = this.resultlist[i];
+                                }
+
+                            }
+                                // console.log(this.chartDataObj);
+
+                         },
+                         drawChart : function(){
+
+                           var data = [ { label: "Data Set 1",
+                                           x: [0, 1, 2, 3, 4],
+                                           y: [0, 1, 2, 3, 4] },
+                                         { label: "Data Set 2",
+                                           x: [0, 1, 2, 3, 4],
+                                           y: [0, 1, 4, 9, 16] } ] ;
+                            data = this.chartDataObj.data;
+
+                            var xy_chart = this.d3_xy_chart()
+                                .width($("#lineChartSvg").width())
+                                .height($("#lineChartSvg").height());
+                                //.xlabel("X Axis")
+                                //.ylabel("Y Axis") ;
+
+                             d3.select("#lineChartSvg svg").remove();
+
+                            var svg = d3.select("#lineChartSvg").append("svg")
+                                .datum(data)
+                                .call(xy_chart) ;
+
+                         },
+                         d3_xy_chart :function(){
+                                var width = $("#lineChartSvg").width(),
+                                    height = $("#lineChartSvg").height();
+                                 //   xlabel = "X Axis Label",
+                                  //  ylabel = "Y Axis Label" ;
+
+                                function chart(selection) {
+                                    selection.each(function(datasets) {
+                                        //
+                                        // Create the plot.
+                                        //
+                                        var margin = {top: 20, right: 80, bottom: 30, left: 50},
+                                            innerwidth = width - margin.left - margin.right,
+                                            innerheight = height - margin.top - margin.bottom ;
+
+                                        var x_scale = d3.scale.linear()
+                                            .range([0, innerwidth])
+                                            .domain([ d3.min(datasets, function(d) { return d3.min(d.x); }),
+                                                      d3.max(datasets, function(d) { return d3.max(d.x); }) ]) ;
+
+                                        var y_scale = d3.scale.linear()
+                                            .range([innerheight, 0])
+                                            .domain([ d3.min(datasets, function(d) { return d3.min(d.y); }),
+                                                      d3.max(datasets, function(d) { return d3.max(d.y); }) ]) ;
+
+                                        var color_scale = d3.scale.category10()
+                                            .domain(d3.range(datasets.length)) ;
+
+                                        var x_axis = d3.svg.axis()
+                                            .scale(x_scale)
+                                            .orient("bottom") ;
+
+                                        var y_axis = d3.svg.axis()
+                                            .scale(y_scale)
+                                            .orient("left") ;
+
+                                        var x_grid = d3.svg.axis()
+                                            .scale(x_scale)
+                                            .orient("bottom")
+                                            .tickSize(-innerheight)
+                                            .tickFormat("");
+                                            //.ticks(sensorObj.chartDataObj.XTickList.length)
+                                            //.tickValues(sensorObj.chartDataObj.XTickList);
+
+                                        var y_grid = d3.svg.axis()
+                                            .scale(y_scale)
+                                            .orient("left")
+                                            .tickSize(-innerwidth)
+                                            .tickFormat("") ;
+
+                                        var draw_line = d3.svg.line()
+                                            .interpolate("basis")
+                                            .x(function(d) { return x_scale(d[0]); })
+                                            .y(function(d) { return y_scale(d[1]); }) ;
+
+                                        var svg = d3.select(this)
+                                            .attr("width", width)
+                                            .attr("height", height)
+                                            .append("g")
+                                            .attr("transform", "translate(" + margin.left + "," + margin.top + ")") ;
+
+                                        svg.append("g")
+                                            .attr("class", "x grid")
+                                            .attr("transform", "translate(0," + innerheight + ")")
+                                            .call(x_grid) ;
+
+                                        svg.append("g")
+                                            .attr("class", "y grid")
+                                            .call(y_grid) ;
+
+                                        svg.append("g")
+                                            .attr("class", "x axis")
+                                            .attr("transform", "translate(0," + innerheight + ")")
+                                            .call(x_axis)
+                                            .append("text")
+                                            .attr("dy", "-.71em")
+                                            .attr("x", innerwidth)
+                                            .style("text-anchor", "end");
+                                           // .text(xlabel) ;
+
+                                        svg.append("g")
+                                            .attr("class", "y axis")
+                                            .call(y_axis)
+                                            .append("text")
+                                            .attr("transform", "rotate(-90)")
+                                            .attr("y", 6)
+                                            .attr("dy", "0.71em")
+                                            .style("text-anchor", "end");
+                                           // .text(ylabel) ;
+
+                                        var data_lines = svg.selectAll(".d3_xy_chart_line")
+                                            .data(datasets.map(function(d) {return d3.zip(d.x, d.y);}))
+                                            .enter().append("g")
+                                            .attr("class", "d3_xy_chart_line") ;
+
+                                        data_lines.append("path")
+                                            .attr("class", "line")
+                                            .attr("d", function(d) {return draw_line(d); })
+                                            .attr("stroke", function(_, i) {return color_scale(i);}) ;
+
+                                        data_lines.append("text")
+                                            .datum(function(d, i) { return {name: datasets[i].label, final: d[d.length-1]}; })
+                                            .attr("transform", function(d) {
+                                                return ( "translate(" + x_scale(d.final[0]) + "," +
+                                                         y_scale(d.final[1]) + ")" ) ; })
+                                            .attr("x", 3)
+                                            .attr("dy", ".35em")
+                                            .attr("fill", function(_, i) { return color_scale(i); })
+                                            .text(function(d) { return d.name; }) ;
+
+                                    }) ;
+                                }
+
+                                chart.width = function(value) {
+                                    if (!arguments.length) return width;
+                                    width = value;
+                                    return chart;
+                                };
+
+                                chart.height = function(value) {
+                                    if (!arguments.length) return height;
+                                    height = value;
+                                    return chart;
+                                };
+
+                                chart.xlabel = function(value) {
+                                    if(!arguments.length) return xlabel ;
+                                    xlabel = value ;
+                                    return chart ;
+                                } ;
+
+                                chart.ylabel = function(value) {
+                                    if(!arguments.length) return ylabel ;
+                                    ylabel = value ;
+                                    return chart ;
+                                } ;
+
+                                return chart;
+                            }
+                      };
+
+$(document).ready(function(){
+
+    var dateFormat = "yy-mm-dd",
+                      from = $( "#from" )
+                        .datepicker({
+                          defaultDate: "+1w",
+                          changeMonth: true,
+                          numberOfMonths: 1,
+                          dateFormat : "yy-mm-dd"
+                        })
+                        .on( "change", function() {
+                          to.datepicker( "option", "minDate", getDate( this ) );
+                        }),
+                      to = $( "#to" ).datepicker({
+                        defaultDate: "+1w",
+                        changeMonth: true,
+                        numberOfMonths: 1,
+                        dateFormat : "yy-mm-dd"
+                      })
+                      .on( "change", function() {
+                        from.datepicker( "option", "maxDate", getDate( this ) );
+                      });
+    //setting today
+    var today = setDateFormat(new Date());
+    $("#from").datepicker( "setDate", today );
+    $("#to").datepicker( "setDate", today );
+
+    //init make tag
+    sensorObj.makeSensorList();
+
+    //auto search
+    searchOnClick();
+
+
+});
+
+function diffDays(fromday,today) {
+    var start = new Date(fromday);
+    var end = new Date(today);
+    var diff = new Date(end - start);
+    if(!start || !end)
+        return;
+
+    var days = diff/1000/60/60/24;
+    return days;
+}
+
+function searchOnClick(){
+     callHistory();
+     onclickSensorBtn("selectSensor","selectSensorDiv");
+}
+
+function chartOnClick(){
+   //handle button obj and show chart division area
+
+
+   if($("#chart").css("display") == "none"){
+        $("#chart").addClass("w3-show");
+       sensorObj.drawChart();
+        $(".graph-button").text("Show Graph");
+    } else {
+
+        $("#chart").removeClass("w3-show");
+        $(".graph-button").text("Hide Graph");
+        d3.select("#lineChartSvg svg").remove();
     }
 
-    function callHistory(periodValue) {
-        var todayObj = new Date();
-        var today = setDateFormat(todayObj);
-        var fromday = getMinusDate(periodValue,todayObj);
-        var rowLimitCnt = searchCondObj.rowLimitCount;
-        var callCount = parseInt(searchCondObj.callCnt);
-        if(callCount > 0 && searchCondObj.totalCnt - searchCondObj.lastNumber < searchCondObj.rowLimitCount) {
-            rowLimitCnt = searchCondObj.totalCnt - searchCondObj.lastNumber;
+}
+
+function bodyOnresize(){
+    if($("#chart").css("display") != "none"){
+        sensorObj.drawChart();
+    }
+}
+
+function callHistory() {
+        var fromday = $("#from").val();
+        var today = $("#to").val();
+        var list = [];
+        var diffday = diffDays(fromday,today);
+        if(diffday < 0 ){
+            alert("select a period again..");
+            return;
+        }
+
+        if( $("input:radio[name='sensorRadio']:checked").val() == "selectSensor"){
+             $(":checkbox[name='chkList']:checked").each(function(pi,po){
+              list.push(po.id);
+             });
+        }
+
+        if(list.length == 0){
+            $(":checkbox[name='chkList']").each(function(pi,po){
+              list.push(po.id);
+             });
 
         }
 
+        var listQuery = (list.length > 0) ? "&list="+list.join(",") : "&list=";
         var paramString = "?fromDate="+fromday+" 00:00:00"
                         +"&toDate="+today+" 23:59:59"
-                        +"&latestIndex="+searchCondObj.latestIndex
-                        +"&fromRow="+callCount * parseInt(searchCondObj.rowLimitCount)
-                        +"&rowLimitCount="+parseInt(rowLimitCnt);
+                        +"&period="+diffday
+                        +listQuery;
 
         callService(paramString);
     }
-
-    function callService(paramValue){
+function callService(paramValue){
       var xhttp;
       if (window.XMLHttpRequest) {
         // code for modern browsers
@@ -155,80 +554,38 @@
         if (this.readyState == 4 && this.status == 200) {
           var rsObj = JSON.parse(this.responseText);
           if(isNotEmpty(rsObj)){
-              makeTable(rsObj);
+             sensorObj.makeTable(rsObj);
           } else {
-              alert("No result data..");
+             // alert("No result data..");
           }
          }
       };
-      xhttp.open("GET", "getHistoryData/"+paramValue, true);
+      xhttp.open("GET", "getHistoryData_list/"+paramValue, true);
       xhttp.send();
     }
-
-    function makeTable(obj){
-        var rsList = isNotEmpty(obj.list)? obj.list:[];
-        var count = searchCondObj.lastNumber;
-        var tableObj = document.getElementById("historyTableTbody");
-        var divScrollObj = document.getElementById("tableWrapDiv");
-        var trObj, tdObj, tdObj2 , textElement;
-
-        divScrollObj.style.overflowY= "hidden";
-          /////////////////////////
-         //change global variable
-         ////////////////////////
-        if(searchCondObj.callCnt == 0){
-            tableObj.innerHTML = "";
-            searchCondObj.totalCnt = isNotEmpty(obj.totalCount)? parseInt(obj.totalCount):0;
-
-            document.getElementById("tableWrapDiv").scrollTop = 0;
-
-            searchCondObj.latestIndex = isNotEmpty(obj.maxId)? parseInt(obj.maxId):0;
-
-
-            document.getElementById("totalCountSpan").innerHTML = parseInt(searchCondObj.totalCnt).toLocaleString('en');
+function onclickSensorBtn(obj,id) {
+    var x = document.getElementById(id);
+    if (obj.id == "selectSensor") {
+        if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+          $("#selectSensor").attr("checked",true);
         }
-
-         if(rsList.length > 0){
-            searchCondObj.callCnt++;
-         }
-         /////////////////////////
-
-        for(var i=0; i<rsList.length;i++){
-            count++
-            trObj = document.createElement("TR");
-            tdObj = document.createElement("TD");
-            textElement= document.createTextNode(count);
-            tdObj.appendChild(textElement);
-            trObj.appendChild(tdObj);
-            for(var j=0; j<rsList[i].length;j++){
-                tdObj = document.createElement("TD");
-                textElement= document.createTextNode(rsList[i][j]);
-                tdObj.appendChild(textElement);
-                trObj.appendChild(tdObj);
-            }
-            tableObj.appendChild(trObj);
-        }
-
-        if(rsList.length > 0){
-            searchCondObj.lastNumber = count;
-        }
-
-         searchCondObj.lockYn = false;
-         divScrollObj.style.overflowY= "";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
     }
-
-    //div table scroll event
-    function onScrollDiv() {
-        var divObj = document.getElementById("tableWrapDiv");
-
-         document.getElementsByClassName("tableWrapHead")[0].scrollLeft = divObj.scrollLeft;
-
-        if( divObj.scrollTop > 180 && searchCondObj.totalCnt > searchCondObj.lastNumber && !searchCondObj.lockYn ){
-            searchCondObj.lockYn = true;
-            callHistory(searchCondObj.period);
-        }
-    }
+}
+//jquery datepicker function
+function getDate( element ) {
+  var date;
+  try {
+         date = $.datepicker.parseDate( dateFormat, element.value );
+  } catch( error ) {
+    date = null;
+  }
+  return date;
+}
 </script>
+
 </body>
 </html>
 
