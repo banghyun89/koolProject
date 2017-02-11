@@ -84,4 +84,4 @@ def getHistoryData_list(request):
 
     rsList = sqlCollection.get_history_data_list(param)
 
-    return JsonResponse({'selectColList': rsList[0], 'list': rsList[1], 'totalCount': rsList[2]})
+    return JsonResponse({'selectColList': rsList[0], 'list': rsList[1], 'totalCount': rsList[2],'period':request.GET.get('period')})
