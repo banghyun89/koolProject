@@ -1,8 +1,13 @@
 import sqlite3
+import itertools
 
 dbname = '../dbConn/obd.db'
 
 connection = sqlite3.connect(dbname)
+
+sensorDict = {'vss': 'vss', 'maf': 'maf', 'kpl': 'kpl', 'rpm': 'rpm', 'fuel_level': 'fuel_level',
+              'coolant_temp': 'coolant_temp', 'ambient_air_temp': 'ambient_air_temp', 'oil_temp': 'oil_temp',
+              'control_module_voltage': 'control_module_voltage', 'intake_temp': 'intake_temp'}
 
 def dict_factory(cursor, row):
     d = {}
@@ -82,16 +87,16 @@ def get_history_data(list):
     pagingSql = """
                      SELECT
                             strftime('%Y-%m-%d %H:%M', time) as time,
-                            printf('%.2f', avg(kpl)) as kpl,
-                            printf('%.2f', avg(vss)) as vss,
-                            printf('%.2f', avg(maf)) as maf,
-                            printf('%.2f', avg(rpm)) as rpm,
-                            printf('%.2f', avg(fuel_level)) as fuel_level,
-                            printf('%.2f', avg(control_module_voltage)) as control_module_voltage,
-                            printf('%.2f', avg(coolant_temp)) as coolant_temp,
-                            printf('%.2f', avg(ambient_air_temp)) as ambient_air_temp,
-                            printf('%.2f', avg(oil_temp)) as oil_temp,
-                            printf('%.2f', avg(intake_temp)) as intake_temp
+                            round( avg(kpl),2) as kpl,
+                            round( avg(vss),2) as vss,
+                            round( avg(maf),2) as maf,
+                            round( avg(rpm),2) as rpm,
+                            round( avg(fuel_level),2) as fuel_level,
+                            round( avg(control_module_voltage),2) as control_module_voltage,
+                            round( avg(coolant_temp),2) as coolant_temp,
+                            round( avg(ambient_air_temp),2) as ambient_air_temp,
+                            round( avg(oil_temp),2) as oil_temp,
+                            round( avg(intake_temp),2) as intake_temp
                        FROM rowOBDdata
                       WHERE time >= ?
                         AND time <= ?
@@ -103,16 +108,16 @@ def get_history_data(list):
     firstCallSql = """
                      SELECT
                             strftime('%Y-%m-%d %H:%M', time) as time,
-                            printf('%.2f', avg(kpl)) as kpl,
-                            printf('%.2f', avg(vss)) as vss,
-                            printf('%.2f', avg(maf)) as maf,
-                            printf('%.2f', avg(rpm)) as rpm,
-                            printf('%.2f', avg(fuel_level)) as fuel_level,
-                            printf('%.2f', avg(control_module_voltage)) as control_module_voltage,
-                            printf('%.2f', avg(coolant_temp)) as coolant_temp,
-                            printf('%.2f', avg(ambient_air_temp)) as ambient_air_temp,
-                            printf('%.2f', avg(oil_temp)) as oil_temp,
-                            printf('%.2f', avg(intake_temp)) as intake_temp
+                            round( avg(kpl),2) as kpl,
+                            round( avg(vss),2) as vss,
+                            round( avg(maf),2) as maf,
+                            round( avg(rpm),2) as rpm,
+                            round( avg(fuel_level),2) as fuel_level,
+                            round( avg(control_module_voltage),2) as control_module_voltage,
+                            round( avg(coolant_temp),2) as coolant_temp,
+                            round( avg(ambient_air_temp),2) as ambient_air_temp,
+                            round( avg(oil_temp),2) as oil_temp,
+                            round( avg(intake_temp),2) as intake_temp
                        FROM rowOBDdata
                       WHERE time >= ?
                         AND time <= ?
@@ -175,19 +180,92 @@ def get_history_data(list):
     response.append(maxId)
     return (response)
 
+def get_history_data_list(list):
+
+    sqlDict =   {"groupByMinute":" GROUP BY strftime('%Y-%m-%d %H:%M', time) ",
+                  "groupByDay" : " GROUP BY strftime('%Y-%m-%d', time) ",
+                  "bottom1" :" FROM rowOBDdata WHERE time >= ? AND time <= ? ",
+                  "bottom2": "ORDER BY id ASC",
+                  "timeByMinute" : "SELECT strftime('%H:%M', time) as time, ",
+                  "timeByDay": "SELECT strftime('%Y-%m-%d', time) as time, ",
+                  "columnPrefix1" : " round( avg(",
+                  "columnPrefix2": "),2) "
+                 }
+    totalCountSql = """
+                        SELECT count(*) totalCount
+                          FROM (SELECT strftime('%Y-%m-%d %H:%M', time)
+                                  FROM rowOBDdata
+                                 WHERE time >= ?
+                                   AND time <= ?
+                                 GROUP BY strftime('%Y-%m-%d %H:%M', time))
+                    """
+
+    try:
+        conn = sqlite3.connect(dbname)
+        cursor = conn.cursor()
+        try:
+            data = list
+            response = []
+            selectList = []
+            count = 0
+            period = int(data[2])
+            selectColList = data[3]
+            sqlColumnList = [sqlDict["columnPrefix1"]+sensorDict[x]+sqlDict["columnPrefix2"] for x in selectColList]
+            selectColList.insert(0, "time")
+
+            if period > 0 :
+                groupby = sqlDict["groupByDay"]
+                timesql = sqlDict["timeByDay"]
+            else :
+                groupby = sqlDict["groupByMinute"]
+                timesql = sqlDict["timeByMinute"]
+
+
+            sql = timesql\
+                + ",".join(sqlColumnList)\
+                + sqlDict["bottom1"]\
+                + groupby\
+                + sqlDict["bottom2"]
+            print(sql)
+            results = cursor.execute(sql,(data[0], data[1]))
+            for row in results.fetchall():
+                selectList.append(row)
+            countList = cursor.execute(totalCountSql,(data[0], data[1]))
+            count = countList.fetchone()[0]
+
+            rsList = []
+            for columns in itertools.izip_longest(*selectList, fillvalue=''):
+                rsList.append(columns)
+
+
+        except sqlite3.Error as e:
+            print('Failed to select data:', e)
+
+        finally:
+            cursor.close()
+    finally:
+        conn.close()
+
+    response.append(selectColList)
+    response.append(rsList)
+    response.append(count)
+
+    return (response)
+
 def get_live_data():
 
+
     sql = """SELECT time,
-                     printf('%.2f',vss) as vss,
-                     printf('%.2f',maf) as maf,
-                     printf('%.2f',kpl) as kpl,
-                     printf('%.2f',rpm) as rpm,
-                     printf('%.2f',fuel_level) as fuel_level,
-                     printf('%.2f',coolant_temp) as coolant_temp,
-                     printf('%.2f',ambient_air_temp) as ambient_air_temp,
-                     printf('%.2f',oil_temp) as oil_temp,
-                     printf('%.2f',control_module_voltage) as control_module_voltage,
-                     printf('%.2f',intake_temp) as intake_temp
+                     round(vss,2) as vss,
+                     round(maf,2) as maf,
+                     round(kpl,2) as kpl,
+                     round(rpm,2) as rpm,
+                     round(fuel_level,2) as fuel_level,
+                     round(coolant_temp,2) as coolant_temp,
+                     round(ambient_air_temp,2) as ambient_air_temp,
+                     round(oil_temp,2) as oil_temp,
+                     round(control_module_voltage,2) as control_module_voltage,
+                     round(intake_temp,2) as intake_temp
                 FROM rowOBDdata
                 ORDER BY id DESC
                 LIMIT 1
@@ -209,3 +287,53 @@ def get_live_data():
         conn.close()
     return (respone)
 
+
+def get_live_data_chart(sensor):
+
+    sensor = sensorDict[sensor]
+
+    sql1 = "SELECT "\
+           + "       round(max(" + sensor + "),2) as maxValue,"\
+           + "       round(min(" + sensor + "),2) as minValue,"\
+           + "       round(avg(" + sensor + "),2) as avgValue"\
+           + " FROM rowOBDdata "\
+           + " WHERE time >= strftime('%Y-%m-%d','now','localtime') " \
+           + " ORDER BY id DESC"
+
+    sql2 = """SELECT time,
+                     round(vss,2) as vss,
+                     round(maf,2) as maf,
+                     round(kpl,2) as kpl,
+                     round(rpm,2) as rpm,
+                     round(fuel_level,2) as fuel_level,
+                     round(coolant_temp,2) as coolant_temp,
+                     round(ambient_air_temp,2) as ambient_air_temp,
+                     round(oil_temp,2) as oil_temp,
+                     round(control_module_voltage,2) as control_module_voltage,
+                     round(intake_temp,2) as intake_temp
+                FROM rowOBDdata
+                ORDER BY id DESC
+                LIMIT 1
+           """
+    try:
+        conn = sqlite3.connect(dbname)
+        conn.row_factory = dict_factory
+        cursor = conn.cursor()
+
+        try:
+            results1 = cursor.execute(sql1)
+            respone1 = results1.fetchone()
+
+            results2 = cursor.execute(sql2)
+            respone2 = results2.fetchone()
+
+            respone2['maxValue'] = respone1['maxValue']
+            respone2['minValue'] = respone1['minValue']
+            respone2['avgValue'] = respone1['avgValue']
+        except sqlite3.Error as e:
+            print('Failed to select data:', e)
+        finally:
+            cursor.close()
+    finally:
+        conn.close()
+    return (respone2)

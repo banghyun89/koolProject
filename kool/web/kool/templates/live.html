@@ -1,29 +1,77 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
-<title>Live</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
-<link rel="stylesheet" href="{% static 'resource/css/live.css' %}">
-<script src="{% static 'resource/js/jquery-3.1.1.min.js' %}"></script>
-<script src="{% static 'resource/js/common.js' %}"></script>
+<head>
+    <title>Live</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
+   <!-- <link rel="stylesheet" href="{% static 'resource/css/live.css' %}"> -->
+    <script src="{% static 'resource/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'resource/gaugeChart/gaugeChart.js' %}"></script>
+    <script src="{% static 'resource/js/common.js' %}"></script>
+    <style>
+    body,h1,h2,h3,h4,h5 {font-family: sans-serif}
+    body {font-size:16px;}
+    .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+    .w3-half img:hover{opacity:1}
+    </style>
+</head>
 <body>
-<div class="w3-container container-custom">
-    <div class="search-zone ">
-        <div>
-            <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="window.location.assign('{% url 'live_graph' %}');">Graph</button>
-            <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="settingOnclick()">Setting</button>
-            <button class="w3-btn w3-round-large w3-small w3-green w3-hover-orange" style="margin-top:5px;" onclick="window.location.assign('{% url 'home' %}');">Menu</button>
-        </div>
-    </div>
-    <div class="circleWrap">
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-blue w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold" id="mySidenav"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-padding-xlarge w3-hide-large w3-display-topleft w3-hover-white" style="width:100%;font-size:22px">Close Menu</a>
+  <div class="w3-container">
+    <h3 class="w3-padding-64">The OBD on the load</h3>
+  </div>
+  <a href="#" onclick="w3_close();window.location.assign('{% url 'home' %}');" class="w3-padding w3-hover-white">MENU</a>
+  <a href="#" onclick="w3_close();window.location.assign('{% url 'history' %}');" class="w3-padding w3-hover-white">History Page</a>
+  <a href="#" onclick="w3_close();window.location.assign('{% url 'live_01' %}');" class="w3-padding w3-hover-white">Live page ver1</a>
+  <a href="#" onclick="w3_close();window.location.assign('{% url 'live_graph' %}');" class="w3-padding w3-hover-white">Live page ver2</a>
+  <a href="#" onclick="w3_close();window.location.assign('{% url 'live_graph_01' %}');" class="w3-padding w3-hover-white">Live page ver3</a>
+  <a href="#" onclick="settingOnclick()" class="w3-padding w3-hover-white">Setting</a>
+</nav>
 
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-blue w3-xlarge w3-padding ">
+  <a href="javascript:void(0)" class="w3-btn w3-blue  w3-margin-right" onclick="w3_open()">☰</a>
+  <span id="time" class="w3-right" style="font-size:0.7em;padding-top:15px;">2017-02-08 12:12:12</span>
+</header>
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+  <div class="w3-display-container" style="" id="showcase">
+      <div id="minValue" class="w3-padding w3-display-topleft w3-center"><h4>Min<br><span class="sensorValue">0</span></h4></div>
+      <div id="avgValue" class="w3-padding w3-display-topmiddle w3-center"><h4>Avg<br><span class="sensorValue">0</span></h4></div>
+      <div id="maxValue" class="w3-padding  w3-display-topright w3-center"><h4>Max<br><span class="sensorValue">0</span></h4></div>
+  </div>
+
+  <div id="gaugeChart" class="w3-display-container w3-center">
+      <canvas id="gaugeChartCanvas"></canvas>
+      <div style="margin-top:-30px;margin-bottom:20px;">
+          <div id="chartValue" style="font-size: 1.2em;">0</div>
+          <div id="chartSensor" style="font-size: 1.2em;">KPL</div>
+
+      </div>
+
+  </div>
+    <!-- Sensor list  -->
+    <div class="w3-container">
+      <div class="w3-margin-bottom">
+        <ul class="w3-ul" id="sensorListUl">
+
+        </ul>
+      </div>
     </div>
+    <!-- Modal page for Sensor Setting menu -->
     <div id="settingModal" class="w3-modal w3-animate-opacity" style="color:#000000;">
         <div class="w3-modal-content w3-card-8">
           <header class="w3-container w3-gray">
             <span onclick="document.getElementById('settingModal').style.display='none'" class="w3-closebtn">&times;</span>
-            <h2>Setting Live Page - control visible </h2>
+            <h2>Setting</h2>
           </header>
           <div class="w3-container" id="list-sensor">
               <ul class="w3-ul w3-card-10">
@@ -35,189 +83,233 @@
          </footer>
        </div>
     </div>
+<!-- End page content -->
 </div>
+
 <script>
-    //dashboard
-     var sensorObj = {  time:{value:"00:00:00",title:"Time",unit:setDateFormat(new Date()),openYN:true},
-                        kpl:{mid:30,max:100,value:0,title:"KPL",unit:"km/l",openYN:true},
-                        vss:{mid:60,max:300,value:0,title:"SPEED",unit:"km/h",openYN:true},
-                        maf:{mid:35,max:160,value:0,title:"MAF",unit:"g/s",openYN:true},
-                        rpm:{mid:50,max:100,value:0,title:"RPM",unit:"",openYN:true},
-                        control_module_voltage:{mid:50,max:100,value:0,title:"Control Module Volt",unit:"V",openYN:true},
-                        fuel_level:{mid:50,max:100,value:0,title:"Fuel level",unit:"%",openYN:true},
-                        coolant_temp:{mid:50,max:100,value:0,title:"Coolant Temp",unit:"°F",openYN:true},
-                        ambient_air_temp:{mid:50,max:100,value:0,title:"Ambient Air Temp",unit:"°F",openYN:true},
-                        oil_temp:{mid:50,max:100,value:0,title:"Oil Temp",unit:"°F",openYN:true},
-                        intake_temp:{mid:50,max:100,value:0,title:"Intake Air Temp",unit:"°F",openYN:true},
-
-                        initValue : function(){
-                            for(var attr in this) {
-                                attr.value = 0;
-                            }
+ //dashboard
+     var sensorObj = {  dataObj :{
+                            kpl:{mid:30,max:100,value:0,title:"KPL",unit:"km/l",openYN:true,keyYn:true},
+                            vss:{mid:60,max:300,value:0,title:"SPEED",unit:"km/h",openYN:true,keyYn:false},
+                            maf:{mid:35,max:160,value:0,title:"MAF",unit:"g/s",openYN:true,keyYn:false},
+                            rpm:{mid:50,max:100,value:0,title:"RPM",unit:"",openYN:true,keyYn:false},
+                            control_module_voltage:{mid:50,max:100,value:0,title:"Control Module Volt",unit:"Volt",openYN:true,keyYn:false},
+                            fuel_level:{mid:50,max:100,value:0,title:"Fuel level",unit:"%",openYN:true,keyYn:false},
+                            coolant_temp:{mid:50,max:100,value:0,title:"Coolant Temp",unit:"°F",openYN:true,keyYn:false},
+                            ambient_air_temp:{mid:50,max:100,value:0,title:"Ambient Air Temp",unit:"°F",openYN:true,keyYn:false},
+                            oil_temp:{mid:50,max:100,value:0,title:"Oil Temp",unit:"°F",openYN:true,keyYn:false},
+                            intake_temp:{mid:50,max:100,value:0,title:"Intake Air Temp",unit:"°F",openYN:true,keyYn:false}
                         },
-                        makeTagAll : function(){
-                            $(".circleWrap").html("");
-                            $("#list-sensor ul").html("");
-                            for(var index in this) {
-                                if(typeof this[index]  == 'object'){
-                                   this.makeTag(index).appendTo($(".circleWrap"));
-                                   this.makeModalListTag(index).appendTo($("#list-sensor ul"));
-                                }
+                        keyValue : "kpl",
+                        InitSensorList : function(){
 
+                            $("#sensorListUl").html("");
+                            $("#list-sensor ul").html("");
+
+                            var liObj = document.createElement('li');
+                            $(liObj).addClass("w3-dark-grey")
+                                             .css({"height":"3px","padding":"0px"})
+                                             .appendTo($("#sensorListUl"));
+                            for(var index in this.dataObj) {
+                                if(!this.dataObj[index].keyYn){
+                                    this.makeTag(index).appendTo($("#sensorListUl"));
+                                } else {
+                                    this.makeTag(index).appendTo($("#sensorListUl")).hide();
+                                }
+                               this.makeModalListTag(index).appendTo($("#list-sensor ul"));
                             }
+
+                            liObj = document.createElement('li');
+                            $(liObj).addClass("w3-dark-grey")
+                                             .css({"height":"3px","padding":"0px"})
+                                             .appendTo($("#sensorListUl"));
                         },
                         makeModalListTag :function(sensorName){
                             var liObj = document.createElement('li');
                             var spanObj = document.createElement('span');
+                            var spanObj2 = document.createElement('span');
                             var labelObj = document.createElement('label');
                             var inputObj = document.createElement('input');
                             $(labelObj).addClass("w3-validate")
-                                       .text(this[sensorName].title);
+                                       .text(this.dataObj[sensorName]["title"]);
                             $(inputObj).addClass("w3-check  w3-margin-right")
                                        .attr("type","checkbox")
                                        .attr("checked","checked");
                             $(spanObj).addClass("w3-closebtn w3-margin-right w3-medium")
-                                       .attr("sensor",sensorName)
-                            $(spanObj).append("Display!");
+                                       .attr("chartYNSensor",sensorName)
+                            if(this.keyValue == sensorName ){
+                               $(spanObj).text("Chart!");
+                            } else {
+                               $(spanObj).text("List!");
+                            }
 
-                            return $(liObj).append(labelObj).append(spanObj);
+                            $(spanObj2).addClass("w3-closebtn w3-margin-right w3-medium")
+                                       .attr("displayYnSensor",sensorName)
+                                       .text("Display!");
+
+                            return $(liObj).append(labelObj).append(spanObj2).append(spanObj);
                         },
                         makeTag : function(sensorName){
-                            var divObj = document.createElement('div');
+                            var liObj = document.createElement('li');
                             var spanObj = document.createElement('span');
+                                $(spanObj).addClass("w3-col")
+                                          .css({"width":"50%","text-align":"left","padding-right":"10px"})
+                                          .text(this.dataObj[sensorName]["title"]);
 
-                                $(divObj).addClass("small-box")
-                                         .attr("id",sensorName);
-
-                                if(this[sensorName]["title"].length > 5 ){
-                                    $(spanObj).addClass("title-small-font");
-                                } else {
-                                    $(spanObj).addClass("title");
-                                }
-                                $(spanObj).text(this[sensorName]["title"]);
-                                $(divObj).append(spanObj);
-                                $(divObj).append("<br/>");
-
+                                $(liObj).addClass("w3-padding-15 w2-row")
+                                         .css("height","30px")
+                                         .attr("id",sensorName)
+                                         .append(spanObj);
                                 spanObj = document.createElement('span');
-                                $(spanObj).addClass("value");
-                                $(spanObj).text(this[sensorName]["value"]);
-                                $(divObj).append(spanObj);
-                                $(divObj).append("<br/>");
+                                $(spanObj).addClass("w3-col sensorValue")
+                                          .css({"width":"50%","text-align":"right","padding-right":"10px"})
+                                          .text(0)
+                                          .appendTo(liObj);
 
-                                spanObj = document.createElement('span');
-                                $(spanObj).addClass("unit");
-                                $(spanObj).text(this[sensorName]["unit"]);
-                                $(divObj).append(spanObj);
-                                $(divObj).append("<br/>");
-                                return $(divObj);
+                                return $(liObj);
 
                         },
-                        setValue : function(list){
-                            for(var index in this) {
-                                if(typeof this[index]  == 'object' ){
-                                    this[index]["value"] = isNotEmpty(list[index])? list[index]:0;
-                                }
-                              }
-                        },
-                        setCircleCss : function(index){
-                            var nomalRatio, warningRatio;
-                            var styleText = "";
-                            var divObj;
-
-                            nomalRatio = Math.round(this[index]["value"]/this[index]["max"]*100);
-
-                            if(this[index]["value"] > this[index]["mid"]){
-                                warningRatio = Math.round(nomalRatio/1.6);
-                                styleText = this.getCss(warningRatio,nomalRatio);
-                            }
-                            $("#"+index).css("background", styleText);
-                        },
-                        getCss : function(warning,normal){
-                            return "linear-gradient(to bottom left, #ffcccc "+warning+"%, #8cfaf5 "+normal+"%)";
-                        },
-                        displayData : function(list){
-                            //set Value
-                             this.setValue(list);
-
-                            for(var index in this) {
+                        displayData : function(obj){
+                            for(var index in obj) {
                                 if(index == "time"){
-                                     //time infomation split
-                                     var timeValue = this.time.value;
-                                     var timeList = timeValue.split(" ");
-                                     $("#"+index+" .value").text(timeList[1]); //time Info
-                                     $("#"+index+" .unit").text(timeList[0]); //date Info
+                                     $("#time").text(obj.time);
+                                } else if(this.keyValue == index){
+                                     this.drawChart(index,obj[index]); // set actual value
                                 } else {
-                                    $("#"+index+" .value").text(this[index].value); //time Info
+                                     $("#"+index+" .sensorValue").text(obj[index]);
                                 }
-
-                                //make background color
-                                this.setCircleCss(index);
                             }
-                          }
+                        },
+                        opts : {
+                                  angle: -0.15, // The span of the gauge arc
+                                  lineWidth: 0.11, // The line thickness
+                                  radiusScale: 1, // Relative radius
+                                  pointer: {
+                                    length: 0.59, // // Relative to gauge radius
+                                    strokeWidth: 0.029, // The thickness
+                                    color: '#000000' // Fill color
+                                  },
+                                  limitMax: false,     // If false, the max value of the gauge will be updated if value surpass max
+                                  limitMin: false,     // If true, the min value of the gauge will be fixed unless you set it manually
+                                  colorStart: '#6FADCF',   // Colors
+                                  colorStop: '#8FC0DA',    // just experiment with them
+                                  strokeColor: '#E0E0E0',  // to see which ones work best for you
+                                  generateGradient: true,
+                                  highDpiSupport: true,     // High resolution support
+                                  percentColors: [[0.0, "#a9d70b" ], [0.50, "#f9c802"], [1.0, "#ff0000"]]
+                        },
+                        gauge : "",
+                        drawChart : function(sensor,value){
+                            var target = document.getElementById('gaugeChartCanvas'); // your canvas element
+                            this.gauge = new Gauge(target).setOptions(this.opts); // create sexy gauge!
+                            this.gauge.maxValue = this.dataObj[sensor].max; // set max gauge value
+                            this.gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+                            this.gauge.animationSpeed = 10; // set animation speed (32 is default value)
+                            this.gauge.set(value); // set actual value
+                            $("#chartSensor").text(this.dataObj[sensor]["title"]);
+                            $("#chartValue").text(value);
 
+                        },
+                        setChart : function(id,value){
+
+                        }
                       };
-
     $(document).ready(function(){
+
+          //modify div style min/max/avg value gauge chart
+          var divWidth = $(".w3-main").width();
+          var smallDivWidth =  Math.round($(".min-value").width()*5);
+
+          if(divWidth < 1000 ) {
+            smallDivWidth =  Math.round($(".min-value").width()*7);
+            $("#showcase").attr("style","margin:auto;width:"+smallDivWidth+"px;margin-top:60px;margin-bottom:10px;height:60px;");
+            //$("#gaugeChart").attr("style","height:200px;");
+            $("#showcase h4").attr("style","font-size:1.1em");
+            $("#sensorListUl").css({"width":smallDivWidth,"margin":"auto"});
+          } else {
+            smallDivWidth =  Math.round($(".min-value").width()*10);
+            $("#showcase").attr("style","margin:auto;width:"+smallDivWidth+"px;margin-top:40px;margin-bottom:20px;height:70px;");
+            $("#showcase h4").attr("style","font-size:1.5em");
+           // $("#gaugeChart").attr("style","height:220px;");
+            $("#sensorListUl").css({"width":smallDivWidth,"margin":"auto"});
+          }
+
+        //init chart
+        sensorObj.drawChart(sensorObj.keyValue,0);
+
+
         //make tags
-        sensorObj.makeTagAll();
+        sensorObj.InitSensorList();
 
-       /* $(".small-box").click(function(){
-            $(this).hide();
-        }); */
-        $("[sensor]").click(function(){
-            var id = $(this).attr("sensor");
-            $(this).toggleClass("w3-text-gray");
+        $("[chartYNSensor]").click(function(){
+            var id = $(this).attr("chartYNSensor");
+             if($(this).text()=="List!"){
+                $("[chartYNSensor]").text("List!");
+                $("[chartYNSensor]").removeClass("w3-text-gray");
+                $(this).text("Chart!");
+                $("#"+sensorObj.keyValue).show();
+                sensorObj.dataObj[id]["openYN"]= true;
+                sensorObj.keyValue= id;
+                $(this).addClass("w3-text-gray");
+                $("#"+id).hide();
 
-             if($(this).text()=="Display!"){
-
-                 $("#"+id).hide();
-                 $(this).text("Hide!");
-                 sensorObj[id]["openYN"]= false;
-             } else {
-                $("#"+id).show();
-                $(this).text("Display!");
-                sensorObj[id]["openYN"]= true;
+                $("[displayYnSensor='"+id+"']").text("Display!");
+                $("[displayYnSensor='"+id+"']").removeClass("w3-text-gray");
+                 sensorObj.dataObj[id]["openYN"]= true;
              }
          });
+
+         $("[displayYnSensor]").click(function(){
+            var id = $(this).attr("displayYnSensor");
+             if($(this).text()=="Display!" && sensorObj.keyValue != id){
+                 $(this).addClass("w3-text-gray");
+                 $("#"+id).hide();
+                 $(this).text("Hide!");
+                 sensorObj.dataObj[id]["openYN"]= false;
+             } else {
+                $(this).removeClass("w3-text-gray");
+                $("#"+id).show();
+                $(this).text("Display!");
+                sensorObj.dataObj[id]["openYN"]= true;
+             }
+         });
+
          //call live data every second
-         setInterval(function(){
+        setInterval(function(){
             callLive();
           }, 1000);
 
     });
 
+//ajax
+function callLive() {
+  var xhttp;
 
-    function callLive() {
-      var xhttp;
+  if (window.XMLHttpRequest) {
+    // code for modern browsers
+    xhttp = new XMLHttpRequest();
+    } else {
+    // code for IE6, IE5 ..
+    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
 
-      if (window.XMLHttpRequest) {
-        // code for modern browsers
-        xhttp = new XMLHttpRequest();
-        } else {
-        // code for IE6, IE5 ..
-        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      var rsObj = JSON.parse(this.responseText);
+      if(isObject(rsObj)){
+          sensorObj.displayData(rsObj);
+      } else {
+          //alert("No result data..");
       }
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
 
-          var rsObj = JSON.parse(this.responseText);
-         // console.log(rsObj);
-          if(isObject(rsObj)){
-              sensorObj.displayData(rsObj);
-          } else {
-              alert("No result data..");
-          }
-
-        }
-      };
-      xhttp.open("GET", "getLiveData", true);
-      xhttp.send();
     }
+  };
+  xhttp.open("GET", "getLiveData_chart"+"?sensor="+sensorObj.keyValue, true);
+  xhttp.send();
+}
 
-    function settingOnclick(){
-        document.getElementById('settingModal').style.display='block';
-    }
 </script>
+
 </body>
 </html>
 

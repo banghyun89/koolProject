@@ -1,0 +1,233 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<title>History</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'resource/css/w3.css' %}">
+<link rel="stylesheet" href="{% static 'resource/css/history.css' %}">
+<script src="{% static 'resource/googleGraph/loader.js' %}"></script>
+<script src="{% static 'resource/js/jquery-3.1.1.min.js' %}"></script>
+<script src="{% static 'resource/js/common.js' %}"></script>
+<body>
+    <div class="w3-container w3-container-custom">
+
+        <div class="search-zone ">
+            <div style="margin:10px 10px 0px 0px ;padding:0px;">
+                <select class="w3-select" id="periodSelect">
+                  <option value="" disabled selected>Choose Search period</option>
+                  <option value="0" >Today</option>
+                  <option value="1" >2 days</option>
+                  <option value="7">a Week</option>
+                  <option value="10">10 days</option>
+                  <option value="30">a Month</option>
+                </select>
+            </div>
+            <div>
+                <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick()">Search</button>
+                <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="searchOnClick('refresh')">Refresh</button>
+                <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="window.location.assign('{% url 'history_graph' %}');">Graph</button>
+                <button class="w3-btn w3-round-large w3-small w3-green w3-hover-orange" style="margin-top:5px;"  onclick="window.location.assign('{% url 'home' %}');">Menu</button>
+            </div>
+        </div>
+
+        <p style="padding:15px;">
+            Total count :
+            <span id="totalCountSpan">0</span>
+        </p>
+        <div class="tableWrapHead" >
+            <table id="tableTitle">
+                <thead>
+                    <tr>
+                        <th class="width-5">No.</th>
+                        <th class="width-15">Time</th>
+                        <th class="width-10">KPL (g/s)</th>
+                        <th class="width-10" >VSS (kph)</th>
+                        <th class="width-10" >MAF</th>
+                        <th class="width-10" >RPM</th>
+                        <th class="width-10" >Control module</th>
+                        <th class="width-10" >Fuel Level(%)</th>
+                        <th class="width-10" >Engine Coolant Temp</th>
+                        <th class="width-10" >Ambient air temp</th>
+                        <th class="width-10" >Engine oil temp</th>
+                        <th class="width-10" >Intake Air temp</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tableWrap" id="tableWrapDiv" onscroll="onScrollDiv()">
+            <table id="historyTable" style="">
+                 <thead>
+                    <tr style="">
+                        <th class="width-5">No.</th>
+                        <th class="width-15">Time</th>
+                        <th class="width-10">KPL (g/s)</th>
+                        <th class="width-10" >VSS (kph)</th>
+                        <th class="width-10" >MAF</th>
+                        <th class="width-10" >RPM</th>
+                        <th class="width-10" >Control module</th>
+                        <th class="width-10" >Fuel Level(%)</th>
+                        <th class="width-10" >Engine Coolant Temp</th>
+                        <th class="width-10" >Ambient air temp</th>
+                        <th class="width-10" >Engine oil temp</th>
+                        <th class="width-10" >Intake Air temp</th>
+                    </tr>
+                </thead>
+                <tbody id="historyTableTbody">
+                    <tr>
+                        <td colspan="5"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+<script>
+    //define gobal variables
+    //a object to search Condition
+    var searchCondObj = {   lockYn:false,
+                            rowLimitCount:20, // 20 rows per 1 page
+                            callCnt:0, // total call service count
+                            totalCnt:0, // total count of searching
+                            latestIndex:0, // limit row Id
+                            lastNumber:0, //current page's last row index for Table "No." column
+                            period:1, //defalut 1 days
+                            init:function(periodValue){
+                                this.callCnt = 0;
+                                this.totalCnt = 0;
+                                this.latestIndex= 0;
+                                this.lastNumber = 0;
+                                this.period = periodValue;
+                            }
+                        };
+
+     $(document).ready(function(){
+        //call when page load
+        callHistory(0); //1days
+
+    });
+
+
+    function searchOnClick(){
+
+        var index = document.getElementById("periodSelect").selectedIndex;
+        var selectValue = document.getElementById("periodSelect").options[index].value;
+
+        if(selectValue == ""){
+            document.getElementById("periodSelect").selectedIndex = 1;
+            callHistory(selectValue);
+        }  else {
+            searchCondObj.init(selectValue);
+            callHistory(selectValue);
+        }
+    }
+
+    function callHistory(periodValue) {
+        var todayObj = new Date();
+        var today = setDateFormat(todayObj);
+        var fromday = getMinusDate(periodValue,todayObj);
+        var rowLimitCnt = searchCondObj.rowLimitCount;
+        var callCount = parseInt(searchCondObj.callCnt);
+        if(callCount > 0 && searchCondObj.totalCnt - searchCondObj.lastNumber < searchCondObj.rowLimitCount) {
+            rowLimitCnt = searchCondObj.totalCnt - searchCondObj.lastNumber;
+
+        }
+
+        var paramString = "?fromDate="+fromday+" 00:00:00"
+                        +"&toDate="+today+" 23:59:59"
+                        +"&latestIndex="+searchCondObj.latestIndex
+                        +"&fromRow="+callCount * parseInt(searchCondObj.rowLimitCount)
+                        +"&rowLimitCount="+parseInt(rowLimitCnt);
+
+        callService(paramString);
+    }
+
+    function callService(paramValue){
+      var xhttp;
+      if (window.XMLHttpRequest) {
+        // code for modern browsers
+        xhttp = new XMLHttpRequest();
+      } else {
+        // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+          var rsObj = JSON.parse(this.responseText);
+          if(isNotEmpty(rsObj)){
+              makeTable(rsObj);
+          } else {
+              alert("No result data..");
+          }
+         }
+      };
+      xhttp.open("GET", "getHistoryData/"+paramValue, true);
+      xhttp.send();
+    }
+
+    function makeTable(obj){
+        var rsList = isNotEmpty(obj.list)? obj.list:[];
+        var count = searchCondObj.lastNumber;
+        var tableObj = document.getElementById("historyTableTbody");
+        var divScrollObj = document.getElementById("tableWrapDiv");
+        var trObj, tdObj, tdObj2 , textElement;
+
+        divScrollObj.style.overflowY= "hidden";
+          /////////////////////////
+         //change global variable
+         ////////////////////////
+        if(searchCondObj.callCnt == 0){
+            tableObj.innerHTML = "";
+            searchCondObj.totalCnt = isNotEmpty(obj.totalCount)? parseInt(obj.totalCount):0;
+
+            document.getElementById("tableWrapDiv").scrollTop = 0;
+
+            searchCondObj.latestIndex = isNotEmpty(obj.maxId)? parseInt(obj.maxId):0;
+
+
+            document.getElementById("totalCountSpan").innerHTML = parseInt(searchCondObj.totalCnt).toLocaleString('en');
+        }
+
+         if(rsList.length > 0){
+            searchCondObj.callCnt++;
+         }
+         /////////////////////////
+
+        for(var i=0; i<rsList.length;i++){
+            count++
+            trObj = document.createElement("TR");
+            tdObj = document.createElement("TD");
+            textElement= document.createTextNode(count);
+            tdObj.appendChild(textElement);
+            trObj.appendChild(tdObj);
+            for(var j=0; j<rsList[i].length;j++){
+                tdObj = document.createElement("TD");
+                textElement= document.createTextNode(rsList[i][j]);
+                tdObj.appendChild(textElement);
+                trObj.appendChild(tdObj);
+            }
+            tableObj.appendChild(trObj);
+        }
+
+        if(rsList.length > 0){
+            searchCondObj.lastNumber = count;
+        }
+
+         searchCondObj.lockYn = false;
+         divScrollObj.style.overflowY= "";
+    }
+
+    //div table scroll event
+    function onScrollDiv() {
+        var divObj = document.getElementById("tableWrapDiv");
+
+         document.getElementsByClassName("tableWrapHead")[0].scrollLeft = divObj.scrollLeft;
+
+        if( divObj.scrollTop > 180 && searchCondObj.totalCnt > searchCondObj.lastNumber && !searchCondObj.lockYn ){
+            searchCondObj.lockYn = true;
+            callHistory(searchCondObj.period);
+        }
+    }
+</script>
+</body>
+</html>
+
