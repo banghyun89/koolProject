@@ -186,7 +186,7 @@ def get_history_data_list(list):
                   "groupByDay" : " GROUP BY strftime('%Y-%m-%d', time) ",
                   "bottom1" :" FROM rowOBDdata WHERE time >= ? AND time <= ? ",
                   "bottom2": "ORDER BY id ASC",
-                  "timeByMinute" : "SELECT strftime('%H:%M', time) as time, ",
+                  "timeByMinute" : "SELECT strftime('%Y-%m-%d %H:%M', time) as time, ",
                   "timeByDay": "SELECT strftime('%Y-%m-%d', time) as time, ",
                   "columnPrefix1" : " round( avg(",
                   "columnPrefix2": "),2) "
