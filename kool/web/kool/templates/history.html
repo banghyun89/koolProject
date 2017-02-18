@@ -159,13 +159,22 @@ var sensorObj = {  dataObj :{
                         },
                         makeSensorList : function(){
                             var closeButtonObj = document.createElement('span');
+                            var searchButtonObj = document.createElement('span');
 
                             $("#selectSensorDiv").html("");
+
 
                             $(closeButtonObj).addClass("w3-btn w3-large w3-round w3-blue w3-border w3-right")
                                              .text("close")
                                              .click(function(){
                                                   $("#selectSensorDiv").removeClass("w3-show");
+                                              }).appendTo($("#selectSensorDiv"));
+
+                            $(searchButtonObj).addClass("w3-btn w3-large w3-round w3-white w3-border w3-right")
+                                             .css("margin-right","10px")
+                                             .text("Search")
+                                             .click(function(){
+                                                  searchOnClick();
                                               }).appendTo($("#selectSensorDiv"));
 
                             $("#selectSensorDiv").append("<br>");
