@@ -57,14 +57,14 @@ def put_data(obd_data):
                                       oil_temp,
                                       control_module_voltage,
                                       intake_temp)
-                               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                               VALUES ( datetime('now','localtime'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           """
     cursor = connection.cursor()
 
     try:
         data = obd_data
         cursor.execute(sql,
-                       (data['time'],
+                       (
                         data['vss'],
                         data['maf'],
                         data['kpl'],
@@ -330,6 +330,7 @@ def get_live_data_chart(sensor):
             respone2['maxValue'] = respone1['maxValue']
             respone2['minValue'] = respone1['minValue']
             respone2['avgValue'] = respone1['avgValue']
+
         except sqlite3.Error as e:
             print('Failed to select data:', e)
         finally:
@@ -337,3 +338,4 @@ def get_live_data_chart(sensor):
     finally:
         conn.close()
     return (respone2)
+
