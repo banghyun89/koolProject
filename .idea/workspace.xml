@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cfae27eb-9b50-4f5f-a126-9cccdb221b92" name="Default" comment="commit &#10;&#10; history line graph추가">
+    <list default="true" id="cfae27eb-9b50-4f5f-a126-9cccdb221b92" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/kool/web/kool/templates/live_real.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/document/2017-01-31_v1.mov" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/document/2017-02-02_v2.mov" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/document/2017-02-05_v3.mov" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/document/2017-02-06_v4.mov" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/document/comming soon.mov" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/document/comming soon2.mp4" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/document/design/20170208_pageDesign.key" afterPath="$PROJECT_DIR$/document/design/20170208_pageDesign.key" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kool/dbConn/obd.db" afterPath="$PROJECT_DIR$/kool/dbConn/obd.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kool/dbConn/sqlCollection.py" afterPath="$PROJECT_DIR$/kool/dbConn/sqlCollection.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kool/web/kool/templates/history.html" afterPath="$PROJECT_DIR$/kool/web/kool/templates/history.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kool/web/kool/templates/live.html" afterPath="$PROJECT_DIR$/kool/web/kool/templates/live.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kool/web/kool/templates/live_01.html" afterPath="$PROJECT_DIR$/kool/web/kool/templates/live_01.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kool/web/kool/templates/live_graph_01.html" afterPath="$PROJECT_DIR$/kool/web/kool/templates/live_graph_01.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kool/web/kool/templates/menu.html" afterPath="$PROJECT_DIR$/kool/web/kool/templates/menu.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kool/web/kool/views.py" afterPath="$PROJECT_DIR$/kool/web/kool/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,13 +39,27 @@
       <file leaf-file-name="history.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/history.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="258" column="45" lean-forward="true" selection-start-line="258" selection-start-column="45" selection-end-line="258" selection-end-column="45" />
+            <state relative-caret-position="431">
+              <caret line="240" column="122" lean-forward="false" selection-start-line="240" selection-start-column="122" selection-end-line="240" selection-end-column="122" />
               <folding>
+                <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#header#0;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#div#0;n#header#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#2;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#2;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#2;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#2;n#div#2;n#body#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -39,8 +68,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kool/web/kool/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="86" column="103" lean-forward="false" selection-start-line="86" selection-start-column="97" selection-end-line="86" selection-end-column="103" />
+            <state relative-caret-position="720">
+              <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -49,28 +78,20 @@
       <file leaf-file-name="sqlCollection.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kool/dbConn/sqlCollection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="188" column="62" lean-forward="false" selection-start-line="188" selection-start-column="62" selection-end-line="188" selection-end-column="62" />
-              <folding />
+            <state relative-caret-position="975">
+              <caret line="66" column="24" lean-forward="false" selection-start-line="66" selection-start-column="24" selection-end-line="66" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="c3.min.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kool/web/kool/static/resource/c3/c3.min.css">
+      <file leaf-file-name="readOBD.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kool/obdConn/readOBD.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="c3.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kool/web/kool/static/resource/c3/c3.min.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="615">
+              <caret line="41" column="15" lean-forward="false" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -79,38 +100,8 @@
       <file leaf-file-name="readOBD_random.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kool/obdConn/readOBD_random.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="48" lean-forward="false" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="history_02.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/history_02.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="591" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="d3.v3.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kool/web/kool/static/resource/d3/d3.v3.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131400">
-              <caret line="8760" column="60" lean-forward="false" selection-start-line="8760" selection-start-column="60" selection-end-line="8760" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="live_02.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_02.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="51" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="315" selection-end-column="0" />
+            <state relative-caret-position="840">
+              <caret line="56" column="22" lean-forward="false" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -119,8 +110,8 @@
       <file leaf-file-name="live.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3525">
-              <caret line="235" column="0" lean-forward="false" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
+            <state relative-caret-position="2595">
+              <caret line="173" column="29" lean-forward="false" selection-start-line="173" selection-start-column="29" selection-end-line="173" selection-end-column="29" />
               <folding>
                 <element signature="n#style#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
@@ -131,8 +122,54 @@
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#3;n#div#1;n#body#0;n#!!top" expanded="true" />
-                <element signature="e#3876#3883#0" expanded="true" />
+                <element signature="e#4230#4237#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="live_01.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_01.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="151" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="151" />
+              <folding>
+                <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="live_graph.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_graph.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="67" lean-forward="false" selection-start-line="6" selection-start-column="67" selection-end-line="6" selection-end-column="67" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="live_graph_01.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_graph_01.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="975">
+              <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="70" selection-end-column="10" />
+              <folding>
+                <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#6;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/menu.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="735">
+              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -148,24 +185,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tableWrapDiv</find>
-      <find>divScrollObj</find>
-      <find>totalCountSpan</find>
-      <find>150px</find>
-      <find>width=&quot;80px&quot;</find>
-      <find>style=&quot;height:0px;&quot;</find>
-      <find>width:80px;</find>
-      <find>&quot;</find>
-      <find>typeof</find>
-      <find>celsius</find>
-      <find>drawChartAll</find>
-      <find>onScrollDiv</find>
-      <find>tableWrap</find>
-      <find>w3-red</find>
-      <find>settingModal</find>
-      <find>selectSensorDiv</find>
-      <find>settingOnclick</find>
-      <find>printf('%.2f',</find>
       <find>searchOnClick</find>
       <find>get_history_data</find>
       <find>selectSensor</find>
@@ -178,6 +197,24 @@
       <find>d.x</find>
       <find>SVG</find>
       <find>resultlistresultlist</find>
+      <find>listTable1</find>
+      <find>listTable</find>
+      <find>160</find>
+      <find>drawChart</find>
+      <find>sensorListUl</find>
+      <find>timeFormat</find>
+      <find>live_real</find>
+      <find>120px</find>
+      <find>timeChart</find>
+      <find>slice</find>
+      <find>time</find>
+      <find>get_live_data_chart</find>
+      <find>getLiveData_chart</find>
+      <find>maxValue</find>
+      <find>displayYnSensor</find>
+      <find>display!</find>
+      <find>sensorNameSpan</find>
+      <find>#time</find>
     </findStrings>
     <replaceStrings>
       <replace>180px</replace>
@@ -193,8 +230,8 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="jihooyim &lt;jihooyim@gmail.com&gt;j" />
         <option value="jihooyim &lt;jihooyim@gmail.com&gt;" />
+        <option value="jihooyim &lt;jihooyim@gmail.com&gt;j" />
         <option value="banghyun89 &lt;jamse88@nate.com&gt;" />
       </list>
     </option>
@@ -240,29 +277,30 @@
         <option value="$PROJECT_DIR$/kool/web/kool/static/resource/css/live.css" />
         <option value="$PROJECT_DIR$/kool/web/kool/static/resource/css/history.css" />
         <option value="$PROJECT_DIR$/kool/web/kool/templates/live_graph.html" />
-        <option value="$PROJECT_DIR$/kool/web/kool/templates/live_01.html" />
         <option value="$PROJECT_DIR$/kool/web/kool/templates/history_graph.html" />
         <option value="$PROJECT_DIR$/kool/web/kool/templates/history_01.html" />
         <option value="$PROJECT_DIR$/kool/obdConn/readOBD_random.py" />
         <option value="$PROJECT_DIR$/kool/obdConn/readOBD.py" />
-        <option value="$PROJECT_DIR$/kool/web/kool/templates/menu.html" />
-        <option value="$PROJECT_DIR$/kool/web/kool/templates/live_graph_01.html" />
         <option value="$PROJECT_DIR$/kool/web/kool/static/resource/gaugeChart/gaugeChart.js" />
         <option value="$PROJECT_DIR$/kool/web/kool/static/resource/js/common.js" />
         <option value="$PROJECT_DIR$/kool/web/kool/templates/data.tsv" />
-        <option value="$PROJECT_DIR$/kool/web/kool/urls.py" />
         <option value="$PROJECT_DIR$/kool/web/kool/static/resource/d3/d3.v3.js" />
-        <option value="$PROJECT_DIR$/kool/web/kool/templates/live.html" />
-        <option value="$PROJECT_DIR$/kool/dbConn/sqlCollection.py" />
+        <option value="$PROJECT_DIR$/kool/web/kool/templates/live_real.html" />
         <option value="$PROJECT_DIR$/kool/web/kool/views.py" />
+        <option value="$PROJECT_DIR$/kool/web/kool/urls.py" />
+        <option value="$PROJECT_DIR$/kool/web/kool/templates/live_graph_01.html" />
+        <option value="$PROJECT_DIR$/kool/web/kool/templates/menu.html" />
+        <option value="$PROJECT_DIR$/kool/web/kool/templates/live_01.html" />
+        <option value="$PROJECT_DIR$/kool/dbConn/sqlCollection.py" />
+        <option value="$PROJECT_DIR$/kool/web/kool/templates/live.html" />
         <option value="$PROJECT_DIR$/kool/web/kool/templates/history.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1680" />
-    <option name="height" value="932" />
+    <option name="width" value="1652" />
+    <option name="height" value="922" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -280,6 +318,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -574,7 +613,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -582,19 +620,19 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/kool/web/kool/templates" />
-      <recent name="$PROJECT_DIR$/kool/web/kool/static/resource/audio" />
-      <recent name="$PROJECT_DIR$/kool/web/kool/static/resource/css" />
-      <recent name="$PROJECT_DIR$/kool/web/kool/static/resource/js" />
-      <recent name="$PROJECT_DIR$/source/Webserver" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/kool/web/kool/static/resource/js" />
       <recent name="$PROJECT_DIR$/kool/web/kool/static/resource/css" />
       <recent name="$PROJECT_DIR$/kool/obdConn" />
       <recent name="$PROJECT_DIR$/source/DataManage" />
       <recent name="$PROJECT_DIR$/source/Webserver/KPLInfo/static" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/kool/web/kool/templates" />
+      <recent name="$PROJECT_DIR$/kool/web/kool/static/resource/audio" />
+      <recent name="$PROJECT_DIR$/kool/web/kool/static/resource/css" />
+      <recent name="$PROJECT_DIR$/kool/web/kool/static/resource/js" />
+      <recent name="$PROJECT_DIR$/source/Webserver" />
     </key>
   </component>
   <component name="RunManager" selected="Python.readOBD_random (1)">
@@ -1069,7 +1107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1486828612913</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="commit &#10;&#10; history line graph추가">
+      <created>1486828739200</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1486828739200</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1087,26 +1132,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="932" extended-state="6" />
+    <frame x="0" y="23" width="1652" height="922" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20855938" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20968731" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281027" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18333334" sideWeight="0.46534055" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15758468" sideWeight="0.4895628" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32627118" sideWeight="0.51937985" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26666668" sideWeight="0.5299507" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3253012" sideWeight="0.51937985" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18333334" sideWeight="0.53465945" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34578314" sideWeight="0.53465945" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26626506" sideWeight="0.5299507" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32658958" sideWeight="0.49330515" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="UnknownFeatures">
@@ -1144,7 +1189,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/source/DataManage/__init__.py" />
     <entry file="file://$PROJECT_DIR$/source/Webserver/Webserver/urls.py" />
     <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/templates/KPLInfo/menu.html" />
     <entry file="file://$PROJECT_DIR$/source/Webserver/KPLInfo/views.py" />
@@ -1214,13 +1258,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_01.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="213" column="5" lean-forward="true" selection-start-line="188" selection-start-column="4" selection-end-line="213" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kool/web/kool/static/resource/googleGraph/loader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2190">
@@ -1232,13 +1269,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2876">
           <caret line="272" column="0" lean-forward="true" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_graph.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="67" lean-forward="false" selection-start-line="6" selection-start-column="67" selection-end-line="6" selection-end-column="67" />
         </state>
       </provider>
     </entry>
@@ -1256,31 +1286,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/menu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="39" column="69" lean-forward="true" selection-start-line="39" selection-start-column="69" selection-end-line="39" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_graph_01.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="39" lean-forward="false" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kool/web/kool/static/resource/gaugeChart/gaugeChart.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="186" lean-forward="false" selection-start-line="0" selection-start-column="186" selection-end-line="0" selection-end-column="186" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kool/obdConn/readOBD.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1605">
-          <caret line="107" column="33" lean-forward="false" selection-start-line="107" selection-start-column="33" selection-end-line="107" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -1316,7 +1325,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1324,15 +1332,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kool/web/kool/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="22" column="60" lean-forward="false" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1341,30 +1340,128 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="131400">
           <caret line="8760" column="60" lean-forward="false" selection-start-line="8760" selection-start-column="60" selection-end-line="8760" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kool/web/kool/static/resource/mcaule-d3/d3_timeseries.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/web/kool/static/resource/mcaule-d3/d3_timeseries.js" />
     <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_02.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="29" column="51" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="315" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/web/kool/static/resource/c3/c3.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/web/kool/static/resource/c3/c3.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/history_02.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="33" lean-forward="true" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_real.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="307" column="43" lean-forward="false" selection-start-line="307" selection-start-column="43" selection-end-line="307" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/web/kool/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" column="54" lean-forward="false" selection-start-line="15" selection-start-column="54" selection-end-line="15" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/web/kool/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_graph.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="67" lean-forward="false" selection-start-line="6" selection-start-column="67" selection-end-line="6" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_graph_01.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="975">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="70" selection-end-column="10" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#6;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live_01.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="151" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="151" />
+          <folding>
+            <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/obdConn/readOBD_random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="56" column="22" lean-forward="false" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/obdConn/readOBD.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="15" lean-forward="false" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kool/dbConn/sqlCollection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="975">
+          <caret line="66" column="24" lean-forward="false" selection-start-line="66" selection-start-column="24" selection-end-line="66" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/live.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3525">
-          <caret line="235" column="0" lean-forward="false" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
+        <state relative-caret-position="2595">
+          <caret line="173" column="29" lean-forward="false" selection-start-line="173" selection-start-column="29" selection-end-line="173" selection-end-column="29" />
           <folding>
             <element signature="n#style#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
@@ -1375,68 +1472,34 @@
             <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#3;n#div#1;n#body#0;n#!!top" expanded="true" />
-            <element signature="e#3876#3883#0" expanded="true" />
+            <element signature="e#4230#4237#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kool/obdConn/readOBD_random.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="48" lean-forward="false" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/history_02.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="591" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kool/web/kool/static/resource/c3/c3.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kool/web/kool/static/resource/c3/c3.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kool/dbConn/sqlCollection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="188" column="62" lean-forward="false" selection-start-line="188" selection-start-column="62" selection-end-line="188" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kool/web/kool/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="86" column="103" lean-forward="false" selection-start-line="86" selection-start-column="97" selection-end-line="86" selection-end-column="103" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/kool/web/kool/templates/history.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="258" column="45" lean-forward="true" selection-start-line="258" selection-start-column="45" selection-end-line="258" selection-end-column="45" />
+        <state relative-caret-position="431">
+          <caret line="240" column="122" lean-forward="false" selection-start-line="240" selection-start-column="122" selection-end-line="240" selection-end-column="122" />
           <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#header#0;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#0;n#header#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#div#2;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#2;n#form#0;n#div#0;n#div#2;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#2;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#2;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#2;n#div#2;n#body#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -39,6 +39,12 @@ def getLiveData_chart(request):
     rsList = sqlCollection.get_live_data_chart(request.GET.get('sensor'))
     return JsonResponse(rsList)
 
+def getLiveData_graph(request):
+    rsList = sqlCollection.get_live_data()
+    return JsonResponse(rsList)
+
+
+
 def getHistoryData(request):
     param = []
     param.append(request.GET.get('fromDate'))
@@ -50,11 +56,6 @@ def getHistoryData(request):
     rsList = sqlCollection.get_history_data(param)
 
     return JsonResponse({'list': rsList[0], 'totalCount': rsList[1]})
-
-def getLiveData_graph(request):
-    rsList = sqlCollection.get_live_data()
-    return JsonResponse(rsList)
-
 
 def getHistoryData_graph(request):
     param = []

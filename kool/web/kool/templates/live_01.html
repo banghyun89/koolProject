@@ -10,19 +10,24 @@
 <div class="w3-container container-custom">
     <div class="search-zone ">
         <div>
-            <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="window.location.assign('{% url 'live_graph' %}');">Graph</button>
             <button class="w3-btn w3-round-large w3-small w3-khaki w3-hover-orange" style="margin-top:5px;" onclick="settingOnclick()">Setting</button>
-            <button class="w3-btn w3-round-large w3-small w3-green w3-hover-orange" style="margin-top:5px;" onclick="window.location.assign('{% url 'home' %}');">Menu</button>
+            <button class="w3-btn w3-round-large w3-small w3-green w3-hover-orange" style="margin-top:5px;" onclick="window.location.assign('{% url 'live' %}');">Back</button>
         </div>
     </div>
-    <div class="circleWrap">
+    <div class="circleWrap w3-center">
 
+    </div>
+    <div class="w3-center" style="margin-top:40px;">
+       <audio controls="controls" controls="" autoplay="autoplay" loop="loop" preload="auto">
+            <source src="{% static 'resource/audio/song.m4a' %}" type="audio/m4a" />
+             <source src="{% static 'resource/audio/song.mp3' %}" type="audio/mp3" />
+        </audio>
     </div>
     <div id="settingModal" class="w3-modal w3-animate-opacity" style="color:#000000;">
         <div class="w3-modal-content w3-card-8">
           <header class="w3-container w3-gray">
             <span onclick="document.getElementById('settingModal').style.display='none'" class="w3-closebtn">&times;</span>
-            <h2>Setting Live Page - control visible </h2>
+            <h2>Control visible </h2>
           </header>
           <div class="w3-container" id="list-sensor">
               <ul class="w3-ul w3-card-10">
@@ -37,18 +42,16 @@
 </div>
 <script>
     //dashboard
-     var sensorObj = {  time:{value:"00:00:00",title:"Time",unit:setDateFormat(new Date()),openYN:true},
-                        kpl:{mid:30,max:100,value:0,title:"KPL",unit:"km/l",openYN:true},
-                        vss:{mid:60,max:300,value:0,title:"SPEED",unit:"km/h",openYN:true},
-                        maf:{mid:35,max:160,value:0,title:"MAF",unit:"g/s",openYN:true},
-                        rpm:{mid:50,max:100,value:0,title:"RPM",unit:"",openYN:true},
-                        control_module_voltage:{mid:50,max:100,value:0,title:"Control Module Volt",unit:"V",openYN:true},
-                        fuel_level:{mid:50,max:100,value:0,title:"Fuel level",unit:"%",openYN:true},
-                        coolant_temp:{mid:50,max:100,value:0,title:"Coolant Temp",unit:"°F",openYN:true},
-                        ambient_air_temp:{mid:50,max:100,value:0,title:"Ambient Air Temp",unit:"°F",openYN:true},
-                        oil_temp:{mid:50,max:100,value:0,title:"Oil Temp",unit:"°F",openYN:true},
-                        intake_temp:{mid:50,max:100,value:0,title:"Intake Air Temp",unit:"°F",openYN:true},
-
+     var sensorObj = {   kpl:{mid:15,max:30,value:0,title:"KPL",unit:"km/l",openYN:true,keyYn:true},
+                        vss:{mid:60,max:300,value:0,title:"SPEED",unit:"km/h",openYN:true,keyYn:false},
+                        maf:{mid:35,max:160,value:0,title:"MAF",unit:"g/s",openYN:true,keyYn:false},
+                        rpm:{mid:5000,max:10000,value:0,title:"RPM",unit:"rad/s",openYN:true,keyYn:false},
+                        control_module_voltage:{mid:10,max:20,value:0,title:"Control Module",unit:"V",openYN:true,keyYn:false},
+                        fuel_level:{mid:50,max:100,value:0,title:"Fuel level",unit:"%",openYN:true,keyYn:false},
+                        coolant_temp:{mid:125,max:250,value:0,title:"Coolant Temp",unit:"°F",openYN:true,keyYn:false},
+                        ambient_air_temp:{mid:75,max:150,value:0,title:"Ambient Air Temp",unit:"°F",openYN:true,keyYn:false},
+                        oil_temp:{mid:200,max:400,value:0,title:"Oil Temp",unit:"°F",openYN:true,keyYn:false},
+                        intake_temp:{mid:125,max:150,value:0,title:"Intake Air Temp",unit:"°F",openYN:true,keyYn:false},
                         initValue : function(){
                             for(var attr in this) {
                                 attr.value = 0;

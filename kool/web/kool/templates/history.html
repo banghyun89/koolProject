@@ -19,7 +19,7 @@
     body {font-size:16px;}
     .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
     .w3-half img:hover{opacity:1}
-    #listTable th, #listTable td {border:1px solid #ccc;}
+    table th, table td {border:1px solid #ccc;}
 
 
     </style>
@@ -33,8 +33,6 @@
   </div>
   <a href="#" onclick="w3_close();window.location.assign('{% url 'home' %}');" class="w3-padding w3-hover-white">MENU</a>
   <a href="#" onclick="w3_close();window.location.assign('{% url 'live' %}');" class="w3-padding w3-hover-white">Live Page</a>
-  <a href="#" onclick="w3_close();window.location.assign('{% url 'history_01' %}');" class="w3-padding w3-hover-white">History page ver1</a>
-  <a href="#" onclick="w3_close();window.location.assign('{% url 'history_graph' %}');" class="w3-padding w3-hover-white">History page ver2</a>
   <!--<a href="#" onclick="settingOnclick()" class="w3-padding w3-hover-white">Setting</a> -->
 </nav>
   <div class="w3-display-container w3-large" style="width:100%;height:40px;">
@@ -74,7 +72,7 @@
                <div class="w3-row">
                    <div class="w3-col s4" style="padding-left:20px;">Sensor type</div>
                    <div class="w3-col s8"style="">
-                        <input class="w3-check" type="radio" id="allSensor" name="sensorRadio" value="allSensor" onclick="onclickSensorBtn(this,'selectSensorDiv')">
+                        <input class="w3-check" type="radio" id="allSensor" checked="checked" name="sensorRadio" value="allSensor" onclick="onclickSensorBtn(this,'selectSensorDiv')">
                         <label class="w3-validate" for="allSensor" style="padding-right:20px;">all</label>
                         <input class="w3-check" type="radio" id="selectSensor" value="selectSensor" name="sensorRadio" onclick="onclickSensorBtn(this,'selectSensorDiv')">
                         <label class="w3-validate" for="selectSensor">select sensor</label>
@@ -85,17 +83,33 @@
             </div>
           </form>
       </div>
-     <div id="chart" style="display:none; margin:25px;">
+     <div id="chart" style="display:none; margin:25px;text-aglin:left;">
 
     </div>
     <!-- Sensor list  -->
     <!--<div class="w3-container" style="padding-left:20px;">
        Total : <span id="totalCount">0</span>
     </div>-->
-    <div class="w3-container">
+    <div class="w3-container" id="listTableDivWrap">
+      <div style="float:left;width:160px;" id="listTableDiv1">
         <div class="w3-responsive">
 
-            <table id="listTable" class="w3-table-all w3-hoverable">
+            <table class="w3-table-all w3-hoverable" id="listTable1">
+                <thead>
+                    <tr class="w3-light-blue">
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+      <div  style="float:left;" id="listTableDiv2">
+        <div class="w3-responsive">
+
+            <table class="w3-table-all w3-hoverable" id="listTable2">
                 <thead>
                     <tr class="w3-light-blue">
                     </tr>
@@ -108,6 +122,8 @@
         </div>
       </div>
     </div>
+
+
     <!-- Modal page for Sensor Setting menu -->
     <div id="settingModal" class="w3-modal w3-animate-opacity" style="color:#000000;">
         <div class="w3-modal-content w3-card-8">
@@ -134,7 +150,7 @@ var sensorObj = {  dataObj :{
                             vss:{mid:60,max:300,value:0,title:"SPEED",unit:"km/h",openYN:true,keyYn:false},
                             maf:{mid:35,max:160,value:0,title:"MAF",unit:"g/s",openYN:true,keyYn:false},
                             rpm:{mid:50,max:100,value:0,title:"RPM",unit:"",openYN:true,keyYn:false},
-                            control_module_voltage:{mid:50,max:100,value:0,title:"Control Module Volt",unit:"Volt",openYN:true,keyYn:false},
+                            control_module_voltage:{mid:50,max:100,value:0,title:"Control Module",unit:"Volt",openYN:true,keyYn:false},
                             fuel_level:{mid:50,max:100,value:0,title:"Fuel level",unit:"%",openYN:true,keyYn:false},
                             coolant_temp:{mid:50,max:100,value:0,title:"Coolant Temp",unit:"°F",openYN:true,keyYn:false},
                             ambient_air_temp:{mid:50,max:100,value:0,title:"Ambient Air Temp",unit:"°F",openYN:true,keyYn:false},
@@ -191,8 +207,10 @@ var sensorObj = {  dataObj :{
                             this.totalCount = obj.totalCount;
                             this.period = obj.period;
                             //$("#totalCount").text(this.totalCount);
-                            $("#listTable thead tr").html("");
-                            $("#listTable tbody").html("");
+                            $("#listTable1 thead tr").html("");
+                            $("#listTable1 tbody").html("");
+                            $("#listTable2 thead tr").html("");
+                            $("#listTable2 tbody").html("");
                             //time
                             for(var i in this.selectColList) {
                                 for(var j in this.resultlist[i]) {
@@ -201,26 +219,31 @@ var sensorObj = {  dataObj :{
                                             thObj = document.createElement('th');
                                             $(thObj).text("Sensor")
                                                      .css("text-align","center")
-                                                     .css("min-width","160px")
-                                                     .appendTo($("#listTable thead tr"));
+                                                     .css("min-width","150px")
+                                                     .appendTo($("#listTable1 thead tr"));
+
                                         }
-                                        thObj = document.createElement('th');
+                                         thObj = document.createElement('th');
                                          timeValue = (this.resultlist[i][j].length > 12) ? this.resultlist[i][j].substr(10) : this.resultlist[i][j];
 
-                                        $(thObj).text(timeValue).css("text-align","center").css("min-width","120px").appendTo($("#listTable thead tr"));
+                                        $(thObj).text(timeValue).css("text-align","center").css("min-width","130px").appendTo($("#listTable2 thead tr"));
                                     } else {
                                         if(j==0){
                                             trObj = document.createElement('tr');
                                             tdObj = document.createElement('td');
-                                            $(tdObj).text(this.dataObj[this.selectColList[i]].title).css("text-align","left").appendTo($(trObj));
-                                        }
-                                         tdObj = document.createElement('td');
-                                         $(tdObj).text(this.resultlist[i][j]).css("text-align","right").appendTo($(trObj));
+                                            $(tdObj).text(this.dataObj[this.selectColList[i]].title).css("text-align","left").css("min-width","150px").appendTo($(trObj));
+                                            $(trObj).appendTo($("#listTable1 tbody"));
 
-                                         if(j == this.resultlist[i].length-1){
-                                             $(trObj).appendTo($("#listTable tbody"));
+                                            trObj = document.createElement('tr');
                                          }
 
+                                        tdObj = document.createElement('td');
+                                        $(tdObj).text(this.resultlist[i][j]).css("text-align","right").css("min-width","130px").appendTo($(trObj));
+
+
+                                        if(j == this.resultlist[i].length-1){
+                                            $(trObj).appendTo($("#listTable2 tbody"));
+                                        }
                                     }
 
                                 }
@@ -245,20 +268,25 @@ var sensorObj = {  dataObj :{
 
                             $("#chart").addClass("w3-show");
                             $(".graph-button").text("Hide Graph");
+                            console.log(this.chartList);
                              sensorObj.drawChart();
                          },
+                         chart : null,
                          drawChart : function(){
                            if( this.chartList.length < 2 )
                                return;
-
+                           //$("#chart").width($("#listTableDivWrap").width()*0.95);
                            var timeFormat = (this.period > 0) ? "%Y/%m/%d":"%H:%M";
 
-                           var chart = c3.generate({
+                           this.chart = c3.generate({
                                 bindto: '#chart',
                                 data: {
                                   x : 'time',
                                   xFormat : timeFormat,
                                   columns: this.chartList
+                                },
+                                point: {
+                                    show: false
                                 },
                                 axis : {
                                   x : {
@@ -277,6 +305,7 @@ var sensorObj = {  dataObj :{
 
 $(document).ready(function(){
 
+    $("#listTableDiv2").width( $("#listTableDivWrap").width() - $("#listTableDiv1").width()-15);
     var dateFormat = "yy-mm-dd",
                       from = $( "#from" )
                         .datepicker({
@@ -344,8 +373,14 @@ function chartOnClick(){
 }
 
 function bodyOnresize(){
-    if($("#chart").css("display") != "none"){
-        sensorObj.drawChart();
+    if($("#chart").css("display") != "none" && sensorObj.chart != null){
+
+        sensorObj.chart.resize();
+    }
+    if($(".w3-sidenav").css("display") == "none"){
+        $("#listTableDiv2").width( $(this).width() - $("#listTableDiv1").width()-70);
+    } else {
+        $("#listTableDiv2").width( $(this).width() - $("#listTableDiv1").width()-450);
     }
 }
 
