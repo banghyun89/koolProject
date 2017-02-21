@@ -28,12 +28,7 @@ def mafCalculation(rpmMagnitude, mapMagnitude, iatMagnitude):
     imap = rpmMagnitude * mapMagnitude / iatMagnitude
     stuff1 = .85
     stuff2 = (28.9644 / 8.314472)
-
-    # print("STUFF1: ", stuff1, " STUFF2: ", stuff2)
-
-    # stuff = (85/100)*(3.342)*(28.9644/8.314472)
     stuff = stuff1 * (3.342) * stuff2
-    # print("STUFF: ", stuff)
 
     return round((imap/120)*stuff,2)
 

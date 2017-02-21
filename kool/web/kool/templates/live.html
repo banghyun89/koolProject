@@ -24,8 +24,8 @@
 <nav class="w3-sidenav w3-blue w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold" id="mySidenav"><br>
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-padding-xlarge w3-hide-large w3-display-topleft w3-hover-white" style="width:100%;font-size:22px">Close Menu</a>
   <div class="w3-container w3-padding-64">
-    <h3>The OBD on the load</h3>
-     <button class="w3-btn w3-white w3-large w3-text-red w3-border w3-round-xlarge connectBtn" style="">ELM Off</button>
+    <h3>The OBD on the load </h3>
+      <a class="w3-btn-floating w3-light-green connectState" style="width:20px;height:20px; margin-bottom:20px;"></a>
   </div>
   <a href="#" onclick="w3_close();window.location.assign('{% url 'home' %}');" class="w3-padding w3-hover-white">MENU</a>
   <a href="#" onclick="w3_close();window.location.assign('{% url 'live_01' %}');" class="w3-padding w3-hover-white">Live Circles</a>
@@ -37,7 +37,8 @@
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top w3-hide-large w3-blue w3-xlarge w3-padding ">
   <a href="javascript:void(0)" class="w3-btn w3-blue  w3-margin-right" onclick="w3_open()">☰</a>
-    <button class="w3-btn w3-white w3-large w3-text-red w3-border w3-round-xlarge connectBtn" style="">ELM Off</button>
+    <button class="w3-btn w3-white w3-small w3-text-light-green w3-border w3-round-xlarge connectBtn" style="">ELM On</button>
+   <!-- <a class="w3-btn-floating w3-light-green connectState" style="width:20px;height:20px;"></a> -->
   <span class="w3-right time" style="font-size:0.7em;padding-top:15px;"></span>
 </header>
 
@@ -97,13 +98,13 @@
                             kpl:{mid:15,max:30,value:0,title:"KPL",unit:"km/l",openYN:true,keyYn:true},
                             vss:{mid:60,max:300,value:0,title:"SPEED",unit:"km/h",openYN:true,keyYn:false},
                             maf:{mid:35,max:160,value:0,title:"MAF",unit:"g/s",openYN:true,keyYn:false},
-                            rpm:{mid:5000,max:10000,value:0,title:"RPM",unit:"rad/s",openYN:true,keyYn:false},
+                            rpm:{mid:5000,max:10000,value:0,title:"RPM",unit:"r/min",openYN:true,keyYn:false},
                             control_module_voltage:{mid:10,max:20,value:0,title:"Control Module",unit:"V",openYN:true,keyYn:false},
                             fuel_level:{mid:50,max:100,value:0,title:"Fuel level",unit:"%",openYN:true,keyYn:false},
-                            coolant_temp:{mid:125,max:250,value:0,title:"Coolant Temp",unit:"°F",openYN:true,keyYn:false},
-                            ambient_air_temp:{mid:75,max:150,value:0,title:"Ambient Air Temp",unit:"°F",openYN:true,keyYn:false},
-                            oil_temp:{mid:200,max:400,value:0,title:"Oil Temp",unit:"°F",openYN:true,keyYn:false},
-                            intake_temp:{mid:125,max:150,value:0,title:"Intake Air Temp",unit:"°F",openYN:true,keyYn:false}
+                            coolant_temp:{mid:125,max:250,value:0,title:"Coolant Temp",unit:"°C",openYN:true,keyYn:false},
+                            ambient_air_temp:{mid:75,max:150,value:0,title:"Ambient Air Temp",unit:"°C",openYN:true,keyYn:false},
+                            oil_temp:{mid:200,max:400,value:0,title:"Oil Temp",unit:"°C",openYN:true,keyYn:false},
+                            intake_temp:{mid:125,max:150,value:0,title:"Intake Air Temp",unit:"°C",openYN:true,keyYn:false}
                         },
                         keyValue : "kpl",
                         InitSensorList : function(){
